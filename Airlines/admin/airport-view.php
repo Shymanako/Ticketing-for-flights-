@@ -18,47 +18,37 @@ require 'dbcon.php';
 
     <div class="container mt-5">
 
+        <?php include('message.php'); ?>
+
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
-                        <h4>Passenger Details
-                            <a href="passenger.php" class="btn btn-danger float-end">Back</a>
+                        <h4>Airport Details
+                            <a href="airport.php" class="btn btn-danger float-end">Back</a>
                         </h4>
                     </div>
                     <div class="card-body">
 
                         <?php
 
-                        if(isset($_GET['passenger_id'])){
-                            $passenger_id = mysqli_real_escape_string($con, $_GET['passenger_id']);
-                            $query = "SELECT * FROM passenger WHERE passenger_id='$passenger_id'";
+                        if(isset($_GET['airport_code'])){
+                            $airport_code = mysqli_real_escape_string($con, $_GET['airport_code']);
+                            $query = "SELECT * FROM airport WHERE airport_code='$airport_code'";
                             $query_run = mysqli_query($con, $query);
 
                             if(mysqli_num_rows($query_run) > 0)
                             {
-                                $passenger = mysqli_fetch_array($query_run);
+                                $airport = mysqli_fetch_array($query_run);
                                 ?>
 
                                     <div class="mb-3">
-                                        <label> Passenger First Name </label>
-                                        <p class="form-control"><?=$passenger['first_name'];?></p>
+                                        <label> Airport Code </label>
+                                        <p class="form-control"><?=$airport['airport_code'];?></p>
                                     </div>
                                     <div class="mb-3">
-                                        <label> Passenger Last Name </label>
-                                        <p class="form-control"><?=$passenger['last_name'];?></p>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label> Passenger Date of Birth </label>
-                                        <p class="form-control"><?=$passenger['date_of_birth'];?></p>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label> Passenger Citizenship </label>
-                                        <p class="form-control"><?=$passenger['citizenship'];?></p>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label> Passenger Phone Number </label>
-                                        <p class="form-control"><?=$passenger['phone_number'];?></p>
+                                        <label> Airport Name </label>
+                                        <p class="form-control"><?=$airport['airport_name'];?></p>
                                     </div>
 
                                 <?php

@@ -1,5 +1,7 @@
 <?php
+session_start();
 require 'dbcon.php';
+include('partials/login-check.php');
 ?>
 
 <!doctype html>
@@ -10,7 +12,7 @@ require 'dbcon.php';
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
   
-    <title>View</title>
+    <title>Update</title>
 
   </head>
   <body>
@@ -18,49 +20,45 @@ require 'dbcon.php';
 
     <div class="container mt-5">
 
+        <?php include('message.php'); ?>
+
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
-                        <h4>Passenger Details
-                            <a href="passenger.php" class="btn btn-danger float-end">Back</a>
+                        <h4>Update Airport
+                            <a href="airport.php" class="btn btn-danger float-end">Back</a>
                         </h4>
                     </div>
                     <div class="card-body">
 
                         <?php
 
-                        if(isset($_GET['passenger_id'])){
-                            $passenger_id = mysqli_real_escape_string($con, $_GET['passenger_id']);
-                            $query = "SELECT * FROM passenger WHERE passenger_id='$passenger_id'";
+                        if(isset($_GET['airport_code'])){
+                            $airport_code = mysqli_real_escape_string($con, $_GET['airport_code']);
+                            $query = "SELECT * FROM airport WHERE airport_code='$airport_code'";
                             $query_run = mysqli_query($con, $query);
 
                             if(mysqli_num_rows($query_run) > 0)
                             {
-                                $passenger = mysqli_fetch_array($query_run);
+                                $airport = mysqli_fetch_array($query_run);
                                 ?>
 
-                                    <div class="mb-3">
-                                        <label> Passenger First Name </label>
-                                        <p class="form-control"><?=$passenger['first_name'];?></p>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label> Passenger Last Name </label>
-                                        <p class="form-control"><?=$passenger['last_name'];?></p>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label> Passenger Date of Birth </label>
-                                        <p class="form-control"><?=$passenger['date_of_birth'];?></p>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label> Passenger Citizenship </label>
-                                        <p class="form-control"><?=$passenger['citizenship'];?></p>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label> Passenger Phone Number </label>
-                                        <p class="form-control"><?=$passenger['phone_number'];?></p>
-                                    </div>
+                                <form action="code.php" autocomplete="off" method="POST">
+                                    <input type="hidden" name="airport_code" value="<?= $airport_code;?>">
 
+                                    <div class="mb-3">
+                                        <label> Airport Code </label>
+                                        <input type="text" name="airport_code" value="<?= $airport['airport_code'];?>" class="form-control">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label> Airport Name </label>
+                                        <input type="text" name="airport_name" value="<?= $airport['airport_name'];?>" class="form-control">
+                                    </div>
+                                    <div class="mb-3">
+                                        <button type="submit" name="update_airport" class="btn btn-primary">Update Airport</button>
+                                    </div>
+                                </form>
                                 <?php
                             }
                             else

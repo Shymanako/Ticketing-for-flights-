@@ -1,4 +1,5 @@
 <?php
+session_start();
 require 'dbcon.php';
 include('partials/login-check.php');
 ?>
@@ -11,7 +12,7 @@ include('partials/login-check.php');
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
   
-    <title>View</title>
+    <title>Update</title>
 
   </head>
   <body>
@@ -25,7 +26,7 @@ include('partials/login-check.php');
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
-                        <h4>Flight Details
+                        <h4>Update Direction
                             <a href="admin.php" class="btn btn-danger float-end">Back</a>
                         </h4>
                     </div>
@@ -34,35 +35,48 @@ include('partials/login-check.php');
                         <?php
 
                         if(isset($_GET['id'])){
-                            $flight_id = mysqli_real_escape_string($con, $_GET['id']);
-                            $query = "SELECT * FROM flight WHERE fid='$flight_id'";
+                            $origin_airport_code = mysqli_real_escape_string($con, $_GET['id']);
+                            $query = "SELECT * FROM flight WHERE origin_airport_code='$origin_airport_code'";
                             $query_run = mysqli_query($con, $query);
 
                             if(mysqli_num_rows($query_run) > 0)
                             {
-                                $flight = mysqli_fetch_array($query_run);
+                                $direction = mysqli_fetch_array($query_run);
                                 ?>
+
+                                <form action="code.php" autocomplete="off" method="POST">
+                                    <input type="hidden" name="origin_airport_code" value="<?= $origin_airport_code;?>">
 
                                     <div class="mb-3">
                                         <label> Flight Location </label>
-                                        <p class="form-control"><?=$flight['location'];?></p>
+                                        <input type="text" name="location" value="<?= $flight['location'];?>" class="form-control">
                                     </div>
                                     <div class="mb-3">
                                         <label> Flight Destination </label>
-                                        <p class="form-control"><?=$flight['destination'];?></p>
+                                        <input list="destination" type="text" name="destination" value="<?= $flight['destination'];?>" class="form-control">
+                                        <datalist id="destination">
+                                            <option value="Manila">
+                                            <option value="Tokyo">
+                                            <option value="Seoul">
+                                            <option value="Agra">
+                                            <option value="Beijing">
+                                            <option value="Hanoi">
+                                            <option value="Kuala Lumpur">
+                                            <option value="Rio De Janeiro">
+                                            <option value="Singapore">
+                                            <option value="Reykjavik">
+                                            <option value="Paris">
+                                            <option value="Bali">
+                                        </datalist>
                                     </div>
                                     <div class="mb-3">
-                                        <label> Flight Airlines </label>
-                                        <p class="form-control"><?=$flight['airlines'];?></p>
+                                        <label> Price </label>
+                                        <input type="number" name="price" placeholder="Enter Price" class="form-control">
                                     </div>
                                     <div class="mb-3">
-                                        <label> Flight Departure </label>
-                                        <p class="form-control"><?=$flight['departure'];?></p>
+                                        <button type="submit" name="update_direction" class="btn btn-primary">Update Direction</button>
                                     </div>
-                                    <div class="mb-3">
-                                        <label> Flight Arrival </label>
-                                        <p class="form-control"><?=$flight['arrival'];?></p>
-                                    </div>
+                                </form>
 
                                 <?php
                             }

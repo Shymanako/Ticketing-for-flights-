@@ -25,40 +25,35 @@ include('partials/login-check.php');
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
-                        <h4>Add Payment
-                            <a href="payment.php" class="btn btn-danger float-end">Back</a>
+                        <h4>Add Airlines
+                            <a href="airlines.php" class="btn btn-danger float-end">Back</a>
                         </h4>
                     </div>
                     <div class="card-body">
+
                         <script type="text/javascript">
                             function validateForm() {
-                                var a = document.forms["Form"]["reservation_id"].value;
-                                var b = document.forms["Form"]["payment_method"].value;
-                                var c = document.forms["Form"]["payment_amount"].value;
-                                if (a == null || a == "", b == null || b == "", c == null || c == ""){
+                                var a = document.forms["Form"]["airline_name"].value;
+                                if (a == null || a == ""){
                                 alert("Please Fill In All Required Details");
                                 return false;
                                 }
                             }
                         </script>
+
                         <form name="Form" action="code.php" autocomplete="off" onsubmit="return validateForm()" method="POST">
-
+                            
                             <div class="mb-3">
-                                <label>Reservation ID </label>
-                                <input list="credit_type" type="text" name="reservation_id" placeholder="Enter reservation id" class="form-control">
+                                <label> Airline ID </label>
+                                <input type="text" name="airline_id" placeholder="Enter Airline ID" class="form-control" maxlength="3">
                             </div>
                             <div class="mb-3">
-                                <label> Payment Method </label>
-                                <input type="text" name="payment_method" placeholder="Enter payment method" class="form-control" maxlength="12">
+                                <label> Airline Name </label>
+                                <input type="text" name="airline_name" placeholder="Enter Airline Name" class="form-control">
                             </div>
                             <div class="mb-3">
-                                <label> Payment Amount </label>
-                                <input type="text" name="payment_amount" placeholder="Enter payment amount" class="form-control" maxlength="12">
+                                <button type="submit" name="save_airlines" class="btn btn-primary">Save Airlines</button>
                             </div>
-                            <div class="mb-3">
-                                <button type="submit" name="save_payment" class="btn btn-primary">Save Payment</button>
-                            </div>
-
                         </form>
                     </div>
                 </div>

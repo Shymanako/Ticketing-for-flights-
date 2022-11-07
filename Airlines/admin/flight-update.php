@@ -1,6 +1,7 @@
 <?php
 session_start();
 require 'dbcon.php';
+include('partials/login-check.php');
 ?>
 
 <!doctype html>
@@ -33,9 +34,9 @@ require 'dbcon.php';
 
                         <?php
 
-                        if(isset($_GET['id'])){
-                            $flight_id = mysqli_real_escape_string($con, $_GET['id']);
-                            $query = "SELECT * FROM flight WHERE fid='$flight_id'";
+                        if(isset($_GET['flight_id'])){
+                            $flight_id = mysqli_real_escape_string($con, $_GET['flight_id']);
+                            $query = "SELECT * FROM flight WHERE flight_id='$flight_id'";
                             $query_run = mysqli_query($con, $query);
 
                             if(mysqli_num_rows($query_run) > 0)
@@ -47,43 +48,8 @@ require 'dbcon.php';
                                     <input type="hidden" name="flight_id" value="<?= $flight_id;?>">
 
                                     <div class="mb-3">
-                                        <label> Flight Location </label>
-                                        <input type="text" name="location" value="<?= $flight['location'];?>" class="form-control">
-                                    </div>
-                                    <div class="mb-3">
-                                        <label> Flight Destination </label>
-                                        <input list="destination" type="text" name="destination" value="<?= $flight['destination'];?>" class="form-control">
-                                        <datalist id="destination">
-                                            <option value="Manila">
-                                            <option value="Tokyo">
-                                            <option value="Seoul">
-                                            <option value="Agra">
-                                            <option value="Beijing">
-                                            <option value="Hanoi">
-                                            <option value="Kuala Lumpur">
-                                            <option value="Rio De Janeiro">
-                                            <option value="Singapore">
-                                            <option value="Reykjavik">
-                                            <option value="Paris">
-                                            <option value="Bali">
-                                        </datalist>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label> Flight Airlines </label>
-                                        <input list="airlines" type="text" name="airlines" value="<?= $flight['airlines'];?>" class="form-control">
-                                        <datalist id="airlines">
-                                            <option value="Cebu Pacific">
-                                            <option value="Philippine Airlines">
-                                            <option value="Air Asia">
-                                        </datalist>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label> Flight Departure </label>
-                                        <input type="datetime-local" name="departure" value="<?= $flight['departure'];?>" class="form-control">
-                                    </div>
-                                    <div class="mb-3">
-                                        <label> Flight Arrival </label>
-                                        <input type="datetime-local" name="arrival" value="<?= $flight['arrival'];?>" class="form-control">
+                                        <label> Schedule ID </label>
+                                        <input type="text" name="schedule_id" value="<?= $flight['schedule_id'];?>" class="form-control">
                                     </div>
 
                                     <div class="mb-3">

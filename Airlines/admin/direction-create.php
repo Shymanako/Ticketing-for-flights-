@@ -25,38 +25,51 @@ include('partials/login-check.php');
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
-                        <h4>Add Payment
-                            <a href="payment.php" class="btn btn-danger float-end">Back</a>
+                        <h4>Add Direction
+                            <a href="admin.php" class="btn btn-danger float-end">Back</a>
                         </h4>
                     </div>
                     <div class="card-body">
+
                         <script type="text/javascript">
                             function validateForm() {
-                                var a = document.forms["Form"]["reservation_id"].value;
-                                var b = document.forms["Form"]["payment_method"].value;
-                                var c = document.forms["Form"]["payment_amount"].value;
-                                if (a == null || a == "", b == null || b == "", c == null || c == ""){
+                                var a = document.forms["Form"]["destination_airport_code"].value;
+                                var b = document.forms["Form"]["price"].value;
+                                if (a == null || a == "", b == null || b == ""){
                                 alert("Please Fill In All Required Details");
                                 return false;
                                 }
                             }
                         </script>
+
                         <form name="Form" action="code.php" autocomplete="off" onsubmit="return validateForm()" method="POST">
 
                             <div class="mb-3">
-                                <label>Reservation ID </label>
-                                <input list="credit_type" type="text" name="reservation_id" placeholder="Enter reservation id" class="form-control">
+                                <label> Destination Airport Code </label>
+                                <input list="destination_airport_code" type="text" name="destination_airport_code" placeholder="Enter destination airport code" class="form-control">
+                                <datalist id="destination_airport_code">
+                                    <option value="Manila">
+                                    <option value="Tokyo">
+                                    <option value="Seoul">
+                                    <option value="Agra">
+                                    <option value="Beijing">
+                                    <option value="Hanoi">
+                                    <option value="Kuala Lumpur">
+                                    <option value="Rio De Janeiro">
+                                    <option value="Singapore">
+                                    <option value="Reykjavik">
+                                    <option value="Paris">
+                                    <option value="Bali">
+                                </datalist>
                             </div>
+
                             <div class="mb-3">
-                                <label> Payment Method </label>
-                                <input type="text" name="payment_method" placeholder="Enter payment method" class="form-control" maxlength="12">
+                                <label> Price </label>
+                                <input type="number" name="price" placeholder="Enter Price" class="form-control">
                             </div>
+
                             <div class="mb-3">
-                                <label> Payment Amount </label>
-                                <input type="text" name="payment_amount" placeholder="Enter payment amount" class="form-control" maxlength="12">
-                            </div>
-                            <div class="mb-3">
-                                <button type="submit" name="save_payment" class="btn btn-primary">Save Payment</button>
+                                <button type="submit" name="save_direction" class="btn btn-primary">Save Direction</button>
                             </div>
 
                         </form>

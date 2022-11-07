@@ -1,6 +1,7 @@
 <?php
 session_start();
 require 'dbcon.php';
+include('partials/login-check.php');
 ?>
 
 <!doctype html>
@@ -26,16 +27,16 @@ require 'dbcon.php';
                 <div class="card">
                     <div class="card-header">
                         <h4>Update Payment
-                            <a href="admin.php" class="btn btn-danger float-end">Back</a>
+                            <a href="payment.php" class="btn btn-danger float-end">Back</a>
                         </h4>
                     </div>
                     <div class="card-body">
 
                         <?php
 
-                        if(isset($_GET['id'])){
-                            $payment_id = mysqli_real_escape_string($con, $_GET['id']);
-                            $query = "SELECT * FROM payment WHERE pid='$payment_id'";
+                        if(isset($_GET['payment_id'])){
+                            $payment_id = mysqli_real_escape_string($con, $_GET['payment_id']);
+                            $query = "SELECT * FROM payment WHERE payment_id='$payment_id'";
                             $query_run = mysqli_query($con, $query);
 
                             if(mysqli_num_rows($query_run) > 0)
@@ -47,16 +48,16 @@ require 'dbcon.php';
                                     <input type="hidden" name="payment_id" value="<?= $payment_id;?>">
 
                                     <div class="mb-3">
-                                        <label> Credit Type </label>
-                                        <input list="credit_type" type="text" name="credit_type" value="<?= $payment['credit_type'];?>" class="form-control">
-                                        <datalist id="credit_type">
-                                            <option value="Visa">
-                                            <option value="Mastercard">
-                                        </datalist>
+                                        <label> Reservation ID </label>
+                                        <input list="credit_type" type="text" name="reservation_id" value="<?= $payment['reservation_id'];?>" class="form-control">
                                     </div>
                                     <div class="mb-3">
-                                        <label> Account Number </label>
-                                        <input type="text" name="account_number" value="<?= $payment['account_number'];?>" class="form-control">
+                                        <label> Payment Method </label>
+                                        <input type="text" name="payment_method" value="<?= $payment['payment_method'];?>" class="form-control">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label> Payment Amount </label>
+                                        <input type="text" name="payment_amount" value="<?= $payment['payment_amount'];?>" class="form-control">
                                     </div>
 
                                     <div class="mb-3">

@@ -1,7 +1,7 @@
 <?php
   session_start();
   require 'dbcon.php';
-
+  include('partials/login-check.php');
 ?>
 
 <!doctype html>
@@ -24,11 +24,15 @@
         <h2>DB Admin</h2>
 
         <li><a href="admin.php">Home</a></li>
+        <li><a href="airlines.php">Airlines</a></li>
+        <li><a href="airport.php">Airport</a></li>
+        <li><a href="direction.php">Direction</a></li>
         <li><a href="ticket.php">Ticket</a></li>
         <li><a href="passenger.php">Passenger</a></li>
         <li><a href="flight.php">Flight</a></li>
         <li><a href="payment.php">Payment</a></li>
         <li><a href="../home.php"> Back to Website</a></li>
+        <li><a href="logout-admin.php"> Logout</a></li>
   
       </div>
     </div>

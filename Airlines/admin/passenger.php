@@ -1,7 +1,7 @@
 <?php
   session_start();
   require 'dbcon.php';
-
+  include('partials/login-check.php');
 ?>
 
 <!doctype html>
@@ -24,11 +24,16 @@
         <h2>DB Admin</h2>
         
         <li><a href="admin.php">Home</a></li>
+        <li><a href="airlines.php">Airlines</a></li>
+        <li><a href="airport.php">Airport</a></li>
+        <li><a href="direction.php">Direction</a></li>
         <li><a href="ticket.php">Ticket</a></li>
         <li><a href="passenger.php">Passenger</a></li>
         <li><a href="flight.php">Flight</a></li>
         <li><a href="payment.php">Payment</a></li>
+        <li><a href="reservation.php">Reservation</a></li>
         <li><a href="../home.php"> Back to Website</a></li>
+        <li><a href="logout-admin.php"> Logout</a></li>
         
       </div>
     </div>
@@ -55,14 +60,10 @@
                       <tr>
                         <th>Passenger ID</th>
                         <th>First Name</th>
-                        <th>Middle Name</th>
                         <th>Last Name</th>
-                        <th>Age</th>
-                        <th>Birthdate</th>
-                        <th>Email</th>
-                        <th>Phone</th>
+                        <th>Date of Birth</th>
                         <th>Citizenship</th>
-                        <th>Action</th>
+                        <th>Phone Number</th>
                       </tr>
                   </thead>
                   <tbody>
@@ -76,20 +77,18 @@
                           // echo
                           ?>
                           <tr>
-                            <td><?= $passenger['id']; ?></td>
+                            <td><?= $passenger['passenger_id']; ?></td>
                             <td><?= $passenger['first_name']; ?></td>
-                            <td><?= $passenger['middle_name']; ?></td>
                             <td><?= $passenger['last_name']; ?></td>
-                            <td><?= $passenger['age']; ?></td>
-                            <td><?= $passenger['birthdate']; ?></td>
-                            <td><?= $passenger['email']; ?></td>
-                            <td><?= $passenger['phone']; ?></td>
+                            <td><?= $passenger['date_of_birth']; ?></td>
                             <td><?= $passenger['citizenship']; ?></td>
+                            <td><?= $passenger['phone_number']; ?></td>
+
                             <td>
-                              <a href="passenger-view.php?id=<?= $passenger['id']; ?>" class="btn btn-info btn-sm">View</a>
-                              <a href="passenger-update.php?id=<?= $passenger['id']; ?>" class="btn btn-success btn-sm">Update</a>
+                              <a href="passenger-view.php?passenger_id=<?= $passenger['passenger_id']; ?>" class="btn btn-info btn-sm">View</a>
+                              <a href="passenger-update.php?passenger_id=<?= $passenger['passenger_id']; ?>" class="btn btn-success btn-sm">Update</a>
                               <form action="code.php" method='POST' class="d-inline">
-                                <button type="submit" name="delete_passenger" value="<?=$passenger['id']; ?>" class="btn btn-danger btn-sm">Delete</a>
+                                <button type="submit" name="delete_passenger" value="<?=$passenger['passenger_id']; ?>" class="btn btn-danger btn-sm">Delete</a>
                               </form>
                             </td>
                           </tr>

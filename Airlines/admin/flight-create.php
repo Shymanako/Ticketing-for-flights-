@@ -1,5 +1,6 @@
 <?php
 session_start();
+include('partials/login-check.php');
 ?>
 
 <!doctype html>
@@ -32,12 +33,8 @@ session_start();
 
                         <script type="text/javascript">
                             function validateForm() {
-                                var a = document.forms["Form"]["location"].value;
-                                var b = document.forms["Form"]["destination"].value;
-                                var c = document.forms["Form"]["airlines"].value;
-                                var d = document.forms["Form"]["departure"].value;
-                                var e = document.forms["Form"]["arrival"].value;
-                                if (a == null || a == "", b == null || b == "", c == null || c == "", d == null || d == "", e == null || e == ""){
+                                var a = document.forms["Form"]["schedule_id"].value;
+                                if (a == null || a == ""){
                                 alert("Please Fill In All Required Details");
                                 return false;
                                 }
@@ -47,43 +44,8 @@ session_start();
                         <form name="Form" action="code.php" autocomplete="off" onsubmit="return validateForm()" method="POST">
 
                             <div class="mb-3">
-                                <label> Flight Location </label>
-                                <input type="text" name="location" placeholder="Enter location" class="form-control">
-                            </div>
-                            <div class="mb-3">
-                                <label> Flight Destination </label>
-                                <input list="destination" type="text" name="destination" placeholder="Enter destination" class="form-control">
-                                <datalist id="destination">
-                                    <option value="Manila">
-                                    <option value="Tokyo">
-                                    <option value="Seoul">
-                                    <option value="Agra">
-                                    <option value="Beijing">
-                                    <option value="Hanoi">
-                                    <option value="Kuala Lumpur">
-                                    <option value="Rio De Janeiro">
-                                    <option value="Singapore">
-                                    <option value="Reykjavik">
-                                    <option value="Paris">
-                                    <option value="Bali">
-                                </datalist>
-                            </div>
-                            <div class="mb-3">
-                                <label> Flight Airlines </label>
-                                <input list="airlines" type="text" name="airlines" placeholder="Enter chosen airlines" class="form-control">
-                                <datalist id="airlines">
-                                    <option value="Cebu Pacific">
-                                    <option value="Philippine Airlines">
-                                    <option value="Air Asia">
-                                </datalist>
-                            </div>
-                            <div class="mb-3">
-                                <label> Flight Departure </label>
-                                <input type="datetime-local" name="departure" class="form-control">
-                            </div>
-                            <div class="mb-3">
-                                <label> Flight Arrival </label>
-                                <input type="datetime-local" name="arrival" class="form-control">
+                                <label> Schedule ID </label>
+                                <input type="text" name="schedule_id" placeholder="Enter Schedule ID" class="form-control">
                             </div>
 
                             <div class="mb-3">

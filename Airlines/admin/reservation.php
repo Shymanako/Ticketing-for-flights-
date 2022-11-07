@@ -46,8 +46,8 @@
         <div class="col-md-12">
           <div class="card">
             <div class="card-header">
-              <h4>Payment Details
-                <a href="payment-create.php" class="btn btn-primary float-end">Add Payment</a>
+              <h4>Reservation Details
+                <a href="reservation-create.php" class="btn btn-primary float-end">Add Payment</a>
               </h4>
             </div>
             <div class="card-body">
@@ -55,33 +55,33 @@
               <table class="table table-bordered table-striped">
                   <thead>
                       <tr>
-                        <th>Payment ID</th>
                         <th>Reservation ID</th>
-                        <th>Payment Method</th>
-                        <th>Payment Amount</th>
+                        <th>Passenger ID</th>
+                        <th>Flight ID</th>
+                        <th>Airline ID</th>
                         <th>Action</th>
                       </tr>
                   </thead>
                   <tbody>
                     <?php 
-                      $query = "SELECT * FROM payment";
+                      $query = "SELECT * FROM reservation";
                       $query_run = mysqli_query($con, $query);
 
                       if(mysqli_num_rows($query_run) > 0){
-                        foreach($query_run as $payment){
+                        foreach($query_run as $reservation){
 
                           // echo
                           ?>
                           <tr>
-                            <td><?= $payment['payment_id']; ?></td>
                             <td><?= $payment['reservation_id']; ?></td>
-                            <td><?= $payment['payment_method']; ?></td>
-                            <td><?= $payment['payment_amount']; ?></td>
+                            <td><?= $payment['passenger_id']; ?></td>
+                            <td><?= $payment['flight_id']; ?></td>
+                            <td><?= $payment['airline_id']; ?></td>
                             <td>
-                              <a href="payment-view.php?payment_id=<?= $payment['payment_id']; ?>" class="btn btn-info btn-sm">View</a>
-                              <a href="payment-update.php?payment_id=<?= $payment['payment_id']; ?>" class="btn btn-success btn-sm">Update</a>
+                              <a href="reservation-view.php?reservation_id=<?= $payment['reservation_id']; ?>" class="btn btn-info btn-sm">View</a>
+                              <a href="reservation-update.php?reservation_id=<?= $payment['reservation_id']; ?>" class="btn btn-success btn-sm">Update</a>
                               <form action="code.php" method='POST' class="d-inline">
-                                <button type="submit" name="delete_payment" value="<?=$payment['payment_id']; ?>" class="btn btn-danger btn-sm">Delete</a>
+                                <button type="submit" name="delete_reservation" value="<?=$payment['reservation_id']; ?>" class="btn btn-danger btn-sm">Delete</a>
                               </form>
                             </td>
                           </tr>
