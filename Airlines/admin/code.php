@@ -299,5 +299,27 @@ if(isset($_POST['update_airport'])){
         exit(0);
     }
 }
+
+if(isset($_POST['save_direction'])){
+    $origin_airport_code = mysqli_real_escape_string($con, $_POST['origin_airport_code']);
+    $destination_airport_code = mysqli_real_escape_string($con, $_POST['destination_airport_code']);
+    $price = mysqli_real_escape_string($con, $_POST['price']);
+
+    $query = "INSERT INTO direction (origin_airport_code, destination_airport_code, price) VALUES ('$origin_airport_code', '$destination_airport_code', '$price')";
+
+    $query_run = mysqli_query($con, $query);
+    if($query_run){
+
+        $_SESSION['message'] = "Direction Created Successfully";
+        header("Location: direction.php");
+        exit(0);
+    }
+    else{
+        $_SESSION['message'] = "Direction Not Created";
+        header("Location: direction-create.php");
+        exit(0);
+    }
+}
+
 ?>
 

@@ -1,5 +1,6 @@
 <?php
 session_start();
+require 'dbcon.php';
 include('partials/login-check.php');
 ?>
 
@@ -26,15 +27,16 @@ include('partials/login-check.php');
                 <div class="card">
                     <div class="card-header">
                         <h4>Add Direction
-                            <a href="admin.php" class="btn btn-danger float-end">Back</a>
+                            <a href="direction.php" class="btn btn-danger float-end">Back</a>
                         </h4>
                     </div>
                     <div class="card-body">
 
                         <script type="text/javascript">
                             function validateForm() {
-                                var a = document.forms["Form"]["destination_airport_code"].value;
-                                var b = document.forms["Form"]["price"].value;
+                                var a = document.forms["Form"]["origin_airport_code"].value;
+                                var b = document.forms["Form"]["destination_airport_code"].value;
+                                var c = document.forms["Form"]["price"].value;
                                 if (a == null || a == "", b == null || b == ""){
                                 alert("Please Fill In All Required Details");
                                 return false;
@@ -43,24 +45,47 @@ include('partials/login-check.php');
                         </script>
 
                         <form name="Form" action="code.php" autocomplete="off" onsubmit="return validateForm()" method="POST">
-
                             <div class="mb-3">
-                                <label> Destination Airport Code </label>
-                                <input list="destination_airport_code" type="text" name="destination_airport_code" placeholder="Enter destination airport code" class="form-control">
-                                <datalist id="destination_airport_code">
-                                    <option value="Manila">
-                                    <option value="Tokyo">
-                                    <option value="Seoul">
-                                    <option value="Agra">
-                                    <option value="Beijing">
-                                    <option value="Hanoi">
-                                    <option value="Kuala Lumpur">
-                                    <option value="Rio De Janeiro">
-                                    <option value="Singapore">
-                                    <option value="Reykjavik">
-                                    <option value="Paris">
-                                    <option value="Bali">
-                                </datalist>
+                                <label> Origin Airport Code </label>
+                                <input type="text" name="origin_airport_code" placeholder="Enter Origin Aireport Code" class="form-control">
+                            </div>
+                            <div>
+                                <select name="destination_airport_code">
+                                    <?php
+                                        // php code to display available airports from database
+                                        // query to select all available airports in database
+                                        $query = "select * from airport";
+
+                                        // Executing query
+                                        $query_run = mysqli_query($con, $query);
+
+                                        // count rows to check whether we have airport or not
+                                        $count = mysqli_num_rows($query_run);
+
+                                        // if count is greater than 0 we have airport else we do not have an airport
+                                        if($count>0)
+                                        {
+                                            // we have airport
+                                            while($row=mysqli_fetch_assoc($query_run))
+                                            {
+                                                // get the detail of airports
+                                                $airport_code = $row['airport_code'];
+                                                $airport_name = $row['airport_name'];
+
+                                                ?>
+                                                <option value="<?php echo $airport_code; ?>"><?php echo $airport_name; ?></option>
+                                                <?php
+                                            }
+                                        }
+                                        else
+                                        {
+                                            // we do not have airport
+                                            ?>
+                                            <option value="0">No Airport Found</option>
+                                            <?php
+                                        }
+                                    ?>
+                                </select>
                             </div>
 
                             <div class="mb-3">
