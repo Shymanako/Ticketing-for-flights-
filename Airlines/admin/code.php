@@ -198,63 +198,63 @@ if(isset($_POST['save_payment'])){
     }
 }
 
-if(isset($_POST['save_airlines'])){
+if(isset($_POST['save_airline'])){
     $airline_id = mysqli_real_escape_string($con, $_POST['airline_id']);
     $airline_name = mysqli_real_escape_string($con, $_POST['airline_name']);
 
-    $query = "INSERT INTO airlines (airline_id, airline_name) VALUES ('$airline_id', '$airline_name')";
+    $query = "INSERT INTO airline (airline_id, airline_name) VALUES ('$airline_id', '$airline_name')";
 
     $query_run = mysqli_query($con, $query);
     if($query_run){
 
-        $_SESSION['message'] = "Airlines Created Successfully";
-        header("Location: airlines.php");
+        $_SESSION['message'] = "Airline Created Successfully";
+        header("Location: airline.php");
         exit(0);
     }
     else{
-        $_SESSION['message'] = "Airlines Not Created";
-        header("Location: airlines-create.php");
+        $_SESSION['message'] = "Airline Not Created";
+        header("Location: airline-create.php");
         exit(0);
     }
 }
 
-if(isset($_POST['update_airlines'])){
+if(isset($_POST['update_airline'])){
     $airline_id = mysqli_real_escape_string($con, $_POST['airline_id']);
     $airline_name = mysqli_real_escape_string($con, $_POST['airline_name']);
 
-    $query = "UPDATE airlines SET airline_id='$airline_id', airline_name='$airline_name' ";
+    $query = "UPDATE airline SET airline_id='$airline_id', airline_name='$airline_name' ";
     $query_run = mysqli_query($con, $query);
 
     if($query_run){
 
-        $_SESSION['message'] = "Airlines Updated Successfully";
+        $_SESSION['message'] = "Airline Updated Successfully";
         header("Location: admin.php");
         exit(0);
     }
     else{
 
-        $_SESSION['message'] = "Airlines Update Failed";
-        header("Location: airlines-update.php");
+        $_SESSION['message'] = "Airline Update Failed";
+        header("Location: airline-update.php");
         exit(0);
     }
 }
 
-if(isset($_POST['delete_airlines'])){
-    $airline_id = mysqli_real_escape_string($con, $_POST['delete_airlines']);
+if(isset($_POST['delete_airline'])){
+    $airline_id = mysqli_real_escape_string($con, $_POST['delete_airline']);
 
-    $query = "DELETE FROM airlines WHERE airline_id='$airline_id'";
+    $query = "DELETE FROM airline WHERE airline_id='$airline_id'";
     $query_run = mysqli_query($con, $query);
     
     if($query_run){
 
-        $_SESSION['message'] = "Airlines Deleted Successfully";
-        header("Location: airlines.php");
+        $_SESSION['message'] = "Airline Deleted Successfully";
+        header("Location: airline.php");
         exit(0);
     }
     else{
 
-        $_SESSION['message'] = "Airlines Deletion Failed";
-        header("Location: airlines.php");
+        $_SESSION['message'] = "Airline Deletion Failed";
+        header("Location: airline.php");
         exit(0);
     }
 }
@@ -320,6 +320,50 @@ if(isset($_POST['save_direction'])){
         exit(0);
     }
 }
+
+if(isset($_POST['delete_direction'])){
+    $direction_id = mysqli_real_escape_string($con, $_POST['delete_direction']);
+
+    $query = "DELETE FROM direction WHERE direction_id='$direction_id'";
+    $query_run = mysqli_query($con, $query);
+    
+    if($query_run){
+
+        $_SESSION['message'] = "Direction Deleted Successfully";
+        header("Location: direction.php");
+        exit(0);
+    }
+    else{
+
+        $_SESSION['message'] = "Direction Deletion Failed";
+        header("Location: direction.php");
+        exit(0);
+    }
+}
+
+if(isset($_POST['update_direction'])){
+    $origin_airport_code = mysqli_real_escape_string($con, $_POST['origin_airport_code']);
+    $destination_airport_code = mysqli_real_escape_string($con, $_POST['destination_airport_code']);
+    $price = mysqli_real_escape_string($con, $_POST['price']);
+
+    $query = "UPDATE direction SET origin_airport_code='$origin_airport_code', destination_airport_code='$destination_airport_code', price='$price' ";
+    $query_run = mysqli_query($con, $query);
+
+    if($query_run){
+
+        $_SESSION['message'] = "Direction Updated Successfully";
+        header("Location: direction.php");
+        exit(0);
+    }
+    else{
+
+        $_SESSION['message'] = "Direction Update Failed";
+        header("Location: direction-update.php");
+        exit(0);
+    }
+}
+
+
 
 ?>
 

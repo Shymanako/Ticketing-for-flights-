@@ -22,19 +22,17 @@
     <div class="wrapper">
       <div class="sidebar">
         <h2>DB Admin</h2>
-
         <li><a href="admin.php">Home</a></li>
-        <li><a href="airlines.php">Airlines</a></li>
+        <li><a href="airline.php">Airline</a></li>
         <li><a href="airport.php">Airport</a></li>
+        <li><a href="ticket.php">Booked Information</a></li>
         <li><a href="direction.php">Direction</a></li>
-        <li><a href="ticket.php">Ticket</a></li>
-        <li><a href="passenger.php">Passenger</a></li>
         <li><a href="flight.php">Flight</a></li>
+        <li><a href="passenger.php">Passenger</a></li>
         <li><a href="payment.php">Payment</a></li>
         <li><a href="reservation.php">Reservation</a></li>
         <li><a href="../home.php"> Back to Website</a></li>
         <li><a href="logout-admin.php"> Logout</a></li>
-  
       </div>
     </div>
 
@@ -75,10 +73,10 @@
                             <td><?= $direction['destination_airport_code']; ?></td>
                             <td><?= $direction['price']; ?></td>
                             <td>
-                              <a href="direction-view.php?origin_airport_code=<?= $direction['origin_airport_code']; ?>" class="btn btn-info btn-sm">View</a>
-                              <a href="direction-update.php?origin_airport_code=<?= $direction['origin_airport_code']; ?>" class="btn btn-success btn-sm">Update</a>
+                              <a href="direction-view.php?direction_id=<?= $direction['direction_id']; ?>" class="btn btn-info btn-sm">View</a>
+                              <a href="direction-update.php?direction_id=<?= $direction['direction_id']; ?>" class="btn btn-success btn-sm">Update</a>
                               <form action="code.php" method='POST' class="d-inline">
-                                <button type="submit" name="delete_direction" value="<?=$direction['origin_airport_code']; ?>" class="btn btn-danger btn-sm">Delete</a>
+                                <button type="submit" name="delete_direction" value="<?=$direction['direction_id']; ?>" class="btn btn-danger btn-sm">Delete</a>
                               </form>
                             </td>
                           </tr>

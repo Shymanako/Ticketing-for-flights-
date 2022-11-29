@@ -64,7 +64,7 @@
     if(isset($_POST["submit"]))
     {
         // Process for login
-        // Get the data from login fom
+        // Get the data from login
 
         $email = $_POST['email'];
         $password = $_POST['password'];

@@ -24,34 +24,31 @@ require 'dbcon.php';
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
-                        <h4>Direction Details
-                            <a href="direction.php" class="btn btn-danger float-end">Back</a>
+                        <h4>Airline Details
+                            <a href="airline.php" class="btn btn-danger float-end">Back</a>
                         </h4>
                     </div>
                     <div class="card-body">
 
                         <?php
 
-                        if(isset($_GET['direction_id'])){
-                            $direction_id = mysqli_real_escape_string($con, $_GET['direction_id']);
-                            $query = "SELECT * FROM direction WHERE direction_id='$direction_id'";
+                        if(isset($_GET['airline_id'])){
+                            $airline_id = mysqli_real_escape_string($con, $_GET['airline_id']);
+                            $query = "SELECT * FROM airline WHERE airline_id='$airline_id'";
                             $query_run = mysqli_query($con, $query);
 
                             if(mysqli_num_rows($query_run) > 0)
                             {
-                                $direction = mysqli_fetch_array($query_run);
+                                $airline = mysqli_fetch_array($query_run);
                                 ?>
+
                                     <div class="mb-3">
-                                        <label> Origin Airport Code </label>
-                                        <p class="form-control"><?=$direction['origin_airport_code'];?></p>
+                                        <label> Airline ID </label>
+                                        <p class="form-control"><?=$airline['airline_id'];?></p>
                                     </div>
                                     <div class="mb-3">
-                                        <label> Destination Airport Code </label>
-                                        <p class="form-control"><?=$direction['destination_airport_code'];?></p>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label> Price </label>
-                                        <p class="form-control"><?=$direction['price'];?></p>
+                                        <label> Airline Name </label>
+                                        <p class="form-control"><?=$airline['airline_name'];?></p>
                                     </div>
 
                                 <?php

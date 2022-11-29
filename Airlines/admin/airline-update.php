@@ -1,5 +1,7 @@
 <?php
+session_start();
 require 'dbcon.php';
+include('partials/login-check.php');
 ?>
 
 <!doctype html>
@@ -10,7 +12,7 @@ require 'dbcon.php';
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
   
-    <title>View</title>
+    <title>Update</title>
 
   </head>
   <body>
@@ -24,36 +26,39 @@ require 'dbcon.php';
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
-                        <h4>Direction Details
-                            <a href="direction.php" class="btn btn-danger float-end">Back</a>
+                        <h4>Update Airline
+                            <a href="airline.php" class="btn btn-danger float-end">Back</a>
                         </h4>
                     </div>
                     <div class="card-body">
 
                         <?php
 
-                        if(isset($_GET['direction_id'])){
-                            $direction_id = mysqli_real_escape_string($con, $_GET['direction_id']);
-                            $query = "SELECT * FROM direction WHERE direction_id='$direction_id'";
+                        if(isset($_GET['airline_id'])){
+                            $airline_id = mysqli_real_escape_string($con, $_GET['airline_id']);
+                            $query = "SELECT * FROM airline WHERE airline_id='$airline_id'";
                             $query_run = mysqli_query($con, $query);
 
                             if(mysqli_num_rows($query_run) > 0)
                             {
-                                $direction = mysqli_fetch_array($query_run);
+                                $airline = mysqli_fetch_array($query_run);
                                 ?>
-                                    <div class="mb-3">
-                                        <label> Origin Airport Code </label>
-                                        <p class="form-control"><?=$direction['origin_airport_code'];?></p>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label> Destination Airport Code </label>
-                                        <p class="form-control"><?=$direction['destination_airport_code'];?></p>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label> Price </label>
-                                        <p class="form-control"><?=$direction['price'];?></p>
-                                    </div>
 
+                                <form action="code.php" autocomplete="off" method="POST">
+                                    <input type="hidden" name="airline_id" value="<?= $airline_id;?>">
+                                    
+                                    <div class="mb-3">
+                                        <label> Airline ID </label>
+                                        <input type="text" name="airline_id" value="<?= $airline['airline_id'];?>" class="form-control">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label> Airline Name </label>
+                                        <input type="text" name="airline_name" value="<?= $airline['airline_name'];?>" class="form-control">
+                                    </div>
+                                    <div class="mb-3">
+                                        <button type="submit" name="update_airline" class="btn btn-primary">Update Airline</button>
+                                    </div>
+                                </form>
                                 <?php
                             }
                             else

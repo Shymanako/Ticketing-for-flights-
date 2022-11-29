@@ -27,17 +27,23 @@ include('partials/login-check.php');
                 <div class="card">
                     <div class="card-header">
                         <h4>Update Direction
-                            <a href="admin.php" class="btn btn-danger float-end">Back</a>
+                            <a href="direction.php" class="btn btn-danger float-end">Back</a>
                         </h4>
                     </div>
                     <div class="card-body">
 
                         <?php
 
-                        if(isset($_GET['id'])){
-                            $origin_airport_code = mysqli_real_escape_string($con, $_GET['id']);
-                            $query = "SELECT * FROM flight WHERE origin_airport_code='$origin_airport_code'";
+                        if(isset($_GET['direction_id'])){
+                            $direction_id = mysqli_real_escape_string($con, $_GET['direction_id']);
+                            $query = "SELECT * FROM direction WHERE direction_id='$direction_id'";
                             $query_run = mysqli_query($con, $query);
+                            $row = mysqli_fetch_assoc($query_run);
+
+                            $current_origin_airport_code = $row['origin_airport_code'];
+                            $current_destination_airport_code = $row['destination_airport_code'];
+                            $price = $row['price'];
+
 
                             if(mysqli_num_rows($query_run) > 0)
                             {
@@ -45,34 +51,96 @@ include('partials/login-check.php');
                                 ?>
 
                                 <form action="code.php" autocomplete="off" method="POST">
-                                    <input type="hidden" name="origin_airport_code" value="<?= $origin_airport_code;?>">
+                                    <input type="hidden" name="direction_id" value="<?= $direction_id;?>">
 
                                     <div class="mb-3">
-                                        <label> Flight Location </label>
-                                        <input type="text" name="location" value="<?= $flight['location'];?>" class="form-control">
+                                        <label> Origin Airport Code </label>
+                                        <div>
+                                        <select name="origin_airport_code">
+                                            <?php
+                                                // php code to display available airports from database
+                                                // query to select all available airports in database
+                                                $query2 = "select * from airport";
+
+                                                // Executing query
+                                                $query_run2 = mysqli_query($con, $query2);
+
+                                                // count rows to check whether we have airport or not
+                                                $count2 = mysqli_num_rows($query_run2);
+
+                                                // if count is greater than 0 we have airport else we do not have an airport
+                                                if($count2>0)
+                                                {
+                                                    // we have airport
+                                                    while($row2=mysqli_fetch_assoc($query_run2))
+                                                    {
+                                                        // get the detail of airports
+                                                        $airport_code = $row2['airport_code'];
+                                                        $airport_name = $row2['airport_name'];
+
+                                                        ?>
+                                                        <option <?php if($current_origin_airport_code==$airport_code){echo "selected"; } ?> value="<?php echo $airport_code; ?>"><?php echo $airport_name; ?></option>
+                                                        <?php
+                                                    }
+                                                }
+                                                else
+                                                {
+                                                    // we do not have airport
+                                                    ?>
+                                                    <option value="0">No Airport Found</option>
+                                                    <?php
+                                                }
+                                            ?>
+                                        </select>
                                     </div>
-                                    <div class="mb-3">
-                                        <label> Flight Destination </label>
-                                        <input list="destination" type="text" name="destination" value="<?= $flight['destination'];?>" class="form-control">
-                                        <datalist id="destination">
-                                            <option value="Manila">
-                                            <option value="Tokyo">
-                                            <option value="Seoul">
-                                            <option value="Agra">
-                                            <option value="Beijing">
-                                            <option value="Hanoi">
-                                            <option value="Kuala Lumpur">
-                                            <option value="Rio De Janeiro">
-                                            <option value="Singapore">
-                                            <option value="Reykjavik">
-                                            <option value="Paris">
-                                            <option value="Bali">
-                                        </datalist>
+
                                     </div>
+                                        <div class="mb-3">
+                                            <label> Destination Airport Code </label>
+                                            <div>
+                                                <select name="destination_airport_code">
+                                                    <?php
+                                                        // php code to display available airports from database
+                                                        // query to select all available airports in database
+                                                        $query3 = "select * from airport";
+
+                                                        // Executing query
+                                                        $query_run3 = mysqli_query($con, $query3);
+
+                                                        // count rows to check whether we have airport or not
+                                                        $count3 = mysqli_num_rows($query_run3);
+
+                                                        // if count is greater than 0 we have airport else we do not have an airport
+                                                        if($count3>0)
+                                                        {
+                                                            // we have airport
+                                                            while($row3=mysqli_fetch_assoc($query_run3))
+                                                            {
+                                                                // get the detail of airports
+                                                                $airport_code = $row3['airport_code'];
+                                                                $airport_name = $row3['airport_name'];
+
+                                                                ?>
+                                                                <option <?php if($current_destination_airport_code==$airport_code){echo "selected"; } ?> value="<?php echo $airport_code; ?>"><?php echo $airport_name; ?></option>
+                                                                <?php
+                                                            }
+                                                        }
+                                                        else
+                                                        {
+                                                            // we do not have airport
+                                                            ?>
+                                                            <option value="0">No Airport Found</option>
+                                                            <?php
+                                                        }
+                                                    ?>
+                                                </select>
+                                    </div>
+
                                     <div class="mb-3">
                                         <label> Price </label>
-                                        <input type="number" name="price" placeholder="Enter Price" class="form-control">
+                                        <input type="number" name="price" value="<?php echo $price; ?>" class="form-control">
                                     </div>
+
                                     <div class="mb-3">
                                         <button type="submit" name="update_direction" class="btn btn-primary">Update Direction</button>
                                     </div>

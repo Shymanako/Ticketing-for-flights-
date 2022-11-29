@@ -23,12 +23,12 @@
       <div class="sidebar">
         <h2>DB Admin</h2>  
         <li><a href="admin.php">Home</a></li>
-        <li><a href="airlines.php">Airlines</a></li>
+        <li><a href="airline.php">Airline</a></li>
         <li><a href="airport.php">Airport</a></li>
+        <li><a href="ticket.php">Booked Information</a></li>
         <li><a href="direction.php">Direction</a></li>
-        <li><a href="ticket.php">Ticket</a></li>
-        <li><a href="passenger.php">Passenger</a></li>
         <li><a href="flight.php">Flight</a></li>
+        <li><a href="passenger.php">Passenger</a></li>
         <li><a href="payment.php">Payment</a></li>
         <li><a href="reservation.php">Reservation</a></li>
         <li><a href="../home.php"> Back to Website</a></li>
@@ -133,7 +133,7 @@
                         <th>Flight ID</th>
                         <th>Location</th>
                         <th>Destination</th>
-                        <th>Airlines</th>
+                        <th>Airline</th>
                         <th>Departure</th>
                         <th>Arrival</th>
                         <th>Action</th>
@@ -153,7 +153,7 @@
                             <td><?= $flight['fid']; ?></td>
                             <td><?= $flight['location']; ?></td>
                             <td><?= $flight['destination']; ?></td>
-                            <td><?= $flight['airlines']; ?></td>
+                            <td><?= $flight['airline']; ?></td>
                             <td><?= $flight['departure']; ?></td>
                             <td><?= $flight['arrival']; ?></td>
                             <td>

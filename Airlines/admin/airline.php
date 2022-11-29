@@ -44,7 +44,8 @@
         <div class="col-md-12">
           <div class="card">
             <div class="card-header">
-              <h4>Passenger Ticket Details
+              <h4>Airline Details
+                <a href="airline-create.php" class="btn btn-primary float-end">Add Airline</a>
               </h4>
             </div>
             <div class="card-body">
@@ -52,35 +53,32 @@
               <table class="table table-bordered table-striped">
                   <thead>
                       <tr>
-                        <th>Ticket ID</th>
-                        <th>First Name</th>
-                        <th>Last Name</th>
-                        <th>Location</th>
-                        <th>Destination</th>
-                        <th>Airline</th>
-                        <th>Departure</th>
-                        <th>Arrival</th>
+                        <th>Airline ID</th>
+                        <th>Airline Name</th>
+                        <th>Action</th>
                       </tr>
                   </thead>
                   <tbody>
                     <?php 
-                      $query = "SELECT * FROM ticket";
+                      $query = "SELECT * FROM airline";
                       $query_run = mysqli_query($con, $query);
 
                       if(mysqli_num_rows($query_run) > 0){
-                        foreach($query_run as $ticket){
+                        foreach($query_run as $airline){
 
                           // echo
                           ?>
                           <tr>
-                            <td><?= $ticket['id']; ?></td>
-                            <td><?= $ticket['first_name']; ?></td>
-                            <td><?= $ticket['last_name']; ?></td>
-                            <td><?= $ticket['location']; ?></td>
-                            <td><?= $ticket['destination']; ?></td>
-                            <td><?= $ticket['airline']; ?></td>
-                            <td><?= $ticket['departure']; ?></td>
-                            <td><?= $ticket['arrival']; ?></td>
+                            <td><?= $airline['airline_id']; ?></td>
+                            <td><?= $airline['airline_name']; ?></td>
+
+                            <td>
+                              <a href="airline-view.php?airline_id=<?= $airline['airline_id']; ?>" class="btn btn-info btn-sm">View</a>
+                              <a href="airline-update.php?airline_id=<?= $airline['airline_id']; ?>" class="btn btn-success btn-sm">Update</a>
+                              <form action="code.php" method='POST' class="d-inline">
+                                <button type="submit" name="delete_airline" value="<?=$airline['airline_id']; ?>" class="btn btn-danger btn-sm">Delete</a>
+                              </form>
+                            </td>
                           </tr>
                           <?php
                         }
