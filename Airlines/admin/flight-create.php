@@ -1,5 +1,6 @@
 <?php
 session_start();
+require 'dbcon.php';
 include('partials/login-check.php');
 ?>
 
@@ -26,7 +27,7 @@ include('partials/login-check.php');
                 <div class="card">
                     <div class="card-header">
                         <h4>Add Flight
-                            <a href="admin.php" class="btn btn-danger float-end">Back</a>
+                            <a href="flight.php" class="btn btn-danger float-end">Back</a>
                         </h4>
                     </div>
                     <div class="card-body">
@@ -44,13 +45,47 @@ include('partials/login-check.php');
                         <form name="Form" action="code.php" autocomplete="off" onsubmit="return validateForm()" method="POST">
 
                             <div class="mb-3">
-                                <label> Schedule ID </label>
-                                <input type="text" name="schedule_id" placeholder="Enter Schedule ID" class="form-control">
-                            </div>
+                                    <label> Schedule ID </label>
+                                        <select name="schedule_id">
+                                            <?php
+                                                // php code to display available schedules from database
+                                                // query to select all available schedules in database
+                                                $query = "select * from schedule";
 
-                            <div class="mb-3">
-                                <button type="submit" name="save_flight" class="btn btn-primary">Save Flight</button>
-                            </div>
+                                                // Executing query
+                                                $query_run = mysqli_query($con, $query);
+
+                                                // count rows to check whether we have schedule or not
+                                                $count = mysqli_num_rows($query_run);
+
+                                                // if count is greater than 0 we have schedule else we do not have an schedule
+                                                if($count>0)
+                                                {
+                                                    // we have schedule
+                                                    while($row=mysqli_fetch_assoc($query_run))
+                                                    {
+                                                        // get the detail of schedule
+                                                        $schedule_id = $row['schedule_id'];
+
+                                                        ?>
+                                                        <option value="<?php echo $schedule_id; ?>"><?php echo $schedule_id; ?></option>
+                                                        <?php
+                                                    }
+                                                }
+                                                else
+                                                {
+                                                    // we do not have schedule
+                                                    ?>
+                                                    <option value="0">No schedule Found</option>
+                                                    <?php
+                                                }
+                                            ?>
+                                        </select>
+                                </div>
+
+                                <div class="mb-3">
+                                    <button type="submit" name="save_flight" class="btn btn-primary">Save Flight</button>
+                                </div>
 
                         </form>
                     </div>

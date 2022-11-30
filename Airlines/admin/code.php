@@ -23,22 +23,24 @@ if(isset($_POST['delete_passenger'])){
 }
 
 if(isset($_POST['update_passenger'])){
-
     $passenger_id = mysqli_real_escape_string($con, $_POST['passenger_id']);
     $first_name = mysqli_real_escape_string($con, $_POST['first_name']);
     $last_name = mysqli_real_escape_string($con, $_POST['last_name']);
     $date_of_birth = mysqli_real_escape_string($con, $_POST['date_of_birth']);
     $citizenship = mysqli_real_escape_string($con, $_POST['citizenship']);
     $phone_number = mysqli_real_escape_string($con, $_POST['phone_number']);
+    $email = mysqli_real_escape_string($con, $_POST['email']);
+    $password = mysqli_real_escape_string($con, $_POST['password']);
 
     $query = "UPDATE passenger SET first_name='$first_name', last_name='$last_name',
-    date_of_birth='$date_of_birth', citizenship='$citizenship', phone_number='$phone_number' WHERE passenger_id='$passenger_id'";
+    date_of_birth='$date_of_birth', citizenship='$citizenship', phone_number='$phone_number', 
+    email='$email', password='$password' WHERE passenger_id='$passenger_id'";
     $query_run = mysqli_query($con, $query);
 
     if($query_run){
 
         $_SESSION['message'] = "Passenger Updated Successfully";
-        header("Location: admin.php");
+        header("Location: passenger.php");
         exit(0);
     }
     else{
@@ -56,14 +58,16 @@ if(isset($_POST['save_passenger'])){
     $date_of_birth = mysqli_real_escape_string($con, $_POST['date_of_birth']);
     $citizenship = mysqli_real_escape_string($con, $_POST['citizenship']);
     $phone_number = mysqli_real_escape_string($con, $_POST['phone_number']);
+    $email = mysqli_real_escape_string($con, $_POST['email']);
+    $password = mysqli_real_escape_string($con, $_POST['password']);
 
-    $query = "INSERT INTO passenger (first_name, last_name, date_of_birth, citizenship, phone_number) VALUES ('$first_name', '$last_name', '$date_of_birth', '$citizenship', '$phone_number')";
+    $query = "INSERT INTO passenger (first_name, last_name, date_of_birth, citizenship, phone_number, email, password) VALUES ('$first_name', '$last_name', '$date_of_birth', '$citizenship', '$phone_number', '$email', '$password')";
 
     $query_run = mysqli_query($con, $query);
     if($query_run){
 
         $_SESSION['message'] = "Passenger Created Successfully";
-        header("Location: admin.php");
+        header("Location: passenger.php");
         exit(0);
     }
     else{
@@ -75,36 +79,34 @@ if(isset($_POST['save_passenger'])){
 
 if(isset($_POST['delete_flight'])){
     $flight_id = mysqli_real_escape_string($con, $_POST['delete_flight']);
-
     $query = "DELETE FROM flight WHERE flight_id='$flight_id' ";
     $query_run = mysqli_query($con, $query);
 
     if($query_run){
 
         $_SESSION['message'] = "Flight Deleted Successfully";
-        header("Location: admin.php");
+        header("Location: flight.php");
         exit(0);
     }
     else{
 
         $_SESSION['message'] = "Flight Deletion Failed";
-        header("Location: admin.php");
+        header("Location: flight.php");
         exit(0);
     }
 }
 
 if(isset($_POST['update_flight'])){
-
     $flight_id = mysqli_real_escape_string($con, $_POST['flight_id']);
     $schedule_id = mysqli_real_escape_string($con, $_POST['schedule_id']);
 
-    $query = "UPDATE flight SET schedule_id='$schedule_id' ";
+    $query = "UPDATE flight SET schedule_id='$schedule_id' where flight_id='$flight_id' ";
     $query_run = mysqli_query($con, $query);
 
     if($query_run){
 
         $_SESSION['message'] = "Flight Updated Successfully";
-        header("Location: admin.php");
+        header("Location: flight.php");
         exit(0);
     }
     else{
@@ -124,12 +126,12 @@ if(isset($_POST['save_flight'])){
     if($query_run){
 
         $_SESSION['message'] = "Flight Created Successfully";
-        header("Location: admin.php");
+        header("Location: flight.php");
         exit(0);
     }
     else{
         $_SESSION['message'] = "Flight Not Created";
-        header("Location: passenger-create.php");
+        header("Location: flight-create.php");
         exit(0);
     }
 }
@@ -143,19 +145,19 @@ if(isset($_POST['delete_payment'])){
     if($query_run){
 
         $_SESSION['message'] = "Payment Deleted Successfully";
-        header("Location: admin.php");
+        header("Location: payment.php");
         exit(0);
     }
     else{
 
         $_SESSION['message'] = "Payment Deletion Failed";
-        header("Location: admin.php");
+        header("Location: payment.php");
         exit(0);
     }
 }
 
 if(isset($_POST['update_payment'])){
-
+    $payment_id = mysqli_real_escape_string($con, $_POST['payment_id']);
     $reservation_id = mysqli_real_escape_string($con, $_POST['reservation_id']);
     $payment_method = mysqli_real_escape_string($con, $_POST['payment_method']);
     $payment_amount = mysqli_real_escape_string($con, $_POST['payment_amount']);
@@ -166,7 +168,7 @@ if(isset($_POST['update_payment'])){
     if($query_run){
 
         $_SESSION['message'] = "Payment Updated Successfully";
-        header("Location: admin.php");
+        header("Location: payment.php");
         exit(0);
     }
     else{
@@ -188,7 +190,7 @@ if(isset($_POST['save_payment'])){
     if($query_run){
 
         $_SESSION['message'] = "Payment Created Successfully";
-        header("Location: admin.php");
+        header("Location: payment.php");
         exit(0);
     }
     else{
@@ -222,13 +224,13 @@ if(isset($_POST['update_airline'])){
     $airline_id = mysqli_real_escape_string($con, $_POST['airline_id']);
     $airline_name = mysqli_real_escape_string($con, $_POST['airline_name']);
 
-    $query = "UPDATE airline SET airline_id='$airline_id', airline_name='$airline_name' ";
+    $query = "UPDATE airline SET airline_name='$airline_name' where airline_id='$airline_id' ";
     $query_run = mysqli_query($con, $query);
 
     if($query_run){
 
         $_SESSION['message'] = "Airline Updated Successfully";
-        header("Location: admin.php");
+        header("Location: airline.php");
         exit(0);
     }
     else{
@@ -283,7 +285,7 @@ if(isset($_POST['update_airport'])){
     $airport_code = mysqli_real_escape_string($con, $_POST['airport_code']);
     $airport_name = mysqli_real_escape_string($con, $_POST['airport_name']);
 
-    $query = "UPDATE airport SET airport_code='$airport_code', airport_name='$airport_name' ";
+    $query = "UPDATE airport SET airport_name='$airport_name' where airport_code='$airport_code' ";
     $query_run = mysqli_query($con, $query);
 
     if($query_run){
@@ -342,11 +344,12 @@ if(isset($_POST['delete_direction'])){
 }
 
 if(isset($_POST['update_direction'])){
+    $direction_id = mysqli_real_escape_string($con, $_POST['direction_id']);
     $origin_airport_code = mysqli_real_escape_string($con, $_POST['origin_airport_code']);
     $destination_airport_code = mysqli_real_escape_string($con, $_POST['destination_airport_code']);
     $price = mysqli_real_escape_string($con, $_POST['price']);
 
-    $query = "UPDATE direction SET origin_airport_code='$origin_airport_code', destination_airport_code='$destination_airport_code', price='$price' ";
+    $query = "UPDATE direction SET origin_airport_code='$origin_airport_code', destination_airport_code='$destination_airport_code', price='$price' where direction_id='$direction_id' ";
     $query_run = mysqli_query($con, $query);
 
     if($query_run){
@@ -363,7 +366,134 @@ if(isset($_POST['update_direction'])){
     }
 }
 
+if(isset($_POST['save_schedule'])){
+    $direction_id = mysqli_real_escape_string($con, $_POST['direction_id']);
+    $departure_time = mysqli_real_escape_string($con, $_POST['departure_time']);
+    $arrival_time = mysqli_real_escape_string($con, $_POST['arrival_time']);
+    $airline_id = mysqli_real_escape_string($con, $_POST['airline_id']);
 
+    $query = "INSERT INTO schedule (direction_id, departure_time, arrival_time, airline_id) VALUES ('$direction_id', '$departure_time', '$arrival_time', '$airline_id')";
+
+    $query_run = mysqli_query($con, $query);
+    if($query_run){
+
+        $_SESSION['message'] = "Schedule Created Successfully";
+        header("Location: schedule.php");
+        exit(0);
+    }
+    else{
+        $_SESSION['message'] = "Schedule Not Created";
+        header("Location: schedule-create.php");
+        exit(0);
+    }
+}
+
+if(isset($_POST['delete_schedule'])){
+    $schedule_id = mysqli_real_escape_string($con, $_POST['delete_schedule']);
+
+    $query = "DELETE FROM schedule WHERE schedule_id='$schedule_id'";
+    $query_run = mysqli_query($con, $query);
+    
+    if($query_run){
+
+        $_SESSION['message'] = "Schedule Deleted Successfully";
+        header("Location: schedule.php");
+        exit(0);
+    }
+    else{
+
+        $_SESSION['message'] = "Schedule Deletion Failed";
+        header("Location: schedule.php");
+        exit(0);
+    }
+}
+
+if(isset($_POST['update_schedule'])){
+    $schedule_id = mysqli_real_escape_string($con, $_POST['schedule_id']);
+    $direction_id = mysqli_real_escape_string($con, $_POST['direction_id']);
+    $departure_time = mysqli_real_escape_string($con, $_POST['departure_time']);
+    $arrival_time = mysqli_real_escape_string($con, $_POST['arrival_time']);
+    $airline_id = mysqli_real_escape_string($con, $_POST['airline_id']);
+
+    $query = "UPDATE schedule SET direction_id='$direction_id', departure_time='$departure_time', arrival_time='$arrival_time', airline_id='$airline_id' where schedule_id='$schedule_id' ";
+    $query_run = mysqli_query($con, $query);
+
+    if($query_run){
+
+        $_SESSION['message'] = "Schedule Updated Successfully";
+        header("Location: schedule.php");
+        exit(0);
+    }
+    else{
+
+        $_SESSION['message'] = "Schedule Update Failed";
+        header("Location: schedule-update.php");
+        exit(0);
+    }
+}
+
+if(isset($_POST['save_reservation'])){
+    $passenger_id = mysqli_real_escape_string($con, $_POST['passenger_id']);
+    $flight_id = mysqli_real_escape_string($con, $_POST['flight_id']);
+    $reservation_status = mysqli_real_escape_string($con, $_POST['reservation_status']);
+
+    $query = "INSERT INTO reservation (passenger_id, flight_id, reservation_status) VALUES ('$passenger_id', '$flight_id', '$reservation_status')";
+
+    $query_run = mysqli_query($con, $query);
+    if($query_run){
+
+        $_SESSION['message'] = "Reservation Created Successfully";
+        header("Location: reservation.php");
+        exit(0);
+    }
+    else{
+        $_SESSION['message'] = "Reservation Not Created";
+        header("Location: reservation-create.php");
+        exit(0);
+    }
+}
+
+if(isset($_POST['update_reservation'])){
+    $passenger_id = mysqli_real_escape_string($con, $_POST['passenger_id']);
+    $flight_id = mysqli_real_escape_string($con, $_POST['flight_id']);
+    $reservation_status = mysqli_real_escape_string($con, $_POST['reservation_status']);
+
+    $query = "UPDATE reservation SET passenger_id='$passenger_id', flight_id='$flight_id', reservation_status='$reservation_status'";
+    $query_run = mysqli_query($con, $query);
+
+    if($query_run){
+
+        $_SESSION['message'] = "Reservation Updated Successfully";
+        header("Location: reservation.php");
+        exit(0);
+    }
+    else{
+
+        $_SESSION['message'] = "Reservation Update Failed";
+        header("Location: reservation-update.php");
+        exit(0);
+    }
+}
+
+if(isset($_POST['delete_reservation'])){
+    $reservation_id = mysqli_real_escape_string($con, $_POST['delete_reservation']);
+
+    $query = "DELETE FROM reservation WHERE reservation_id='$reservation_id'";
+    $query_run = mysqli_query($con, $query);
+    
+    if($query_run){
+
+        $_SESSION['message'] = "Reservation Deleted Successfully";
+        header("Location: reservation.php");
+        exit(0);
+    }
+    else{
+
+        $_SESSION['message'] = "Reservation Deletion Failed";
+        header("Location: reservation.php");
+        exit(0);
+    }
+}
 
 ?>
 

@@ -1,5 +1,6 @@
 <?php
 session_start();
+require 'dbcon.php';
 include('partials/login-check.php');
 ?>
 
@@ -43,21 +44,62 @@ include('partials/login-check.php');
                         </script>
                         <form name="Form" action="code.php" autocomplete="off" onsubmit="return validateForm()" method="POST">
 
-                            <div class="mb-3">
-                                <label>Reservation ID </label>
-                                <input list="credit_type" type="text" name="reservation_id" placeholder="Enter reservation id" class="form-control">
-                            </div>
-                            <div class="mb-3">
-                                <label> Payment Method </label>
-                                <input type="text" name="payment_method" placeholder="Enter payment method" class="form-control" maxlength="12">
-                            </div>
-                            <div class="mb-3">
-                                <label> Payment Amount </label>
-                                <input type="text" name="payment_amount" placeholder="Enter payment amount" class="form-control" maxlength="12">
-                            </div>
-                            <div class="mb-3">
-                                <button type="submit" name="save_payment" class="btn btn-primary">Save Payment</button>
-                            </div>
+                                <div class="mb-3">
+                                    <label> Reservation ID: </label>
+                                        <select name="reservation_id">
+                                            <?php
+                                                // php code to display available reservations from database
+                                                // query to select all available reservations in database
+                                                $query = "select * from reservation";
+
+                                                // Executing query
+                                                $query_run = mysqli_query($con, $query);
+
+                                                // count rows to check whether we have reservation or not
+                                                $count = mysqli_num_rows($query_run);
+
+                                                // if count is greater than 0 we have reservation else we do not have an reservation
+                                                if($count>0)
+                                                {
+                                                    // we have reservation
+                                                    while($row=mysqli_fetch_assoc($query_run))
+                                                    {
+                                                        // get the detail of reservation
+                                                        $reservation_id = $row['reservation_id'];
+
+                                                        ?>
+                                                        <option value="<?php echo $reservation_id; ?>"><?php echo $reservation_id; ?></option>
+                                                        <?php
+                                                    }
+                                                }
+                                                else
+                                                {
+                                                    // we do not have reservation
+                                                    ?>
+                                                    <option value="0">No Reservation Found</option>
+                                                    <?php
+                                                }
+                                            ?>
+                                        </select>
+                                </div>
+                                
+                                <div class="inputBox">
+                                    <label> Payment Method: </label>
+                                    <input list="payment_method" placeholder="enter Payment method" name="payment_method">
+                                    <datalist id="payment_method">
+                                        <option value="Visa">
+                                        <option value="Mastercard">
+                                    </datalist>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label> Payment Amount: </label>
+                                    <input type="number" name="payment_amount" placeholder="Enter payment amount" class="form-control">
+                                </div>
+
+                                <div class="mb-3">
+                                    <button type="submit" name="save_payment" class="btn btn-primary">Save Payment</button>
+                                </div>
 
                         </form>
                     </div>

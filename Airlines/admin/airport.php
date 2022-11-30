@@ -25,12 +25,13 @@
         <li><a href="admin.php">Home</a></li>
         <li><a href="airline.php">Airline</a></li>
         <li><a href="airport.php">Airport</a></li>
-        <li><a href="ticket.php">Booked Information</a></li>
+        <li><a href="booked-information.php">Booked Information</a></li>
         <li><a href="direction.php">Direction</a></li>
         <li><a href="flight.php">Flight</a></li>
         <li><a href="passenger.php">Passenger</a></li>
         <li><a href="payment.php">Payment</a></li>
         <li><a href="reservation.php">Reservation</a></li>
+        <li><a href="schedule.php">Schedule</a></li>
         <li><a href="../home.php"> Back to Website</a></li>
         <li><a href="logout-admin.php"> Logout</a></li>
       </div>

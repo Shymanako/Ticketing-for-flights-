@@ -70,7 +70,7 @@
         $password = $_POST['password'];
 
         // Sql to check wether the admin exists or not
-        $sql = "select * from login where email='$email 'and password='$password'";
+        $sql = "select * from Administrator where email='$email 'and password='$password'";
 
         // Execute the query
         $res = mysqli_query($con, $sql);

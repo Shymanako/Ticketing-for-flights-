@@ -38,6 +38,11 @@ include('partials/login-check.php');
                             $payment_id = mysqli_real_escape_string($con, $_GET['payment_id']);
                             $query = "SELECT * FROM payment WHERE payment_id='$payment_id'";
                             $query_run = mysqli_query($con, $query);
+                            $row = mysqli_fetch_assoc($query_run);
+
+                            $current_reservation_id = $row['reservation_id'];
+                            $payment_method = $row['payment_method'];
+                            $payment_amount = $row['payment_amount'];
 
                             if(mysqli_num_rows($query_run) > 0)
                             {
@@ -49,15 +54,56 @@ include('partials/login-check.php');
 
                                     <div class="mb-3">
                                         <label> Reservation ID </label>
-                                        <input list="credit_type" type="text" name="reservation_id" value="<?= $payment['reservation_id'];?>" class="form-control">
+                                        <div>
+                                        <select name="reservation_id">
+                                            <?php
+                                                // php code to display available reservations from database
+                                                // query to select all available reservations in database
+                                                $query2 = "select * from reservation";
+
+                                                // Executing query
+                                                $query_run2 = mysqli_query($con, $query2);
+
+                                                // count rows to check whether we have reservation or not
+                                                $count2 = mysqli_num_rows($query_run2);
+
+                                                // if count is greater than 0 we have reservation else we do not have an reservation
+                                                if($count2>0)
+                                                {
+                                                    // we have reservation
+                                                    while($row2=mysqli_fetch_assoc($query_run2))
+                                                    {
+                                                        // get the detail of reservation
+                                                        $reservation_id = $row2['reservation_id'];
+
+                                                        ?>
+                                                        <option <?php if($current_reservation_id==$reservation_id){echo "selected"; } ?> value="<?php echo $reservation_id; ?>"><?php echo $reservation_id; ?></option>
+                                                        <?php
+                                                    }
+                                                }
+                                                else
+                                                {
+                                                    // we do not have reservation
+                                                    ?>
+                                                    <option value="0">No Reservation Found</option>
+                                                    <?php
+                                                }
+                                            ?>
+                                        </select>
                                     </div>
+
                                     <div class="mb-3">
-                                        <label> Payment Method </label>
-                                        <input type="text" name="payment_method" value="<?= $payment['payment_method'];?>" class="form-control">
+                                        <label> Payment Method: </label>
+                                        <input list="payment_method" value="<?php echo $payment_method; ?>" name="payment_method">
+                                        <datalist id="payment_method">
+                                            <option value="Visa">
+                                            <option value="Mastercard">
+                                        </datalist>
                                     </div>
+
                                     <div class="mb-3">
-                                        <label> Payment Amount </label>
-                                        <input type="text" name="payment_amount" value="<?= $payment['payment_amount'];?>" class="form-control">
+                                        <label>Payment Amount: </label>
+                                        <input type="number" value="<?php echo $payment_amount; ?>" name="payment_amount">
                                     </div>
 
                                     <div class="mb-3">

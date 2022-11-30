@@ -51,21 +51,35 @@ include('partials/login-check.php');
                                 <label> Passenger First Name </label>
                                 <input type="text" name="first_name" placeholder="Enter passenger first name" class="form-control">
                             </div>
+
                             <div class="mb-3">
                                 <label> Passenger Last Name </label>
                                 <input type="text" name="last_name" placeholder="Enter passenger last name" class="form-control">
                             </div>
+
                             <div class="mb-3">
                                 <label> Passenger Date of Birth </label>
-                                <input type="date" name="birthdate" placeholder="Enter passenger birthdate" class="form-control">
+                                <input type="date" name="date_of_birth" placeholder="Enter passenger birthdate" class="form-control">
                             </div>
-                            <div class="mb-3">
+
                             <div class="mb-3">
                                 <label> Passenger Citizenship </label>
                                 <input type="text" name="citizenship" placeholder="Enter passenger citizenship" class="form-control">
                             </div>
+
+                            <div class="mb-3">
                             <label> Passenger Phone Number </label>
-                                <input type="number" name="phone" placeholder="Enter passenger phone number" class="form-control">
+                                <input type="number" name="phone_number" placeholder="Enter passenger phone number" class="form-control" maxlength="11">
+                            </div>
+
+                            <div class="mb-3">
+                            <label> Email </label>
+                                <input type="email" name="email" placeholder="Enter passenger email" class="form-control">
+                            </div>
+
+                            <div class="mb-3">
+                            <label> Password </label>
+                                <input type="text" name="password" placeholder="Enter passenger password" class="form-control">
                             </div>
 
                             <div class="mb-3">

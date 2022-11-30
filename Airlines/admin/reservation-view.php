@@ -24,35 +24,34 @@ require 'dbcon.php';
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
-                        <h4>Payment Details
-                            <a href="payment.php" class="btn btn-danger float-end">Back</a>
+                        <h4>Reservation Details
+                            <a href="reservation.php" class="btn btn-danger float-end">Back</a>
                         </h4>
                     </div>
                     <div class="card-body">
 
                         <?php
 
-                        if(isset($_GET['payment_id'])){
-                            $payment_id = mysqli_real_escape_string($con, $_GET['payment_id']);
-                            $query = "SELECT * FROM payment WHERE payment_id='$payment_id'";
+                        if(isset($_GET['reservation_id'])){
+                            $reservation_id = mysqli_real_escape_string($con, $_GET['reservation_id']);
+                            $query = "SELECT * FROM reservation WHERE reservation_id='$reservation_id'";
                             $query_run = mysqli_query($con, $query);
 
                             if(mysqli_num_rows($query_run) > 0)
                             {
-                                $payment = mysqli_fetch_array($query_run);
+                                $reservation = mysqli_fetch_array($query_run);
                                 ?>
-
                                     <div class="mb-3">
-                                        <label> Reservation ID Type </label>
-                                        <p class="form-control"><?=$payment['reservation_id'];?></p>
+                                        <label> Passenger ID </label>
+                                        <p class="form-control"><?=$reservation['passenger_id'];?></p>
                                     </div>
                                     <div class="mb-3">
-                                        <label> Payment Method </label>
-                                        <p class="form-control"><?=$payment['payment_method'];?></p>
+                                        <label> Flight ID </label>
+                                        <p class="form-control"><?=$reservation['flight_id'];?></p>
                                     </div>
                                     <div class="mb-3">
-                                        <label> Payment Amount </label>
-                                        <p class="form-control"><?=$payment['payment_amount'];?></p>
+                                        <label> Reservation Status </label>
+                                        <p class="form-control"><?=$reservation['reservation_status'];?></p>
                                     </div>
 
                                 <?php

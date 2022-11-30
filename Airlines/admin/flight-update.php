@@ -27,7 +27,7 @@ include('partials/login-check.php');
                 <div class="card">
                     <div class="card-header">
                         <h4>Update Flight
-                            <a href="admin.php" class="btn btn-danger float-end">Back</a>
+                            <a href="flight.php" class="btn btn-danger float-end">Back</a>
                         </h4>
                     </div>
                     <div class="card-body">
@@ -38,6 +38,9 @@ include('partials/login-check.php');
                             $flight_id = mysqli_real_escape_string($con, $_GET['flight_id']);
                             $query = "SELECT * FROM flight WHERE flight_id='$flight_id'";
                             $query_run = mysqli_query($con, $query);
+                            $row = mysqli_fetch_assoc($query_run);
+
+                            $current_schedule_id = $row['schedule_id'];
 
                             if(mysqli_num_rows($query_run) > 0)
                             {
@@ -49,7 +52,41 @@ include('partials/login-check.php');
 
                                     <div class="mb-3">
                                         <label> Schedule ID </label>
-                                        <input type="text" name="schedule_id" value="<?= $flight['schedule_id'];?>" class="form-control">
+                                            <select name="schedule_id">
+                                                <?php
+                                                    // php code to display available schedules from database
+                                                    // query to select all available schedules in database
+                                                    $query2 = "select * from schedule";
+
+                                                    // Executing query
+                                                    $query_run2 = mysqli_query($con, $query2);
+
+                                                    // count rows to check whether we have schedule or not
+                                                    $count2 = mysqli_num_rows($query_run2);
+
+                                                    // if count is greater than 0 we have schedule else we do not have an schedule
+                                                    if($count2>0)
+                                                    {
+                                                        // we have schedule
+                                                        while($row2=mysqli_fetch_assoc($query_run2))
+                                                        {
+                                                            // get the detail of schedule
+                                                            $schedule_id = $row2['schedule_id'];
+
+                                                            ?>
+                                                            <option <?php if($current_schedule_id==$schedule_id){echo "selected"; } ?> value="<?php echo $schedule_id; ?>"><?php echo $schedule_id; ?></option>
+                                                            <?php
+                                                        }
+                                                    }
+                                                    else
+                                                    {
+                                                        // we do not have schedule
+                                                        ?>
+                                                        <option value="0">No schedule Found</option>
+                                                        <?php
+                                                    }
+                                                ?>
+                                            </select>
                                     </div>
 
                                     <div class="mb-3">

@@ -45,8 +45,8 @@
         <div class="col-md-12">
           <div class="card">
             <div class="card-header">
-              <h4>Reservation Details
-                <a href="reservation-create.php" class="btn btn-primary float-end">Add Reservation</a>
+              <h4>Schedule Details
+                <a href="schedule-create.php" class="btn btn-primary float-end">Add Schedule</a>
               </h4>
             </div>
             <div class="card-body">
@@ -54,33 +54,33 @@
               <table class="table table-bordered table-striped">
                   <thead>
                       <tr>
-                        <th>Reservation ID</th>
-                        <th>Passenger ID</th>
-                        <th>Flight ID</th>
-                        <th>Reservation Status</th>
+                        <th>Direction ID</th>
+                        <th>Departure Time</th>
+                        <th>Arrival Time</th>
+                        <th>Airline ID</th>
                         <th>Action</th>
                       </tr>
                   </thead>
                   <tbody>
                     <?php 
-                      $query = "SELECT * FROM reservation";
+                      $query = "SELECT * FROM schedule";
                       $query_run = mysqli_query($con, $query);
 
                       if(mysqli_num_rows($query_run) > 0){
-                        foreach($query_run as $reservation){
+                        foreach($query_run as $schedule){
 
                           // echo
                           ?>
                           <tr>
-                            <td><?= $reservation['reservation_id']; ?></td>
-                            <td><?= $reservation['passenger_id']; ?></td>
-                            <td><?= $reservation['flight_id']; ?></td>
-                            <td><?= $reservation['reservation_status']; ?></td>
+                            <td><?= $schedule['direction_id']; ?></td>
+                            <td><?= $schedule['departure_time']; ?></td>
+                            <td><?= $schedule['arrival_time']; ?></td>
+                            <td><?= $schedule['airline_id']; ?></td>
                             <td>
-                              <a href="reservation-view.php?reservation_id=<?= $reservation['reservation_id']; ?>" class="btn btn-info btn-sm">View</a>
-                              <a href="reservation-update.php?reservation_id=<?= $reservation['reservation_id']; ?>" class="btn btn-success btn-sm">Update</a>
+                              <a href="schedule-view.php?schedule_id=<?= $schedule['schedule_id']; ?>" class="btn btn-info btn-sm">View</a>
+                              <a href="schedule-update.php?schedule_id=<?= $schedule['schedule_id']; ?>" class="btn btn-success btn-sm">Update</a>
                               <form action="code.php" method='POST' class="d-inline">
-                                <button type="submit" name="delete_reservation" value="<?=$reservation['reservation_id']; ?>" class="btn btn-danger btn-sm">Delete</a>
+                                <button type="submit" name="delete_schedule" value="<?=$schedule['schedule_id']; ?>" class="btn btn-danger btn-sm">Delete</a>
                               </form>
                             </td>
                           </tr>
