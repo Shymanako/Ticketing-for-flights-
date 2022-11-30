@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 01, 2022 at 07:14 PM
+-- Generation Time: Nov 19, 2022 at 04:57 AM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -18,18 +18,18 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `reservation_db`
+-- Database: `airline_reservation`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `airlines`
+-- Table structure for table `airline`
 --
 
-CREATE TABLE `airlines` (
+CREATE TABLE `airline` (
   `airline_id` char(3) NOT NULL,
-  `airline_name` varchar(50) NOT NULL
+  `airline_name` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -46,10 +46,25 @@ CREATE TABLE `airport` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `booked information`
+--
+
+CREATE TABLE `booked information` (
+  `booked_id` int(10) NOT NULL,
+  `reservation_id` int(10) NOT NULL,
+  `passenger_id` int(10) NOT NULL,
+  `flight_id` int(10) NOT NULL,
+  `payment_id` int(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `direction`
 --
 
 CREATE TABLE `direction` (
+  `direction_id` int(10) NOT NULL,
   `origin_airport_code` char(3) NOT NULL,
   `destination_airport_code` char(3) NOT NULL,
   `price` double NOT NULL
@@ -69,28 +84,18 @@ CREATE TABLE `flight` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `login`
---
-
-CREATE TABLE `login` (
-  `account_id` int(5) NOT NULL,
-  `email` varchar(50) NOT NULL,
-  `password` varchar(20) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `passenger`
 --
 
 CREATE TABLE `passenger` (
   `passenger_id` int(10) NOT NULL,
-  `first_name` varchar(30) NOT NULL,
-  `last_name` varchar(20) NOT NULL,
+  `first_name` varchar(50) NOT NULL,
+  `last_name` varchar(50) NOT NULL,
   `date_of_birth` date NOT NULL,
   `citizenship` varchar(20) NOT NULL,
-  `phone_number` int(15) NOT NULL
+  `phone_number` int(20) NOT NULL,
+  `email` varchar(50) NOT NULL,
+  `password` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -116,7 +121,7 @@ CREATE TABLE `reservation` (
   `reservation_id` int(10) NOT NULL,
   `passenger_id` int(10) NOT NULL,
   `flight_id` int(10) NOT NULL,
-  `airline_id` char(3) NOT NULL
+  `reservation_status` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -127,10 +132,10 @@ CREATE TABLE `reservation` (
 
 CREATE TABLE `schedule` (
   `schedule_id` int(10) NOT NULL,
-  `origin_airport_code` char(3) NOT NULL,
-  `destination_airport_code` char(3) NOT NULL,
+  `direction_id` int(7) NOT NULL,
   `departure_time` datetime NOT NULL,
-  `arrival_time` datetime NOT NULL
+  `arrival_time` datetime NOT NULL,
+  `airline_id` char(3) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -138,9 +143,9 @@ CREATE TABLE `schedule` (
 --
 
 --
--- Indexes for table `airlines`
+-- Indexes for table `airline`
 --
-ALTER TABLE `airlines`
+ALTER TABLE `airline`
   ADD PRIMARY KEY (`airline_id`);
 
 --
@@ -150,24 +155,22 @@ ALTER TABLE `airport`
   ADD PRIMARY KEY (`airport_code`);
 
 --
+-- Indexes for table `booked information`
+--
+ALTER TABLE `booked information`
+  ADD PRIMARY KEY (`booked_id`,`reservation_id`,`passenger_id`,`flight_id`,`payment_id`);
+
+--
 -- Indexes for table `direction`
 --
 ALTER TABLE `direction`
-  ADD PRIMARY KEY (`origin_airport_code`,`destination_airport_code`),
-  ADD KEY `destination_airport_code` (`destination_airport_code`);
+  ADD PRIMARY KEY (`direction_id`,`origin_airport_code`,`destination_airport_code`);
 
 --
 -- Indexes for table `flight`
 --
 ALTER TABLE `flight`
-  ADD PRIMARY KEY (`flight_id`,`schedule_id`),
-  ADD KEY `schedule_id` (`schedule_id`);
-
---
--- Indexes for table `login`
---
-ALTER TABLE `login`
-  ADD PRIMARY KEY (`account_id`);
+  ADD PRIMARY KEY (`flight_id`,`schedule_id`);
 
 --
 -- Indexes for table `passenger`
@@ -179,41 +182,35 @@ ALTER TABLE `passenger`
 -- Indexes for table `payment`
 --
 ALTER TABLE `payment`
-  ADD PRIMARY KEY (`payment_id`),
-  ADD KEY `reservation_id` (`reservation_id`);
+  ADD PRIMARY KEY (`payment_id`,`reservation_id`);
 
 --
 -- Indexes for table `reservation`
 --
 ALTER TABLE `reservation`
-  ADD PRIMARY KEY (`reservation_id`,`passenger_id`,`flight_id`,`airline_id`),
-  ADD KEY `passenger_id` (`passenger_id`),
-  ADD KEY `flight_id` (`flight_id`),
-  ADD KEY `airline_id` (`airline_id`);
+  ADD PRIMARY KEY (`reservation_id`,`passenger_id`,`flight_id`);
 
 --
 -- Indexes for table `schedule`
 --
 ALTER TABLE `schedule`
-  ADD PRIMARY KEY (`schedule_id`),
-  ADD KEY `origin_airport_code` (`origin_airport_code`),
-  ADD KEY `destination_airport_code` (`destination_airport_code`);
+  ADD PRIMARY KEY (`schedule_id`,`direction_id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
 --
 
 --
+-- AUTO_INCREMENT for table `direction`
+--
+ALTER TABLE `direction`
+  MODIFY `direction_id` int(10) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `flight`
 --
 ALTER TABLE `flight`
   MODIFY `flight_id` int(10) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `login`
---
-ALTER TABLE `login`
-  MODIFY `account_id` int(5) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `passenger`
@@ -238,44 +235,6 @@ ALTER TABLE `reservation`
 --
 ALTER TABLE `schedule`
   MODIFY `schedule_id` int(10) NOT NULL AUTO_INCREMENT;
-
---
--- Constraints for dumped tables
---
-
---
--- Constraints for table `direction`
---
-ALTER TABLE `direction`
-  ADD CONSTRAINT `direction_ibfk_1` FOREIGN KEY (`origin_airport_code`) REFERENCES `airport` (`airport_code`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `direction_ibfk_2` FOREIGN KEY (`destination_airport_code`) REFERENCES `airport` (`airport_code`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Constraints for table `flight`
---
-ALTER TABLE `flight`
-  ADD CONSTRAINT `flight_ibfk_1` FOREIGN KEY (`schedule_id`) REFERENCES `schedule` (`schedule_id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Constraints for table `payment`
---
-ALTER TABLE `payment`
-  ADD CONSTRAINT `payment_ibfk_1` FOREIGN KEY (`reservation_id`) REFERENCES `reservation` (`reservation_id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Constraints for table `reservation`
---
-ALTER TABLE `reservation`
-  ADD CONSTRAINT `reservation_ibfk_1` FOREIGN KEY (`passenger_id`) REFERENCES `passenger` (`passenger_id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `reservation_ibfk_2` FOREIGN KEY (`flight_id`) REFERENCES `flight` (`flight_id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `reservation_ibfk_3` FOREIGN KEY (`airline_id`) REFERENCES `airlines` (`airline_id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Constraints for table `schedule`
---
-ALTER TABLE `schedule`
-  ADD CONSTRAINT `schedule_ibfk_1` FOREIGN KEY (`origin_airport_code`) REFERENCES `direction` (`origin_airport_code`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `schedule_ibfk_2` FOREIGN KEY (`destination_airport_code`) REFERENCES `direction` (`destination_airport_code`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
