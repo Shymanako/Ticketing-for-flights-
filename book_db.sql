@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 19, 2022 at 04:57 AM
--- Server version: 10.4.24-MariaDB
--- PHP Version: 8.1.6
+-- Generation Time: Nov 30, 2022 at 04:39 PM
+-- Server version: 10.4.25-MariaDB
+-- PHP Version: 8.1.10
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,8 +18,27 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `airline_reservation`
+-- Database: `book_db`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `administrator`
+--
+
+CREATE TABLE `administrator` (
+  `admin_id` int(10) NOT NULL,
+  `email` varchar(50) NOT NULL,
+  `password` varchar(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `administrator`
+--
+
+INSERT INTO `administrator` (`admin_id`, `email`, `password`) VALUES
+(1, 'admin@gmail.com', 'admin');
 
 -- --------------------------------------------------------
 
@@ -32,6 +51,13 @@ CREATE TABLE `airline` (
   `airline_name` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `airline`
+--
+
+INSERT INTO `airline` (`airline_id`, `airline_name`) VALUES
+('MSC', 'Mindanao State Airlines');
+
 -- --------------------------------------------------------
 
 --
@@ -43,13 +69,22 @@ CREATE TABLE `airport` (
   `airport_name` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `airport`
+--
+
+INSERT INTO `airport` (`airport_code`, `airport_name`) VALUES
+('MSA', 'Mindanao State Airport'),
+('PNA', 'Philippine National Airport'),
+('PSA', 'Para Sayo Airport');
+
 -- --------------------------------------------------------
 
 --
--- Table structure for table `booked information`
+-- Table structure for table `booked_information`
 --
 
-CREATE TABLE `booked information` (
+CREATE TABLE `booked_information` (
   `booked_id` int(10) NOT NULL,
   `reservation_id` int(10) NOT NULL,
   `passenger_id` int(10) NOT NULL,
@@ -70,6 +105,14 @@ CREATE TABLE `direction` (
   `price` double NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `direction`
+--
+
+INSERT INTO `direction` (`direction_id`, `origin_airport_code`, `destination_airport_code`, `price`) VALUES
+(2, 'MSA', 'PNA', 300),
+(3, 'PNA', 'PSA', 300);
+
 -- --------------------------------------------------------
 
 --
@@ -80,6 +123,13 @@ CREATE TABLE `flight` (
   `flight_id` int(10) NOT NULL,
   `schedule_id` int(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `flight`
+--
+
+INSERT INTO `flight` (`flight_id`, `schedule_id`) VALUES
+(2, 3);
 
 -- --------------------------------------------------------
 
@@ -98,6 +148,13 @@ CREATE TABLE `passenger` (
   `password` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `passenger`
+--
+
+INSERT INTO `passenger` (`passenger_id`, `first_name`, `last_name`, `date_of_birth`, `citizenship`, `phone_number`, `email`, `password`) VALUES
+(1, 'Emmanuelle', 'Salazar', '2001-12-25', 'Filipino', 2147483647, 'admin@gmail.com', 'admin');
+
 -- --------------------------------------------------------
 
 --
@@ -111,6 +168,13 @@ CREATE TABLE `payment` (
   `payment_amount` double NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `payment`
+--
+
+INSERT INTO `payment` (`payment_id`, `reservation_id`, `payment_method`, `payment_amount`) VALUES
+(1, 1, 'Visa', 200);
+
 -- --------------------------------------------------------
 
 --
@@ -123,6 +187,13 @@ CREATE TABLE `reservation` (
   `flight_id` int(10) NOT NULL,
   `reservation_status` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `reservation`
+--
+
+INSERT INTO `reservation` (`reservation_id`, `passenger_id`, `flight_id`, `reservation_status`) VALUES
+(1, 1, 2, 0);
 
 -- --------------------------------------------------------
 
@@ -139,8 +210,21 @@ CREATE TABLE `schedule` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
+-- Dumping data for table `schedule`
+--
+
+INSERT INTO `schedule` (`schedule_id`, `direction_id`, `departure_time`, `arrival_time`, `airline_id`) VALUES
+(3, 2, '2022-12-01 15:35:00', '2022-12-06 15:35:00', 'MSC');
+
+--
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `administrator`
+--
+ALTER TABLE `administrator`
+  ADD PRIMARY KEY (`admin_id`);
 
 --
 -- Indexes for table `airline`
@@ -155,9 +239,9 @@ ALTER TABLE `airport`
   ADD PRIMARY KEY (`airport_code`);
 
 --
--- Indexes for table `booked information`
+-- Indexes for table `booked_information`
 --
-ALTER TABLE `booked information`
+ALTER TABLE `booked_information`
   ADD PRIMARY KEY (`booked_id`,`reservation_id`,`passenger_id`,`flight_id`,`payment_id`);
 
 --
@@ -201,40 +285,46 @@ ALTER TABLE `schedule`
 --
 
 --
+-- AUTO_INCREMENT for table `administrator`
+--
+ALTER TABLE `administrator`
+  MODIFY `admin_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT for table `direction`
 --
 ALTER TABLE `direction`
-  MODIFY `direction_id` int(10) NOT NULL AUTO_INCREMENT;
+  MODIFY `direction_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `flight`
 --
 ALTER TABLE `flight`
-  MODIFY `flight_id` int(10) NOT NULL AUTO_INCREMENT;
+  MODIFY `flight_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `passenger`
 --
 ALTER TABLE `passenger`
-  MODIFY `passenger_id` int(10) NOT NULL AUTO_INCREMENT;
+  MODIFY `passenger_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `payment`
 --
 ALTER TABLE `payment`
-  MODIFY `payment_id` int(10) NOT NULL AUTO_INCREMENT;
+  MODIFY `payment_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `reservation`
 --
 ALTER TABLE `reservation`
-  MODIFY `reservation_id` int(10) NOT NULL AUTO_INCREMENT;
+  MODIFY `reservation_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `schedule`
 --
 ALTER TABLE `schedule`
-  MODIFY `schedule_id` int(10) NOT NULL AUTO_INCREMENT;
+  MODIFY `schedule_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
