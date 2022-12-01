@@ -1,6 +1,8 @@
-<?php
+<?php 
 session_start();
- require 'admin/dbcon.php';
+require 'admin/dbcon.php';
+
+    $connection = mysqli_connect('localhost', 'root', '', 'book_db');
 
     if(isset($_POST['save_passenger'])){
         $first_name = mysqli_real_escape_string($con, $_POST['first_name']);
@@ -17,14 +19,16 @@ session_start();
         if($query_run){
     
             $_SESSION['message'] = "Passenger Created Successfully";
-            header("Location: book2.php");
+            header("Location: about.php");
             exit(0);
         }
         else{
             $_SESSION['message'] = "Passenger Not Created";
-            header("Location: book.php");
+            header("Location: create-passenger.php");
             exit(0);
         }
     }
 
+
 ?>
+

@@ -28,6 +28,7 @@
         <a href="about.php">about</a>
         <a href="trips.php">trips</a>
         <a href="book.php">book a flight</a>
+        <a href="login.php">Login</a>
     </nav>
 
     <div id="menu-btn" class="fas fa-bars"></div>
@@ -152,6 +153,7 @@
             <a href="trips.php"> <i class="fas fa-angle-right"></i>trips</a>
             <a href="book.php"> <i class="fas fa-angle-right"></i>book a flight</a>
             <a href="admin/admin.php"> <i class="fas fa-angle-right"></i>admin</a>
+            <a href="logout.php"> <i class="fas fa-angle-right"></i>logout</a>
         </div>
 
         <div class="box">

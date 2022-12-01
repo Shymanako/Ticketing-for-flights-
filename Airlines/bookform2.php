@@ -1,6 +1,6 @@
 <?php 
 
-    $connection = mysqli_connect('localhost', 'root', '', 'book_db');
+    //$connection = mysqli_connect('localhost', 'root', '', 'book_db');
 
     if(isset($_POST['send'])){
         $location = $_POST['location'];

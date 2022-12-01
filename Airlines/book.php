@@ -1,3 +1,8 @@
+<?php
+    session_start();
+    require 'admin/dbcon.php';
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -50,15 +55,15 @@
     <script type="text/javascript">
         function validateForm() {
             var a = document.forms["Form"]["first_name"].value;
-            var b = document.forms["Form"]["middle_name"].value;
-            var c = document.forms["Form"]["last_name"].value;
-            var d = document.forms["Form"]["age"].value;
-            var e = document.forms["Form"]["birthdate"].value;
+            var b = document.forms["Form"]["last_name"].value;
+            var c = document.forms["Form"]["birth_of_date"].value;
+            var d = document.forms["Form"]["citizenship"].value;
+            var e = document.forms["Form"]["phone_number"].value;
             var f = document.forms["Form"]["email"].value;
-            var g = document.forms["Form"]["phone"].value;
-            var h = document.forms["Form"]["citizenship"].value;
+            var g = document.forms["Form"]["password"].value;
+
             if (a == null || a == "", b == null || b == "", c == null || c == "", d == null || d == "", e == null || e == "", f == null || f == "",
-            g == null || g == "", h == null || h == ""){
+            g == null || g == ""){
             alert("Please Fill In All Required Details");
             return false;
             }
@@ -73,37 +78,33 @@
                 <input type="text" placeholder="enter your first name" name="first_name">
             </div>
             <div class="inputBox">
-                <span>middle name : <span style="color:red;">*</span> </span>
-                <input type="text" placeholder="enter your middle name" name="middle_name">
-            </div>
-            <div class="inputBox">
                 <span>last name : <span style="color:red;">*</span> </span>
                 <input type="text" placeholder="enter your last name" name="last_name">
             </div>
             <div class="inputBox">
-                <span>age : <span style="color:red;">*</span> </span>
-                <input type="number" placeholder="enter your age" name="age">
+                <span>date of birth : <span style="color:red;">*</span> </span>
+                <input type="date" name="date_of_birth">
             </div>
             <div class="inputBox">
-                <span>date of birth : <span style="color:red;">*</span> </span>
-                <input type="date" name="birthdate">
+                <span>citizenship : <span style="color:red;">*</span> </span>
+                <input type="text" placeholder="enter your nationality" name="citizenship">
             </div>
             <div class="inputBox">
                 <span>email : <span style="color:red;">*</span> </span>
                 <input type="email" placeholder="enter your email" name="email">
             </div>
             <div class="inputBox">
-                <span>phone : <span style="color:red;">*</span> </span>
-                <input type="number" placeholder="enter your number" name="phone">
+                <span>phone number : <span style="color:red;">*</span> </span>
+                <input type="number" placeholder="enter your number" name="phone_number">
             </div>
             <div class="inputBox">
-                <span>citizenship : <span style="color:red;">*</span> </span>
-                <input type="text" placeholder="enter your nationality" name="citizenship">
+                <span>password : <span style="color:red;">*</span> </span>
+                <input type="password" placeholder="enter your number" name="password">
             </div>
 
         </div>
 
-        <input type="submit" value="submit and proceed" name="send" class="btn">
+        <input type="submit" name="save_passenger" class="btn">
         
     </form>
 
@@ -128,9 +129,10 @@
             <h3>quick access</h3>
             <a href="home.php"> <i class="fas fa-angle-right"></i>home</a>
             <a href="about.php"> <i class="fas fa-angle-right"></i>about</a>
-            <a href="trips.php"> <i class="fas fa-angle-right"></i>trips</a>
+            <a href="trips.php"> <a href="logout.php"> <i class="fas fa-angle-right"></i>logout</a><i class="fas fa-angle-right"></i>trips</a>
             <a href="book.php"> <i class="fas fa-angle-right"></i>book a flight</a>
             <a href="admin/admin.php"> <i class="fas fa-angle-right"></i>admin</a>
+            
         </div>
 
         <div class="box">
