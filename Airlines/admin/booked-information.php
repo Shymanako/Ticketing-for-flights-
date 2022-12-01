@@ -75,9 +75,9 @@
                           <tr>
                             <td><?= $booked_information['booked_id']; ?></td>
                             <td><?= $booked_information['reservation_id']; ?></td>
-                            <td><?= $booked_information['passen ger_id']; ?></td>
-                            <td><?= $booked_information['Flight_id']; ?></td>
-                            <td><?= $booked_information['Payment_id']; ?></td>
+                            <td><?= $booked_information['passenger_id']; ?></td>
+                            <td><?= $booked_information['flight_id']; ?></td>
+                            <td><?= $booked_information['payment_id']; ?></td>
                           </tr>
                           <?php
                         }
