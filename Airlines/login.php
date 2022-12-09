@@ -32,7 +32,7 @@
             <input type="password" name="password" placeholder="Enter password"> <br><br>
 
             <!-- submit btn -->
-            <button type="submit" name="submit" value="passenger">Log In</button>
+            <button type="submit" name="login_user" value="passenger">Log In</button>
             <a href="about.php"></a>
             <a href="create-passenger.php">Create an Account</a>
         </form>
@@ -45,17 +45,16 @@
 
 <?php
     // Check whether the submiot button is clicked or not
-    if(isset($_POST["submit"]))
+    if(isset($_REQUEST["login_user"]))
     {
         // Process for login
         // Get the data from login
 
-        $passenger_id = $_POST['passenger_id'];
         $email = $_POST['email'];
         $password = $_POST['password'];
 
         // Sql to check wether the admin exists or not
-        $sql = "select * from passenger where email='$email 'and password='$password'";
+        $sql = "select * from passenger where email='$email' and password='$password'";
 
         // Execute the query
         $res = mysqli_query($con, $sql);

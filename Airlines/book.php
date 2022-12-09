@@ -6,18 +6,7 @@
     if(isset($_SESSION['user']))
         {
             $email = mysqli_real_escape_string($con, $_SESSION['user']);
-                    
-            $query = "select * from passenger where email='$email";
-            $query_run = mysqli_query($con, $query);
-            $count = mysqli_num_rows($query_run);
-
-            if($count>0)
-            {
-                while($row=mysqli_fetch_assoc($query_run))
-                {
-                            
-                }
-            }
+            
         }
 ?>
 
@@ -99,38 +88,48 @@
     <form name="Form" action="bookform.php" autocomplete="off" onsubmit="return validateForm()" method="post" class="bookform" required>
 
         <div class="flex">
+
             <?php
+                // Get all the details of logged in passenger
+                $email = $_SESSION["user"];
+                $sql = "select * from passenger where email='$email'";
+                $query_run = mysqli_query($con, $sql);
+                $row=mysqli_fetch_assoc($query_run);
 
-                
-                
-
-
-
+                $passenger_id = $row['passenger_id'];                
+                $first_name = $row['first_name'];
+                $last_name = $row['last_name'];
+                $date_of_birth = $row['date_of_birth'];
+                $citizenship = $row['citizenship'];
+                $passenger_id = $row['passenger_id'];
+                $email = $row['email'];
+                $phone_number = $row['phone_number'];
+                $password = $row['password'];
             ?>
-
+            <input type="hidden" name="passenger_id" value="<?php echo $passenger_id; ?>">
             <div class="inputBox">
                 <span>first name : <span style="color:red;">*</span> </span>
-                <input type="text" placeholder="enter your first name" name="first_name">
+                <input type="text" placeholder="enter your first name" name="first_name" value="<?php echo $first_name; ?>">
             </div>
             <div class="inputBox">
                 <span>last name : <span style="color:red;">*</span> </span>
-                <input type="text" placeholder="enter your last name" name="last_name">
+                <input type="text" placeholder="enter your last name" name="last_name" value="<?php echo $last_name; ?>">
             </div>
             <div class="inputBox">
                 <span>date of birth : <span style="color:red;">*</span> </span>
-                <input type="date" name="date_of_birth">
+                <input type="date" name="date_of_birth" value="<?php echo $date_of_birth; ?>">
             </div>
             <div class="inputBox">
                 <span>citizenship : <span style="color:red;">*</span> </span>
-                <input type="text" placeholder="enter your nationality" name="citizenship">
+                <input type="text" placeholder="enter your nationality" name="citizenship" value="<?php echo $citizenship; ?>">
             </div>
             <div class="inputBox">
                 <span>email : <span style="color:red;">*</span> </span>
-                <input type="email" placeholder="enter your email" name="email">
+                <input type="email" placeholder="enter your email" name="email" value="<?php echo $email; ?>">
             </div>
             <div class="inputBox">
                 <span>phone number : <span style="color:red;">*</span> </span>
-                <input type="number" placeholder="enter your number" name="phone_number">
+                <input type="number" placeholder="enter your number" name="phone_number" value="<?php echo $phone_number; ?>>
             </div>
 
         </div>
