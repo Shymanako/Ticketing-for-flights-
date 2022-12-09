@@ -2,7 +2,7 @@
 session_start();
  require 'admin/dbcon.php';
 
-    if(isset($_POST['save_passenger'])){
+    if(isset($_POST['save_booking'])){
         $first_name = mysqli_real_escape_string($con, $_POST['first_name']);
         $last_name = mysqli_real_escape_string($con, $_POST['last_name']);
         $date_of_birth = mysqli_real_escape_string($con, $_POST['date_of_birth']);

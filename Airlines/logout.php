@@ -9,5 +9,5 @@
     session_destroy(); //  unsets $_SESSION['user']
     
     // Redirect to login page
-    header('location:login.html');
+    header('location:login.php');
 ?>

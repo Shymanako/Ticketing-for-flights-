@@ -8,19 +8,32 @@
 
 body{
     background: #f3f5f9;
+    min-width: 1080px;
 }
 
 .wrapper{
+    width: 20%;
+        min-width: 200px;
+        max-width: 250px;
     display: flex;
     position: relative;
 }
 
+    /* THE NOT WRAPPER */
+    .container{
+        /* border: 1px red solid; */
+        max-width: 75%;
+    }
+
 .wrapper .sidebar{
     position: fixed;
-    width: 200px;
+    width: 20%;
+        min-width: 150px;
+        max-width: 200px;
     height: 100%;
     background: rgb(47, 135, 236);
     padding: 30px 0;
+    overflow-x: scroll;
 }
 
 .wrapper .sidebar h2{
@@ -117,7 +130,7 @@ body{
 
 @media (max-width:1080px){
     .wrapper{
-        display: none;
+        /* display: none; */
     }
     .row{
         margin: 5% auto;

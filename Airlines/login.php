@@ -50,6 +50,7 @@
         // Process for login
         // Get the data from login
 
+        $passenger_id = $_POST['passenger_id'];
         $email = $_POST['email'];
         $password = $_POST['password'];
 
@@ -71,7 +72,7 @@
             $_SESSION['user'] = $email;
 
             // Redirect to Admin homepage
-            header('location:about.php');
+            header('location:home.php');
         }
         else
         {

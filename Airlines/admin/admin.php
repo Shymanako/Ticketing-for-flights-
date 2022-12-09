@@ -1,10 +1,9 @@
 <?php
   session_start();
   require 'dbcon.php';
-  include('partials/login-check.php');
 ?>
 
-<!doctype html>
+<!Doctype html>
 <html lang="en">
   <head>
     <meta charset="utf-8">

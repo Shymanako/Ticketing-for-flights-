@@ -37,6 +37,8 @@
 
 <!-- header section end -->
 
+<?php include('admin/message.php'); ?>
+
 <!-- home starts -->
 <section class="home">
 

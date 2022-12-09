@@ -1,6 +1,5 @@
 <?php
 session_start();
-include('partials/login-check.php');
 ?>
 
 <!doctype html>
