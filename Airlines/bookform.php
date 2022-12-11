@@ -1,30 +1,30 @@
 <?php
 session_start();
- require 'admin/dbcon.php';
+require 'admin/dbcon.php';
 
-    if(isset($_POST['save_booking'])){
-        $first_name = mysqli_real_escape_string($con, $_POST['first_name']);
-        $last_name = mysqli_real_escape_string($con, $_POST['last_name']);
-        $date_of_birth = mysqli_real_escape_string($con, $_POST['date_of_birth']);
-        $citizenship = mysqli_real_escape_string($con, $_POST['citizenship']);
-        $phone_number = mysqli_real_escape_string($con, $_POST['phone_number']);
-        $email = mysqli_real_escape_string($con, $_POST['email']);
-        $password = mysqli_real_escape_string($con, $_POST['password']);
-    
-        $query = "INSERT INTO passenger (first_name, last_name, date_of_birth, citizenship, phone_number, email, password) VALUES ('$first_name', '$last_name', '$date_of_birth', '$citizenship', '$phone_number', '$email', '$password')";
-    
-        $query_run = mysqli_query($con, $query);
-        if($query_run){
-    
-            $_SESSION['message'] = "Passenger Created Successfully";
-            header("Location: book2.php");
-            exit(0);
-        }
-        else{
-            $_SESSION['message'] = "Passenger Not Created";
-            header("Location: book.php");
-            exit(0);
-        }
+
+if (isset($_POST['save_booking'])) {
+    // Get all the details from form
+    $passenger_id = $_POST['passenger_id'];
+
+
+    // Save daa into booked information
+    $query3 = "insert into booked_information set passenger_id='$passenger_id'";
+
+    // Execute the query
+    $query_run3 = mysqli_query($con, $query3);
+
+    if ($query_run3) {
+
+        $_SESSION['message'] = "Booked Flight Successfully";
+        header("Location: book2-view.php");
+        exit(0);
+    } else {
+
+        $_SESSION['message'] = "Flight Booking Failed";
+        header("Location: book.php");
+        exit(0);
     }
+}
 
 ?>
