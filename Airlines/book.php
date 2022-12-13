@@ -87,48 +87,29 @@ if (isset($_SESSION['user'])) {
         <form name="Form" action="book2-view.php" autocomplete="off" onsubmit="return validateForm()" method="post" class="bookform" required>
 
             <div class="flex">
-
-                <?php
-                // Get all the details of logged in passenger
-                $email = $_SESSION["user"];
-                $sql = "select * from passenger where email='$email'";
-                $query_run = mysqli_query($con, $sql);
-                $row = mysqli_fetch_assoc($query_run);
-
-                $passenger_id = $row['passenger_id'];
-                $first_name = $row['first_name'];
-                $last_name = $row['last_name'];
-                $date_of_birth = $row['date_of_birth'];
-                $citizenship = $row['citizenship'];
-                $passenger_id = $row['passenger_id'];
-                $email = $row['email'];
-                $phone_number = $row['phone_number'];
-                $password = $row['password'];
-                ?>
-                <input type="hidden" name="passenger_id" value="<?php echo $passenger_id; ?>">
                 <div class="inputBox">
                     <span>first name : <span style="color:red;">*</span> </span>
-                    <input type="text" placeholder="enter your first name" name="first_name" value="<?php echo $first_name; ?>">
+                    <input type="text" placeholder="enter your first name" name="first_name">
                 </div>
                 <div class="inputBox">
                     <span>last name : <span style="color:red;">*</span> </span>
-                    <input type="text" placeholder="enter your last name" name="last_name" value="<?php echo $last_name; ?>">
+                    <input type="text" placeholder="enter your last name" name="last_name">
                 </div>
                 <div class="inputBox">
                     <span>date of birth : <span style="color:red;">*</span> </span>
-                    <input type="date" name="date_of_birth" value="<?php echo $date_of_birth; ?>">
+                    <input type="date" name="date_of_birth">
                 </div>
                 <div class="inputBox">
                     <span>citizenship : <span style="color:red;">*</span> </span>
-                    <input type="text" placeholder="enter your nationality" name="citizenship" value="<?php echo $citizenship; ?>">
+                    <input type="text" placeholder="enter your nationality" name="citizenship">
                 </div>
                 <div class="inputBox">
                     <span>email : <span style="color:red;">*</span> </span>
-                    <input type="email" placeholder="enter your email" name="email" value="<?php echo $email; ?>">
+                    <input type="email" placeholder="enter your email" name="email">
                 </div>
                 <div class="inputBox">
                     <span>phone number : <span style="color:red;">*</span> </span>
-                    <input type="number" placeholder="enter your number" name="phone_number" value="<?php echo $phone_number; ?>">
+                    <input type="number" placeholder="enter your number" name="phone_number">
                 </div>
 
             </div>
@@ -137,12 +118,16 @@ if (isset($_SESSION['user'])) {
 
             <div class="flex">
                 <div class="inputBox">
-                    <span>Select Schedule : <span style="color:red;">*</span> </span>
+                    <span>Select Flight : <span style="color:red;">*</span> </span>
                     <select name="schedule_id">
                         <?php
                         // php code to display available airports from database
                         // query to select all available airports in database
-                        $query2 = "select schedule.schedule_id, schedule.departure_time, schedule.arrival_time, schedule.airline_id, airline.airline_name, schedule.direction_id, direction.origin_airport_code, direction.destination_airport_code from schedule left join airline on schedule.airline_id = airline.airline_id left join direction on schedule.direction_id = direction.direction_id order by schedule.airline_id";
+                        $query2 = "SELECT flight.flight_id, schedule.schedule_id, schedule.direction_id, 
+                        direction.origin_airport_code, direction.destination_airport_code, schedule.departure_time, 
+                        schedule.arrival_time from flight left join schedule on flight.schedule_id = 
+                        schedule.schedule_id left join direction on schedule.direction_id = direction.direction_id 
+                        order by flight.schedule_id;";
 
                         // Executing query
                         $query_run2 = mysqli_query($con, $query2);
@@ -155,23 +140,66 @@ if (isset($_SESSION['user'])) {
                             // we have airport
                             while ($row = mysqli_fetch_assoc($query_run2)) {
                                 // get the detail of airport
+                                $flight_id = $row['flight_id'];
                                 $schedule_id = $row['schedule_id'];
                                 $direction_id = $row['direction_id'];
                                 $origin_airport_code = $row['origin_airport_code'];
                                 $destination_airport_code = $row['destination_airport_code'];
-                                $airline_id = $row['airline_id'];
-                                $airline_name = $row['airline_name'];
                                 $departure_time = $row['departure_time'];
                                 $arrival_time = $row['arrival_time'];
 
-                        ?>
-                                <option value="<?php echo $schedule_id; ?>"><?php echo $origin_airport_code; ?> to <?php echo $destination_airport_code; ?>, Airline: <?php echo $airline_name; ?>, Departure and Arrival Time : <?php echo $departure_time; ?> - <?php echo $arrival_time; ?> </option>
+                            ?>
+                                <option value="<?php echo $flight; ?>"><?php echo $origin_airport_code; ?> to <?php echo $destination_airport_code; ?> </option>
                             <?php
                             }
                         } else {
                             // we do not have airport
                             ?>
-                            <option value="0">No Airport Found</option>
+                            <option value="0">No Flight Found</option>
+                        <?php
+                        }
+                        ?>
+                    </select>
+                </div>
+            </div>
+
+            <br><br>
+
+            <div class="flex">
+                <div class="inputBox">
+                    <span>Select Departure and Arrival Time : <span style="color:red;">*</span> </span>
+                    <select name="schedule_id">
+                        <?php
+                        // php code to display available airports from database
+                        // query to select all available airports in database
+                        $query2 = "SELECT flight.flight_id, schedule.schedule_id, schedule.direction_id, 
+                        schedule.departure_time, schedule.arrival_time from flight left join schedule on 
+                        flight.schedule_id = schedule.schedule_id left join direction on schedule.direction_id = 
+                        direction.direction_id order by flight.schedule_id;";
+
+                        // Executing query
+                        $query_run2 = mysqli_query($con, $query2);
+
+                        // count rows to check whether we have airport or not
+                        $count2 = mysqli_num_rows($query_run2);
+
+                        // if count is greater than 0 we have airport else we do not have an airport
+                        if ($count2 > 0) {
+                            // we have airport
+                            while ($row = mysqli_fetch_assoc($query_run2)) {
+                                // get the detail of airport
+                                $flight_id = $row['flight_id'];
+                                $departure_time = $row['departure_time'];
+                                $arrival_time = $row['arrival_time'];
+
+                            ?>
+                                <option value="<?php echo $flight; ?>"><?php echo $departure_time; ?> to <?php echo $arrival_time; ?> </option>
+                            <?php
+                            }
+                        } else {
+                            // we do not have airport
+                            ?>
+                            <option value="0">No Flight Found</option>
                         <?php
                         }
                         ?>
@@ -222,8 +250,7 @@ if (isset($_SESSION['user'])) {
             }
         }
 
-        if (isset($_POST['save_booking'])){
-            
+        if (isset($_POST['save_booking'])) {
         }
 
         ?>

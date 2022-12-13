@@ -136,11 +136,6 @@ require 'dbcon.php';
                                     </div>
 
                                     <div class="mb-3">
-                                        <label> Price </label>
-                                        <input type="number" name="price" value="<?php echo $price; ?>" class="form-control">
-                                    </div>
-
-                                    <div class="mb-3">
                                         <button type="submit" name="update_direction" class="btn btn-primary">Update Direction</button>
                                     </div>
                                 </form>
