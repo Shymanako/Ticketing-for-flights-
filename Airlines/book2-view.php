@@ -35,28 +35,36 @@ require 'admin/dbcon.php';
                         <div>
                             <form action="book2.php" method="post">
                                 <?php
-                                if (isset($_POST['input'])) {
+                                $query = "Select * from passenger order by passenger_id desc limit 1";
+                                $query_run = mysqli_query($con, $query);
 
-                                    $first_name = $_POST['first_name'];
-                                    $last_name = $_POST['last_name'];
-                                    $date_of_birth = $_POST['date_of_birth'];
-                                    $citizenship = $_POST['citizenship'];
-                                    $p_number = $_POST['p_number'];
-                                    $email = $_POST['email'];
+                                if (mysqli_num_rows($query_run) > 0) {
+                                    foreach ($query_run as $passenger) {
 
-                                    echo "You entered: " . $first_name . "<br>";
-                                    echo "You entered: " . $last_name . "<br>";
-                                    echo "You entered: " . $date_of_birth . "<br>";
-                                    echo "You entered: " . $citizenship . "<br>";
-                                    echo "You entered: " . $p_number . "<br>";
-                                    echo "You entered: " . $email . "<br>";
+                                        // echo
+                                ?>
+                                        <tr>
+                                            <input type="hidden" name="passenger_id" value="<?= $passenger['passenger_id']; ?>">
+                                            <td><?= $passenger['first_name']; ?></td>
+                                            <td><?= $passenger['last_name']; ?></td>
+                                            <td><?= $passenger['date_of_birth']; ?></td>
+                                            <td><?= $passenger['citizenship']; ?></td>
+                                            <td><?= $passenger['p_number']; ?></td>
+                                            <td><?= $passenger['email']; ?></td>
+
+                                            <td>
+                                                <a href="book2.php?passenger_id=<?= $passenger['passenger_id']; ?>" class="btn">confirm</a>
+                                                <form action="code.php" method='POST' class="d-inline">
+                                                    <button type="submit" name="delete" value="<?= $passenger['passenger_id']; ?>" class="btn btn-danger btn-sm">Delete</a>
+                                                </form>
+                                            </td>
+                                        </tr>
+                                <?php
+                                    }
+                                } else {
+                                    echo '<h5>No Record Found </h5>';
                                 }
                                 ?>
-
-                                <input type="submit" name="send" class="btn">
-                                <form action="code.php" method='POST' class="d-inline">
-                                    <button type="submit" name="delete_passenger" value="<?= $passenger['id']; ?>" class="btn btn-danger btn-sm">Delete</a>
-                                </form>
                             </form>
 
                         </div>
