@@ -100,7 +100,6 @@ include('login-check.php');
                     <input type="email" placeholder="enter your email" name="email">
                 </div>
             </div>
-            oten
 
 
             <input type="submit" name="send" class="btn">
