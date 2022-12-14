@@ -26,16 +26,16 @@ require 'dbcon.php';
                 <div class="card">
                     <div class="card-header">
                         <h4>Update Passenger
-                            <a href="admin.php" class="btn btn-danger float-end">Back</a>
+                            <a href="passenger.php" class="btn btn-danger float-end">Back</a>
                         </h4>
                     </div>
                     <div class="card-body">
 
                         <?php
 
-                        if(isset($_GET['id'])){
-                            $passenger_id = mysqli_real_escape_string($con, $_GET['id']);
-                            $query = "SELECT * FROM passenger WHERE id='$passenger_id'";
+                        if(isset($_GET['passenger_id'])){
+                            $passenger_id = mysqli_real_escape_string($con, $_GET['passenger_id']);
+                            $query = "SELECT * FROM passenger WHERE passenger_id='$passenger_id'";
                             $query_run = mysqli_query($con, $query);
 
                             if(mysqli_num_rows($query_run) > 0)
@@ -51,32 +51,27 @@ require 'dbcon.php';
                                         <input type="text" name="first_name" value="<?= $passenger['first_name'];?>" class="form-control">
                                     </div>
                                     <div class="mb-3">
-                                        <label> Passenger Middle Name </label>
-                                        <input type="text" name="middle_name" value="<?= $passenger['middle_name'];?>" class="form-control">
-                                    </div>
-                                    <div class="mb-3">
                                         <label> Passenger Last Name </label>
                                         <input type="text" name="last_name" value="<?= $passenger['last_name'];?>" class="form-control">
                                     </div>
                                     <div class="mb-3">
-                                        <label> Passenger Age </label>
-                                        <input type="number" name="age" value="<?= $passenger['age'];?>" class="form-control">
-                                    </div>
-                                    <div class="mb-3">
-                                        <label> Passenger Birthdate </label>
-                                        <input type="date" name="birthdate" value="<?= $passenger['birthdate'];?>" class="form-control">
-                                    </div>
-                                    <div class="mb-3">
-                                        <label> Passenger Email </label>
-                                        <input type="email" name="email" value="<?= $passenger['email'];?>" class="form-control">
-                                    </div>
-                                    <div class="mb-3">
-                                        <label> Passenger Phone </label>
-                                        <input type="number" name="phone" value="<?= $passenger['phone'];?>" class="form-control">
+                                        <label> Passenger Date of Birth </label>
+                                        <input type="date" name="date_of_birth" value="<?= $passenger['date_of_birth'];?>" class="form-control">
                                     </div>
                                     <div class="mb-3">
                                         <label> Passenger Citizenship </label>
                                         <input type="text" name="citizenship" value="<?= $passenger['citizenship'];?>" class="form-control">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label> Passenger Phone Number </label>
+                                        <input type="number" name="phone_number" value="<?= $passenger['phone_number'];?>" class="form-control" maxlength="11">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label> Email </label>
+                                        <input type="email" name="email" value="<?= $passenger['email'];?>" class="form-control">
+                                    </div><div class="mb-3">
+                                        <label> Password </label>
+                                        <input type="password" name="password" value="<?= $passenger['password'];?>" class="form-control">
                                     </div>
 
                                     <div class="mb-3">

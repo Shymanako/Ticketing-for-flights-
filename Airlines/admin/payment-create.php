@@ -1,5 +1,6 @@
 <?php
 session_start();
+require 'dbcon.php';
 ?>
 
 <!doctype html>
@@ -25,15 +26,16 @@ session_start();
                 <div class="card">
                     <div class="card-header">
                         <h4>Add Payment
-                            <a href="admin.php" class="btn btn-danger float-end">Back</a>
+                            <a href="payment.php" class="btn btn-danger float-end">Back</a>
                         </h4>
                     </div>
                     <div class="card-body">
                         <script type="text/javascript">
                             function validateForm() {
-                                var a = document.forms["Form"]["credit_type"].value;
-                                var b = document.forms["Form"]["account_number"].value;
-                                if (a == null || a == "", b == null || b == ""){
+                                var a = document.forms["Form"]["reservation_id"].value;
+                                var b = document.forms["Form"]["payment_method"].value;
+                                var c = document.forms["Form"]["payment_amount"].value;
+                                if (a == null || a == "", b == null || b == "", c == null || c == ""){
                                 alert("Please Fill In All Required Details");
                                 return false;
                                 }
@@ -41,21 +43,62 @@ session_start();
                         </script>
                         <form name="Form" action="code.php" autocomplete="off" onsubmit="return validateForm()" method="POST">
 
-                            <div class="mb-3">
-                                <label>Credit Type </label>
-                                <input list="credit_type" type="text" name="credit_type" placeholder="Enter credit card" class="form-control">
-                                <datalist id="credit_type">
-                                    <option value="Visa">
-                                    <option value="Mastercard">
-                                </datalist>
-                            </div>
-                            <div class="mb-3">
-                                <label> Account Number </label>
-                                <input type="text" name="account_number" placeholder="Enter account number" class="form-control" maxlength="12">
-                            </div>
-                            <div class="mb-3">
-                                <button type="submit" name="save_payment" class="btn btn-primary">Save Payment</button>
-                            </div>
+                                <div class="mb-3">
+                                    <label> Reservation ID: </label>
+                                        <select name="reservation_id">
+                                            <?php
+                                                // php code to display available reservations from database
+                                                // query to select all available reservations in database
+                                                $query = "select * from reservation";
+
+                                                // Executing query
+                                                $query_run = mysqli_query($con, $query);
+
+                                                // count rows to check whether we have reservation or not
+                                                $count = mysqli_num_rows($query_run);
+
+                                                // if count is greater than 0 we have reservation else we do not have an reservation
+                                                if($count>0)
+                                                {
+                                                    // we have reservation
+                                                    while($row=mysqli_fetch_assoc($query_run))
+                                                    {
+                                                        // get the detail of reservation
+                                                        $reservation_id = $row['reservation_id'];
+
+                                                        ?>
+                                                        <option value="<?php echo $reservation_id; ?>"><?php echo $reservation_id; ?></option>
+                                                        <?php
+                                                    }
+                                                }
+                                                else
+                                                {
+                                                    // we do not have reservation
+                                                    ?>
+                                                    <option value="0">No Reservation Found</option>
+                                                    <?php
+                                                }
+                                            ?>
+                                        </select>
+                                </div>
+                                
+                                <div class="inputBox">
+                                    <label> Payment Method: </label>
+                                    <input list="payment_method" placeholder="enter Payment method" name="payment_method">
+                                    <datalist id="payment_method">
+                                        <option value="Visa">
+                                        <option value="Mastercard">
+                                    </datalist>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label> Payment Amount: </label>
+                                    <input type="number" name="payment_amount" placeholder="Enter payment amount" class="form-control">
+                                </div>
+
+                                <div class="mb-3">
+                                    <button type="submit" name="save_payment" class="btn btn-primary">Save Payment</button>
+                                </div>
 
                         </form>
                     </div>

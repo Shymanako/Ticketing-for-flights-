@@ -1,3 +1,8 @@
+<?php
+  session_start();
+  require 'admin/dbcon.php';
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -69,53 +74,71 @@
         }
     </script>
 
-    <form action="bookform2.php" name="Form" onsubmit="return validateForm()" autocomplete="off" method="post" class="bookform" required>
+    <form action="book2-view.php" name="Form" onsubmit="return validateForm()" autocomplete="off" method="post" class="bookform" required>
 
         <div class="flex">
             <div class="inputBox">
-                <span>where from : <span style="color:red;">*</span> </span>
-                <input type="text" placeholder="enter your location" name="location">
-            </div>
-            <div class="inputBox">
-                <span>where to : <span style="color:red;">*</span> </span>
-                <input list="destination" placeholder="enter destination" name="destination">
-                <datalist id="destination">
-                    <option value="Manila">
-                    <option value="Tokyo">
-                    <option value="Seoul">
-                    <option value="Agra">
-                    <option value="Beijing">
-                    <option value="Hanoi">
-                    <option value="Kuala Lumpur">
-                    <option value="Rio De Janeiro">
-                    <option value="Singapore">
-                    <option value="Reykjavik">
-                    <option value="Paris">
-                    <option value="Bali">
-                </datalist>
-            </div>
-            <div class="inputBox">
-                <span>select airlines : <span style="color:red;">*</span> </span>
-                <input list="airlines" placeholder="enter preferred airlines" name="airlines">
-                <datalist id="airlines">
-                    <option value="Cebu Pacific">
-                    <option value="Philippine Airlines">
-                    <option value="Air Asia">
-                </datalist>
-            </div>
-            <div class="inputBox">
-                <span>departure : <span style="color:red;">*</span> </span>
-                <input type="datetime-local" name="departure">
-            </div>
-            <div class="inputBox">
-                <span>arrival : <span style="color:red;">*</span> </span>
-                <input type="datetime-local" name="arrival">
-            </div>
+                <span>Select Schedule : <span style="color:red;">*</span> </span>
+                <select name="schedule_id">
+                    <?php
+                        // php code to display available airports from database
+                        // query to select all available airports in database
+                        $query = "select schedule.schedule_id, schedule.departure_time, schedule.arrival_time, schedule.airline_id, airline.airline_name, schedule.direction_id, direction.origin_airport_code, direction.destination_airport_code from schedule left join airline on schedule.airline_id = airline.airline_id left join direction on schedule.direction_id = direction.direction_id order by schedule.airline_id";
 
+                        // Executing query
+                        $query_run = mysqli_query($con, $query);
+
+                        // count rows to check whether we have airport or not
+                        $count = mysqli_num_rows($query_run);
+
+                        // if count is greater than 0 we have airport else we do not have an airport
+                        if($count>0)
+                        {
+                            // we have airport
+                            while($row=mysqli_fetch_assoc($query_run))
+                            {
+                                // get the detail of airport
+                                $schedule_id = $row['schedule_id'];
+                                $direction_id = $row['direction_id'];
+                                $origin_airport_code = $row['origin_airport_code'];
+                                $destination_airport_code = $row['destination_airport_code'];
+                                $airline_id = $row['airline_id'];
+                                $airline_name = $row['airline_name'];
+                                $departure_time = $row['departure_time'];
+                                $arrival_time = $row['arrival_time'];
+                                
+                                ?>
+                                <option value="<?php echo $schedule_id; ?>"><?php echo $origin_airport_code; ?> to <?php echo $destination_airport_code; ?>, Airline: <?php echo $airline_name; ?>, Departure and Arrival Time : <?php echo $departure_time; ?> - <?php echo $arrival_time; ?> </option>
+                                <?php
+                            }
+                        }
+                        else
+                        {
+                            // we do not have airport
+                            ?>
+                            <option value="0">No Airport Found</option>
+                            <?php
+                        }
+                    ?>
+                </select>
+            </div>
         </div>
+        <div>
+            <?php
+            $query = "SELECT * FROM schedule";
+            $query_run = mysqli_query($con, $query);
+            if(mysqli_num_rows($query_run) > 0){
+                foreach($query_run as $schedule){
+            
+                }
+            }
+            ?>
 
-        <input type="submit" value="submit and proceed" name="send" class="btn">
-        
+            <a href="book2-view.php?schedule_id=<?=$schedule['schedule_id']; ?>" class="btn btn-info btn-sm">View</a>
+            <button type="submit" name="send" value="<?=$schedule['schedule_id']; ?>" class="btn">Submit</a>
+        </div>
+    
+    
     </form>
 </section>
 
@@ -145,6 +168,7 @@
             <a href="trips.php"> <i class="fas fa-angle-right"></i>trips</a>
             <a href="book.php"> <i class="fas fa-angle-right"></i>book a flight</a>
             <a href="admin/admin.php"> <i class="fas fa-angle-right"></i>admin</a>
+            <a href="logout.php"> <i class="fas fa-angle-right"></i>logout</a>
         </div>
 
         <div class="box">

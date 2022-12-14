@@ -77,13 +77,6 @@
                             <td><?= $booked_information['passenger_id']; ?></td>
                             <td><?= $booked_information['flight_id']; ?></td>
                             <td><?= $booked_information['payment_id']; ?></td>
-                            <td>
-                              <a href="booked-information-view.php?airport_code=<?= $airport['airport_code']; ?>" class="btn btn-info btn-sm">View</a>
-                              <a href="booked-information-update.php?airport_code=<?= $airport['airport_code']; ?>" class="btn btn-success btn-sm">Update</a>
-                              <form action="code.php" method='POST' class="d-inline">
-                                <button type="submit" name="delete_booked_information" value="<?=$airport['airport_code']; ?>" class="btn btn-danger btn-sm">Delete</a>
-                              </form>
-                            </td>
                           </tr>
                           <?php
                         }

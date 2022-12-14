@@ -23,16 +23,16 @@ require 'dbcon.php';
                 <div class="card">
                     <div class="card-header">
                         <h4>Passenger Details
-                            <a href="admin.php" class="btn btn-danger float-end">Back</a>
+                            <a href="passenger.php" class="btn btn-danger float-end">Back</a>
                         </h4>
                     </div>
                     <div class="card-body">
 
                         <?php
 
-                        if(isset($_GET['id'])){
-                            $passenger_id = mysqli_real_escape_string($con, $_GET['id']);
-                            $query = "SELECT * FROM passenger WHERE id='$passenger_id'";
+                        if(isset($_GET['passenger_id'])){
+                            $passenger_id = mysqli_real_escape_string($con, $_GET['passenger_id']);
+                            $query = "SELECT * FROM passenger WHERE passenger_id='$passenger_id'";
                             $query_run = mysqli_query($con, $query);
 
                             if(mysqli_num_rows($query_run) > 0)
@@ -45,34 +45,29 @@ require 'dbcon.php';
                                         <p class="form-control"><?=$passenger['first_name'];?></p>
                                     </div>
                                     <div class="mb-3">
-                                        <label> Passenger Middle Name </label>
-                                        <p class="form-control"><?=$passenger['middle_name'];?></p>
-                                    </div>
-                                    <div class="mb-3">
                                         <label> Passenger Last Name </label>
                                         <p class="form-control"><?=$passenger['last_name'];?></p>
                                     </div>
                                     <div class="mb-3">
-                                        <label> Passenger Age </label>
-                                        <p class="form-control"><?=$passenger['age'];?></p>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label> Passenger Birthdate </label>
-                                        <p class="form-control"><?=$passenger['birthdate'];?></p>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label> Passenger Email </label>
-                                        <p class="form-control"><?=$passenger['email'];?></p>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label> Passenger Phone </label>
-                                        <p class="form-control"><?=$passenger['phone'];?></p>
+                                        <label> Passenger Date of Birth </label>
+                                        <p class="form-control"><?=$passenger['date_of_birth'];?></p>
                                     </div>
                                     <div class="mb-3">
                                         <label> Passenger Citizenship </label>
                                         <p class="form-control"><?=$passenger['citizenship'];?></p>
                                     </div>
-
+                                    <div class="mb-3">
+                                        <label> Passenger Phone Number </label>
+                                        <p class="form-control"><?=$passenger['phone_number'];?></p>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label> Email </label>
+                                        <p class="form-control"><?=$passenger['email'];?></p>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label> Password </label>
+                                        <p class="form-control"><?=$passenger['password'];?></p>
+                                    </div>
 
                                 <?php
                             }

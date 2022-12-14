@@ -1,7 +1,6 @@
 <?php
   session_start();
   require 'dbcon.php';
-
 ?>
 
 <!doctype html>
@@ -22,14 +21,18 @@
     <div class="wrapper">
       <div class="sidebar">
         <h2>DB Admin</h2>
-
         <li><a href="admin.php">Home</a></li>
-        <li><a href="ticket.php">Ticket</a></li>
-        <li><a href="passenger.php">Passenger</a></li>
+        <li><a href="airline.php">Airline</a></li>
+        <li><a href="airport.php">Airport</a></li>
+        <li><a href="booked-information.php">Booked Information</a></li>
+        <li><a href="direction.php">Direction</a></li>
         <li><a href="flight.php">Flight</a></li>
+        <li><a href="passenger.php">Passenger</a></li>
         <li><a href="payment.php">Payment</a></li>
+        <li><a href="reservation.php">Reservation</a></li>
+        <li><a href="schedule.php">Schedule</a></li>
         <li><a href="../home.php"> Back to Website</a></li>
-  
+        <li><a href="logout-admin.php"> Logout</a></li>
       </div>
     </div>
 
@@ -51,11 +54,7 @@
                   <thead>
                       <tr>
                         <th>Flight ID</th>
-                        <th>Location</th>
-                        <th>Destination</th>
-                        <th>Airlines</th>
-                        <th>Departure</th>
-                        <th>Arrival</th>
+                        <th>Schedule ID</th>
                         <th>Action</th>
                       </tr>
                   </thead>
@@ -70,17 +69,13 @@
                           // echo
                           ?>
                           <tr>
-                            <td><?= $flight['fid']; ?></td>
-                            <td><?= $flight['location']; ?></td>
-                            <td><?= $flight['destination']; ?></td>
-                            <td><?= $flight['airlines']; ?></td>
-                            <td><?= $flight['departure']; ?></td>
-                            <td><?= $flight['arrival']; ?></td>
+                            <td><?= $flight['flight_id']; ?></td>
+                            <td><?= $flight['schedule_id']; ?></td>
                             <td>
-                              <a href="flight-view.php?id=<?= $flight['fid']; ?>" class="btn btn-info btn-sm">View</a>
-                              <a href="flight-update.php?id=<?= $flight['fid']; ?>" class="btn btn-success btn-sm">Update</a>
+                              <a href="flight-view.php?flight_id=<?= $flight['flight_id']; ?>" class="btn btn-info btn-sm">View</a>
+                              <a href="flight-update.php?flight_id=<?= $flight['flight_id']; ?>" class="btn btn-success btn-sm">Update</a>
                               <form action="code.php" method='POST' class="d-inline">
-                                <button type="submit" name="delete_flight" value="<?=$flight['fid']; ?>" class="btn btn-danger btn-sm">Delete</a>
+                                <button type="submit" name="delete_flight" value="<?=$flight['flight_id']; ?>" class="btn btn-danger btn-sm">Delete</a>
                               </form>
                             </td>
                           </tr>
