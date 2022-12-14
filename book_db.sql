@@ -145,14 +145,15 @@ CREATE TABLE `passenger` (
   `citizenship` varchar(20) NOT NULL,
   `phone_number` int(20) NOT NULL,
   `email` varchar(50) NOT NULL,
+  `password` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `passenger`
 --
 
-INSERT INTO `passenger` (`passenger_id`, `first_name`, `last_name`, `date_of_birth`, `citizenship`, `phone_number`, `email`) VALUES
-(1, 'Emmanuelle', 'Salazar', '2001-12-25', 'Filipino', 2147483647, 'admin@gmail.com');
+INSERT INTO `passenger` (`passenger_id`, `first_name`, `last_name`, `date_of_birth`, `citizenship`, `phone_number`, `email`, `password`) VALUES
+(1, 'Emmanuelle', 'Salazar', '2001-12-25', 'Filipino', 2147483647, 'admin@gmail.com', 'admin');
 
 -- --------------------------------------------------------
 

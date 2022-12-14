@@ -7,7 +7,7 @@
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ONE";
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -49,7 +49,7 @@ CREATE TABLE `airport` (
 -- Table structure for table `booked information`
 --
 
-CREATE TABLE `booked information` (
+CREATE TABLE `booked_information` (
   `booked_id` int(10) NOT NULL,
   `reservation_id` int(10) NOT NULL,
   `passenger_id` int(10) NOT NULL,
@@ -94,7 +94,6 @@ CREATE TABLE `passenger` (
   `citizenship` varchar(20) NOT NULL,
   `p_number` varchar(20) NOT NULL,
   `email` varchar(50) NOT NULL,
-  `password` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
