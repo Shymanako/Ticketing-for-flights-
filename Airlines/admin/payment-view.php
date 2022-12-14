@@ -25,16 +25,16 @@ require 'dbcon.php';
                 <div class="card">
                     <div class="card-header">
                         <h4>Payment Details
-                            <a href="payment.php" class="btn btn-danger float-end">Back</a>
+                            <a href="admin.php" class="btn btn-danger float-end">Back</a>
                         </h4>
                     </div>
                     <div class="card-body">
 
                         <?php
 
-                        if(isset($_GET['payment_id'])){
-                            $payment_id = mysqli_real_escape_string($con, $_GET['payment_id']);
-                            $query = "SELECT * FROM payment WHERE payment_id='$payment_id'";
+                        if(isset($_GET['id'])){
+                            $payment_id = mysqli_real_escape_string($con, $_GET['id']);
+                            $query = "SELECT * FROM payment WHERE pid='$payment_id'";
                             $query_run = mysqli_query($con, $query);
 
                             if(mysqli_num_rows($query_run) > 0)
@@ -43,16 +43,12 @@ require 'dbcon.php';
                                 ?>
 
                                     <div class="mb-3">
-                                        <label> Reservation ID Type </label>
-                                        <p class="form-control"><?=$payment['reservation_id'];?></p>
+                                        <label> Credit Type </label>
+                                        <p class="form-control"><?=$payment['credit_type'];?></p>
                                     </div>
                                     <div class="mb-3">
-                                        <label> Payment Method </label>
-                                        <p class="form-control"><?=$payment['payment_method'];?></p>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label> Payment Amount </label>
-                                        <p class="form-control"><?=$payment['payment_amount'];?></p>
+                                        <label> Account Number </label>
+                                        <p class="form-control"><?=$payment['account_number'];?></p>
                                     </div>
 
                                 <?php

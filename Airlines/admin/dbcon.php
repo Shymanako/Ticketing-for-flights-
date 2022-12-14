@@ -1,6 +1,6 @@
 <?php
 
-$con = mysqli_connect('localhost', 'root', '', 'book_db');
+$con = mysqli_connect('localhost', 'root', '', 'airline_reservation');
 
 if(!$con){
     die('Connection Failed!'. mysqli_connect_error());

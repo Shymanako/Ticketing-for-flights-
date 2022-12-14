@@ -1,6 +1,5 @@
 <?php
 session_start();
-require 'dbcon.php';
 ?>
 
 <!doctype html>
@@ -26,15 +25,19 @@ require 'dbcon.php';
                 <div class="card">
                     <div class="card-header">
                         <h4>Add Flight
-                            <a href="flight.php" class="btn btn-danger float-end">Back</a>
+                            <a href="admin.php" class="btn btn-danger float-end">Back</a>
                         </h4>
                     </div>
                     <div class="card-body">
 
                         <script type="text/javascript">
                             function validateForm() {
-                                var a = document.forms["Form"]["schedule_id"].value;
-                                if (a == null || a == ""){
+                                var a = document.forms["Form"]["location"].value;
+                                var b = document.forms["Form"]["destination"].value;
+                                var c = document.forms["Form"]["airlines"].value;
+                                var d = document.forms["Form"]["departure"].value;
+                                var e = document.forms["Form"]["arrival"].value;
+                                if (a == null || a == "", b == null || b == "", c == null || c == "", d == null || d == "", e == null || e == ""){
                                 alert("Please Fill In All Required Details");
                                 return false;
                                 }
@@ -44,47 +47,48 @@ require 'dbcon.php';
                         <form name="Form" action="code.php" autocomplete="off" onsubmit="return validateForm()" method="POST">
 
                             <div class="mb-3">
-                                    <label> Schedule ID </label>
-                                        <select name="schedule_id">
-                                            <?php
-                                                // php code to display available schedules from database
-                                                // query to select all available schedules in database
-                                                $query = "select * from schedule";
+                                <label> Flight Location </label>
+                                <input type="text" name="location" placeholder="Enter location" class="form-control">
+                            </div>
+                            <div class="mb-3">
+                                <label> Flight Destination </label>
+                                <input list="destination" type="text" name="destination" placeholder="Enter destination" class="form-control">
+                                <datalist id="destination">
+                                    <option value="Manila">
+                                    <option value="Tokyo">
+                                    <option value="Seoul">
+                                    <option value="Agra">
+                                    <option value="Beijing">
+                                    <option value="Hanoi">
+                                    <option value="Kuala Lumpur">
+                                    <option value="Rio De Janeiro">
+                                    <option value="Singapore">
+                                    <option value="Reykjavik">
+                                    <option value="Paris">
+                                    <option value="Bali">
+                                </datalist>
+                            </div>
+                            <div class="mb-3">
+                                <label> Flight Airlines </label>
+                                <input list="airlines" type="text" name="airlines" placeholder="Enter chosen airlines" class="form-control">
+                                <datalist id="airlines">
+                                    <option value="Cebu Pacific">
+                                    <option value="Philippine Airlines">
+                                    <option value="Air Asia">
+                                </datalist>
+                            </div>
+                            <div class="mb-3">
+                                <label> Flight Departure </label>
+                                <input type="datetime-local" name="departure" class="form-control">
+                            </div>
+                            <div class="mb-3">
+                                <label> Flight Arrival </label>
+                                <input type="datetime-local" name="arrival" class="form-control">
+                            </div>
 
-                                                // Executing query
-                                                $query_run = mysqli_query($con, $query);
-
-                                                // count rows to check whether we have schedule or not
-                                                $count = mysqli_num_rows($query_run);
-
-                                                // if count is greater than 0 we have schedule else we do not have an schedule
-                                                if($count>0)
-                                                {
-                                                    // we have schedule
-                                                    while($row=mysqli_fetch_assoc($query_run))
-                                                    {
-                                                        // get the detail of schedule
-                                                        $schedule_id = $row['schedule_id'];
-
-                                                        ?>
-                                                        <option value="<?php echo $schedule_id; ?>"><?php echo $schedule_id; ?></option>
-                                                        <?php
-                                                    }
-                                                }
-                                                else
-                                                {
-                                                    // we do not have schedule
-                                                    ?>
-                                                    <option value="0">No schedule Found</option>
-                                                    <?php
-                                                }
-                                            ?>
-                                        </select>
-                                </div>
-
-                                <div class="mb-3">
-                                    <button type="submit" name="save_flight" class="btn btn-primary">Save Flight</button>
-                                </div>
+                            <div class="mb-3">
+                                <button type="submit" name="save_flight" class="btn btn-primary">Save Flight</button>
+                            </div>
 
                         </form>
                     </div>

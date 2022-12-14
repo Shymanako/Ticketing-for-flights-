@@ -26,20 +26,17 @@ require 'dbcon.php';
                 <div class="card">
                     <div class="card-header">
                         <h4>Update Flight
-                            <a href="flight.php" class="btn btn-danger float-end">Back</a>
+                            <a href="admin.php" class="btn btn-danger float-end">Back</a>
                         </h4>
                     </div>
                     <div class="card-body">
 
                         <?php
 
-                        if(isset($_GET['flight_id'])){
-                            $flight_id = mysqli_real_escape_string($con, $_GET['flight_id']);
-                            $query = "SELECT * FROM flight WHERE flight_id='$flight_id'";
+                        if(isset($_GET['id'])){
+                            $flight_id = mysqli_real_escape_string($con, $_GET['id']);
+                            $query = "SELECT * FROM flight WHERE fid='$flight_id'";
                             $query_run = mysqli_query($con, $query);
-                            $row = mysqli_fetch_assoc($query_run);
-
-                            $current_schedule_id = $row['schedule_id'];
 
                             if(mysqli_num_rows($query_run) > 0)
                             {
@@ -50,42 +47,43 @@ require 'dbcon.php';
                                     <input type="hidden" name="flight_id" value="<?= $flight_id;?>">
 
                                     <div class="mb-3">
-                                        <label> Schedule ID </label>
-                                            <select name="schedule_id">
-                                                <?php
-                                                    // php code to display available schedules from database
-                                                    // query to select all available schedules in database
-                                                    $query2 = "select * from schedule";
-
-                                                    // Executing query
-                                                    $query_run2 = mysqli_query($con, $query2);
-
-                                                    // count rows to check whether we have schedule or not
-                                                    $count2 = mysqli_num_rows($query_run2);
-
-                                                    // if count is greater than 0 we have schedule else we do not have an schedule
-                                                    if($count2>0)
-                                                    {
-                                                        // we have schedule
-                                                        while($row2=mysqli_fetch_assoc($query_run2))
-                                                        {
-                                                            // get the detail of schedule
-                                                            $schedule_id = $row2['schedule_id'];
-
-                                                            ?>
-                                                            <option <?php if($current_schedule_id==$schedule_id){echo "selected"; } ?> value="<?php echo $schedule_id; ?>"><?php echo $schedule_id; ?></option>
-                                                            <?php
-                                                        }
-                                                    }
-                                                    else
-                                                    {
-                                                        // we do not have schedule
-                                                        ?>
-                                                        <option value="0">No schedule Found</option>
-                                                        <?php
-                                                    }
-                                                ?>
-                                            </select>
+                                        <label> Flight Location </label>
+                                        <input type="text" name="location" value="<?= $flight['location'];?>" class="form-control">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label> Flight Destination </label>
+                                        <input list="destination" type="text" name="destination" value="<?= $flight['destination'];?>" class="form-control">
+                                        <datalist id="destination">
+                                            <option value="Manila">
+                                            <option value="Tokyo">
+                                            <option value="Seoul">
+                                            <option value="Agra">
+                                            <option value="Beijing">
+                                            <option value="Hanoi">
+                                            <option value="Kuala Lumpur">
+                                            <option value="Rio De Janeiro">
+                                            <option value="Singapore">
+                                            <option value="Reykjavik">
+                                            <option value="Paris">
+                                            <option value="Bali">
+                                        </datalist>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label> Flight Airlines </label>
+                                        <input list="airlines" type="text" name="airlines" value="<?= $flight['airlines'];?>" class="form-control">
+                                        <datalist id="airlines">
+                                            <option value="Cebu Pacific">
+                                            <option value="Philippine Airlines">
+                                            <option value="Air Asia">
+                                        </datalist>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label> Flight Departure </label>
+                                        <input type="datetime-local" name="departure" value="<?= $flight['departure'];?>" class="form-control">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label> Flight Arrival </label>
+                                        <input type="datetime-local" name="arrival" value="<?= $flight['arrival'];?>" class="form-control">
                                     </div>
 
                                     <div class="mb-3">

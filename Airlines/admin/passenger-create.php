@@ -25,7 +25,7 @@ session_start();
                 <div class="card">
                     <div class="card-header">
                         <h4>Add Passenger
-                            <a href="passenger.php" class="btn btn-danger float-end">Back</a>
+                            <a href="admin.php" class="btn btn-danger float-end">Back</a>
                         </h4>
                     </div>
                     <div class="card-body">
@@ -33,11 +33,15 @@ session_start();
                         <script type="text/javascript">
                             function validateForm() {
                                 var a = document.forms["Form"]["first_name"].value;
-                                var b = document.forms["Form"]["last_name"].value;
-                                var c = document.forms["Form"]["date_of_birth"].value;
-                                var d = document.forms["Form"]["citizenship"].value;
-                                var e = document.forms["Form"]["phone_number"].value;
-                                if (a == null || a == "", b == null || b == "", c == null || c == "", d == null || d == "", e == null || e == ""){
+                                var b = document.forms["Form"]["middle_name"].value;
+                                var c = document.forms["Form"]["last_name"].value;
+                                var d = document.forms["Form"]["age"].value;
+                                var e = document.forms["Form"]["birthdate"].value;
+                                var f = document.forms["Form"]["email"].value;
+                                var g = document.forms["Form"]["phone"].value;
+                                var h = document.forms["Form"]["citizenship"].value;
+                                if (a == null || a == "", b == null || b == "", c == null || c == "", d == null || d == "", e == null || e == "", f == null || f == "",
+                                g == null || g == "", h == null || h == ""){
                                 alert("Please Fill In All Required Details");
                                 return false;
                                 }
@@ -50,35 +54,33 @@ session_start();
                                 <label> Passenger First Name </label>
                                 <input type="text" name="first_name" placeholder="Enter passenger first name" class="form-control">
                             </div>
-
+                            <div class="mb-3">
+                                <label> Passenger Middle Name </label>
+                                <input type="text" name="middle_name" placeholder="Enter passenger middle name" class="form-control">
+                            </div>
                             <div class="mb-3">
                                 <label> Passenger Last Name </label>
                                 <input type="text" name="last_name" placeholder="Enter passenger last name" class="form-control">
                             </div>
-
                             <div class="mb-3">
-                                <label> Passenger Date of Birth </label>
-                                <input type="date" name="date_of_birth" placeholder="Enter passenger birthdate" class="form-control">
+                                <label> Passenger Age </label>
+                                <input type="number" name="age" placeholder="Enter passenger age" class="form-control">
                             </div>
-
+                            <div class="mb-3">
+                                <label> Passenger Birthdate </label>
+                                <input type="date" name="birthdate" placeholder="Enter passenger birthdate" class="form-control">
+                            </div>
+                            <div class="mb-3">
+                                <label> Passenger Email </label>
+                                <input type="email" name="email" placeholder="Enter passenger email" class="form-control">
+                            </div>
+                            <div class="mb-3">
+                                <label> Passenger Phone </label>
+                                <input type="number" name="phone" placeholder="Enter passenger phone number" class="form-control">
+                            </div>
                             <div class="mb-3">
                                 <label> Passenger Citizenship </label>
                                 <input type="text" name="citizenship" placeholder="Enter passenger citizenship" class="form-control">
-                            </div>
-
-                            <div class="mb-3">
-                            <label> Passenger Phone Number </label>
-                                <input type="number" name="phone_number" placeholder="Enter passenger phone number" class="form-control" maxlength="11">
-                            </div>
-
-                            <div class="mb-3">
-                            <label> Email </label>
-                                <input type="email" name="email" placeholder="Enter passenger email" class="form-control">
-                            </div>
-
-                            <div class="mb-3">
-                            <label> Password </label>
-                                <input type="text" name="password" placeholder="Enter passenger password" class="form-control">
                             </div>
 
                             <div class="mb-3">

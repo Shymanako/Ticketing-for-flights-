@@ -1,30 +1,23 @@
-<?php
-session_start();
-require 'admin/dbcon.php';
+<?php 
 
+    $connection = mysqli_connect('localhost', 'root', '', 'airline_reservation');
 
-if (isset($_POST['save_booking'])) {
-    // Get all the details from form
-    $passenger_id = $_POST['passenger_id'];
+    if(isset($_POST['send'])){
+        $first_name = $_POST['first_name'];
+        $last_name = $_POST['last_name'];
+        $date_of_birth = $_POST['date_of_birth'];
+        $citizenship = $_POST['citizenship'];
+        $p_number = $_POST['p_number'];
+        $email = $_POST['email'];
 
+        $request = "insert into passenger(first_name, last_name, date_of_birth, citizenship, p_number, email) values ('$first_name', 
+        '$last_name', '$date_of_birth', '$citizenship', '$p_number', '$email')";
 
-    // Save daa into booked information
-    $query3 = "insert into booked_information set passenger_id='$passenger_id'";
+        mysqli_query($connection, $request);
 
-    // Execute the query
-    $query_run3 = mysqli_query($con, $query3);
-
-    if ($query_run3) {
-
-        $_SESSION['message'] = "Booked Flight Successfully";
-        header("Location: book2-view.php");
-        exit(0);
-    } else {
-
-        $_SESSION['message'] = "Flight Booking Failed";
-        header("Location: book.php");
-        exit(0);
+        header('location:book2.php');
+    }else{
+        echo 'Something went wrong. Please try again.';
     }
-}
 
 ?>

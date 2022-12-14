@@ -1,6 +1,6 @@
 <?php 
 
-    $connection = mysqli_connect('localhost', 'root', '', 'book_db');
+    $connection = mysqli_connect('localhost', 'root', '', 'airline_reservation');
 
     if(isset($_POST['send'])){
         $credit_type = $_POST['credit_type'];

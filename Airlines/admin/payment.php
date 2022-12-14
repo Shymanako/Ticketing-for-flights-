@@ -1,6 +1,7 @@
 <?php
   session_start();
   require 'dbcon.php';
+
 ?>
 
 <!doctype html>
@@ -21,18 +22,14 @@
     <div class="wrapper">
       <div class="sidebar">
         <h2>DB Admin</h2>
+        
         <li><a href="admin.php">Home</a></li>
-        <li><a href="airline.php">Airline</a></li>
-        <li><a href="airport.php">Airport</a></li>
-        <li><a href="booked-information.php">Booked Information</a></li>
-        <li><a href="direction.php">Direction</a></li>
-        <li><a href="flight.php">Flight</a></li>
+        <li><a href="ticket.php">Ticket</a></li>
         <li><a href="passenger.php">Passenger</a></li>
+        <li><a href="flight.php">Flight</a></li>
         <li><a href="payment.php">Payment</a></li>
-        <li><a href="reservation.php">Reservation</a></li>
-        <li><a href="schedule.php">Schedule</a></li>
         <li><a href="../home.php"> Back to Website</a></li>
-        <li><a href="logout-admin.php"> Logout</a></li>
+        
       </div>
     </div>
     
@@ -54,9 +51,8 @@
                   <thead>
                       <tr>
                         <th>Payment ID</th>
-                        <th>Reservation ID</th>
-                        <th>Payment Method</th>
-                        <th>Payment Amount</th>
+                        <th>Credit Card Type</th>
+                        <th>Account Number</th>
                         <th>Action</th>
                       </tr>
                   </thead>
@@ -71,15 +67,14 @@
                           // echo
                           ?>
                           <tr>
-                            <td><?= $payment['payment_id']; ?></td>
-                            <td><?= $payment['reservation_id']; ?></td>
-                            <td><?= $payment['payment_method']; ?></td>
-                            <td><?= $payment['payment_amount']; ?></td>
+                            <td><?= $payment['pid']; ?></td>
+                            <td><?= $payment['credit_type']; ?></td>
+                            <td><?= $payment['account_number']; ?></td>
                             <td>
-                              <a href="payment-view.php?payment_id=<?= $payment['payment_id']; ?>" class="btn btn-info btn-sm">View</a>
-                              <a href="payment-update.php?payment_id=<?= $payment['payment_id']; ?>" class="btn btn-success btn-sm">Update</a>
+                              <a href="payment-view.php?id=<?= $payment['pid']; ?>" class="btn btn-info btn-sm">View</a>
+                              <a href="payment-update.php?id=<?= $payment['pid']; ?>" class="btn btn-success btn-sm">Update</a>
                               <form action="code.php" method='POST' class="d-inline">
-                                <button type="submit" name="delete_payment" value="<?=$payment['payment_id']; ?>" class="btn btn-danger btn-sm">Delete</a>
+                                <button type="submit" name="delete_payment" value="<?=$payment['pid']; ?>" class="btn btn-danger btn-sm">Delete</a>
                               </form>
                             </td>
                           </tr>

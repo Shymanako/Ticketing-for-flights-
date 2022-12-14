@@ -25,16 +25,16 @@ require 'dbcon.php';
                 <div class="card">
                     <div class="card-header">
                         <h4>Flight Details
-                            <a href="flight.php" class="btn btn-danger float-end">Back</a>
+                            <a href="admin.php" class="btn btn-danger float-end">Back</a>
                         </h4>
                     </div>
                     <div class="card-body">
 
                         <?php
 
-                        if(isset($_GET['flight_id'])){
-                            $flight_id = mysqli_real_escape_string($con, $_GET['flight_id']);
-                            $query = "SELECT * FROM flight WHERE flight_id='$flight_id'";
+                        if(isset($_GET['id'])){
+                            $flight_id = mysqli_real_escape_string($con, $_GET['id']);
+                            $query = "SELECT * FROM flight WHERE fid='$flight_id'";
                             $query_run = mysqli_query($con, $query);
 
                             if(mysqli_num_rows($query_run) > 0)
@@ -43,12 +43,24 @@ require 'dbcon.php';
                                 ?>
 
                                     <div class="mb-3">
-                                        <label> Flight ID </label>
-                                        <p class="form-control"><?=$flight['flight_id'];?></p>
+                                        <label> Flight Location </label>
+                                        <p class="form-control"><?=$flight['location'];?></p>
                                     </div>
                                     <div class="mb-3">
-                                        <label> Schedule ID </label>
-                                        <p class="form-control"><?=$flight['schedule_id'];?></p>
+                                        <label> Flight Destination </label>
+                                        <p class="form-control"><?=$flight['destination'];?></p>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label> Flight Airlines </label>
+                                        <p class="form-control"><?=$flight['airlines'];?></p>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label> Flight Departure </label>
+                                        <p class="form-control"><?=$flight['departure'];?></p>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label> Flight Arrival </label>
+                                        <p class="form-control"><?=$flight['arrival'];?></p>
                                     </div>
 
                                 <?php
