@@ -73,6 +73,8 @@ include('login-check.php');
 
 
         <form name="Form" action="bookform.php" autocomplete="off" onsubmit="return validateForm()" method="post" class="bookform" required>
+        
+        <?php include('admin/message.php'); ?>
 
             <div class="flex">
                 <div class="inputBox">

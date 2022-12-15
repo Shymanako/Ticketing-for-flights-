@@ -58,15 +58,11 @@ require 'dbcon.php';
                                     </div>
                                     <div class="mb-3">
                                         <label> Passenger Phone Number </label>
-                                        <p class="form-control"><?=$passenger['phone_number'];?></p>
+                                        <p class="form-control"><?=$passenger['p_number'];?></p>
                                     </div>
                                     <div class="mb-3">
                                         <label> Email </label>
                                         <p class="form-control"><?=$passenger['email'];?></p>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label> Password </label>
-                                        <p class="form-control"><?=$passenger['password'];?></p>
                                     </div>
 
                                 <?php

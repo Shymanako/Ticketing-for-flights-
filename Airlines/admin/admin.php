@@ -310,7 +310,6 @@
                         <th>Citizenship</th>
                         <th>Phone Number</th>
                         <th>Email</th>
-                        <th>Password</th>
                         <th>Action</th>
                       </tr>
                   </thead>
@@ -330,9 +329,8 @@
                             <td><?= $passenger['last_name']; ?></td>
                             <td><?= $passenger['date_of_birth']; ?></td>
                             <td><?= $passenger['citizenship']; ?></td>
-                            <td><?= $passenger['phone_number']; ?></td>
+                            <td><?= $passenger['p_number']; ?></td>
                             <td><?= $passenger['email']; ?></td>
-                            <td><?= $passenger['password']; ?></td>
                             <td>
                               <a href="passenger-view.php?passenger_id=<?= $passenger['passenger_id']; ?>" class="btn btn-info btn-sm">View</a>
                               <a href="passenger-update.php?passenger_id=<?= $passenger['passenger_id']; ?>" class="btn btn-success btn-sm">Update</a>

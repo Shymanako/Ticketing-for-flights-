@@ -28,12 +28,11 @@ if(isset($_POST['update_passenger'])){
     $last_name = mysqli_real_escape_string($con, $_POST['last_name']);
     $date_of_birth = mysqli_real_escape_string($con, $_POST['date_of_birth']);
     $citizenship = mysqli_real_escape_string($con, $_POST['citizenship']);
-    $phone_number = mysqli_real_escape_string($con, $_POST['phone_number']);
+    $p_number = mysqli_real_escape_string($con, $_POST['p_number']);
     $email = mysqli_real_escape_string($con, $_POST['email']);
-    $password = mysqli_real_escape_string($con, $_POST['password']);
 
     $query = "UPDATE passenger SET first_name='$first_name', last_name='$last_name',
-    date_of_birth='$date_of_birth', citizenship='$citizenship', phone_number='$phone_number', 
+    date_of_birth='$date_of_birth', citizenship='$citizenship', p_number='$p_number', 
     email='$email', password='$password' WHERE passenger_id='$passenger_id'";
     $query_run = mysqli_query($con, $query);
 
@@ -57,11 +56,11 @@ if(isset($_POST['save_passenger'])){
     $last_name = mysqli_real_escape_string($con, $_POST['last_name']);
     $date_of_birth = mysqli_real_escape_string($con, $_POST['date_of_birth']);
     $citizenship = mysqli_real_escape_string($con, $_POST['citizenship']);
-    $phone_number = mysqli_real_escape_string($con, $_POST['phone_number']);
+    $p_number = mysqli_real_escape_string($con, $_POST['p_number']);
     $email = mysqli_real_escape_string($con, $_POST['email']);
     $password = mysqli_real_escape_string($con, $_POST['password']);
 
-    $query = "INSERT INTO passenger (first_name, last_name, date_of_birth, citizenship, phone_number, email, password) VALUES ('$first_name', '$last_name', '$date_of_birth', '$citizenship', '$phone_number', '$email', '$password')";
+    $query = "INSERT INTO passenger (first_name, last_name, date_of_birth, citizenship, p_number, email, password) VALUES ('$first_name', '$last_name', '$date_of_birth', '$citizenship', '$p_number', '$email', '$password')";
 
     $query_run = mysqli_query($con, $query);
     if($query_run){

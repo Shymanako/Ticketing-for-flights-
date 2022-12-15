@@ -68,19 +68,14 @@ session_start();
 
                             <div class="mb-3">
                             <label> Passenger Phone Number </label>
-                                <input type="number" name="phone_number" placeholder="Enter passenger phone number" class="form-control" maxlength="11">
+                                <input type="number" name="p_number" placeholder="Enter passenger phone number" class="form-control" maxlength="11">
                             </div>
 
                             <div class="mb-3">
                             <label> Email </label>
                                 <input type="email" name="email" placeholder="Enter passenger email" class="form-control">
                             </div>
-
-                            <div class="mb-3">
-                            <label> Password </label>
-                                <input type="text" name="password" placeholder="Enter passenger password" class="form-control">
-                            </div>
-
+                            
                             <div class="mb-3">
                                 <button type="submit" name="save_passenger" class="btn btn-primary">Save Passenger</button>
                             </div>

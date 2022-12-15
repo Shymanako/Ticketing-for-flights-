@@ -64,14 +64,11 @@ require 'dbcon.php';
                                     </div>
                                     <div class="mb-3">
                                         <label> Passenger Phone Number </label>
-                                        <input type="number" name="phone_number" value="<?= $passenger['phone_number'];?>" class="form-control" maxlength="11">
+                                        <input type="number" name="p_number" value="<?= $passenger['p_number'];?>" class="form-control" maxlength="11">
                                     </div>
                                     <div class="mb-3">
                                         <label> Email </label>
                                         <input type="email" name="email" value="<?= $passenger['email'];?>" class="form-control">
-                                    </div><div class="mb-3">
-                                        <label> Password </label>
-                                        <input type="password" name="password" value="<?= $passenger['password'];?>" class="form-control">
                                     </div>
 
                                     <div class="mb-3">
