@@ -33,6 +33,7 @@ body{
     background: rgb(47, 135, 236);
     padding: 30px 0;
     overflow-x: scroll;
+    overflow-y: none;
 }
 
 .wrapper .sidebar h2{
