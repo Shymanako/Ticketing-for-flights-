@@ -41,8 +41,6 @@ require 'dbcon.php';
 
                             $current_origin_airport_code = $row['origin_airport_code'];
                             $current_destination_airport_code = $row['destination_airport_code'];
-                            $price = $row['price'];
-
 
                             if(mysqli_num_rows($query_run) > 0)
                             {
@@ -133,11 +131,6 @@ require 'dbcon.php';
                                                         }
                                                     ?>
                                                 </select>
-                                    </div>
-
-                                    <div class="mb-3">
-                                        <label> Price </label>
-                                        <input type="number" name="price" value="<?php echo $price; ?>" class="form-control">
                                     </div>
 
                                     <div class="mb-3">

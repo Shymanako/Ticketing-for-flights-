@@ -74,16 +74,16 @@
         }
     </script>
 
-    <form action="book2-view.php" name="Form" onsubmit="return validateForm()" autocomplete="off" method="post" class="bookform" required>
+    <form action="book3-view.php" name="Form" onsubmit="return validateForm()" autocomplete="off" method="post" class="bookform" required>
 
         <div class="flex">
             <div class="inputBox">
-                <span>Select Schedule : <span style="color:red;">*</span> </span>
-                <select name="schedule_id">
+                <span>Select Flight : <span style="color:red;">*</span> </span>
+                <select name="flight_id">
                     <?php
                         // php code to display available airports from database
                         // query to select all available airports in database
-                        $query = "select schedule.schedule_id, schedule.departure_time, schedule.arrival_time, schedule.airline_id, airline.airline_name, schedule.direction_id, direction.origin_airport_code, direction.destination_airport_code from schedule left join airline on schedule.airline_id = airline.airline_id left join direction on schedule.direction_id = direction.direction_id order by schedule.airline_id";
+                        $query = "SELECT flight.flight_id, schedule.schedule_id, schedule.direction_id, direction.origin_airport_code, direction.destination_airport_code from flight left join schedule on flight.schedule_id = schedule.schedule_id left join direction on schedule.direction_id = direction.direction_id order by flight.schedule_id;";
 
                         // Executing query
                         $query_run = mysqli_query($con, $query);
@@ -98,17 +98,14 @@
                             while($row=mysqli_fetch_assoc($query_run))
                             {
                                 // get the detail of airport
+                                $flight_id = $row['flight_id'];
                                 $schedule_id = $row['schedule_id'];
                                 $direction_id = $row['direction_id'];
                                 $origin_airport_code = $row['origin_airport_code'];
                                 $destination_airport_code = $row['destination_airport_code'];
-                                $airline_id = $row['airline_id'];
-                                $airline_name = $row['airline_name'];
-                                $departure_time = $row['departure_time'];
-                                $arrival_time = $row['arrival_time'];
                                 
                                 ?>
-                                <option value="<?php echo $schedule_id; ?>"><?php echo $origin_airport_code; ?> to <?php echo $destination_airport_code; ?>, Airline: <?php echo $airline_name; ?>, Departure and Arrival Time : <?php echo $departure_time; ?> - <?php echo $arrival_time; ?> </option>
+                                <option value="<?php echo $flight_id; ?>"><?php echo $origin_airport_code; ?> to <?php echo $destination_airport_code; ?></option>
                                 <?php
                             }
                         }
@@ -116,7 +113,7 @@
                         {
                             // we do not have airport
                             ?>
-                            <option value="0">No Airport Found</option>
+                            <option value="0">No Flight Found</option>
                             <?php
                         }
                     ?>
@@ -125,17 +122,17 @@
         </div>
         <div>
             <?php
-            $query = "SELECT * FROM schedule";
+            $query = "SELECT * FROM flight";
             $query_run = mysqli_query($con, $query);
             if(mysqli_num_rows($query_run) > 0){
-                foreach($query_run as $schedule){
+                foreach($query_run as $flight){
             
                 }
             }
             ?>
 
-            <a href="book2-view.php?schedule_id=<?=$schedule['schedule_id']; ?>" class="btn btn-info btn-sm">View</a>
-            <button type="submit" name="send" value="<?=$schedule['schedule_id']; ?>" class="btn">Submit</a>
+            <a href="book3-view.php?flight_id=<?=$flight['flight_id']; ?>" class="btn btn-info btn-sm">Submit</a>
+            <button type="submit" name="send" value="<?=$flight['flight_id']; ?>" class="btn">Submit</a>
         </div>
     
     

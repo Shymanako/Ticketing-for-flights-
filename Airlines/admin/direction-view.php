@@ -49,10 +49,7 @@ require 'dbcon.php';
                                         <label> Destination Airport Code </label>
                                         <p class="form-control"><?=$direction['destination_airport_code'];?></p>
                                     </div>
-                                    <div class="mb-3">
-                                        <label> Price </label>
-                                        <p class="form-control"><?=$direction['price'];?></p>
-                                    </div>
+
 
                                 <?php
                             }

@@ -35,7 +35,6 @@ require 'dbcon.php';
                             function validateForm() {
                                 var a = document.forms["Form"]["origin_airport_code"].value;
                                 var b = document.forms["Form"]["destination_airport_code"].value;
-                                var c = document.forms["Form"]["price"].value;
                                 if (a == null || a == "", b == null || b == ""){
                                 alert("Please Fill In All Required Details");
                                 return false;
@@ -122,11 +121,6 @@ require 'dbcon.php';
                                         }
                                     ?>
                                 </select>
-                            </div>
-
-                            <div class="mb-3">
-                                <label> Price </label>
-                                <input type="number" name="price" placeholder="Enter Price" class="form-control">
                             </div>
 
                             <div class="mb-3">

@@ -67,9 +67,11 @@ require 'dbcon.php';
                                                 {
                                                     // get the detail of direction
                                                     $direction_id = $row['direction_id'];
+                                                    $origin_airport_code = $row['origin_airport_code'];
+                                                    $destination_airport_code = $row['destination_airport_code'];
 
                                                     ?>
-                                                    <option value="<?php echo $direction_id; ?>"><?php echo $direction_id; ?></option>
+                                                    <option value="<?php echo $direction_id; ?>"><?php echo $origin_airport_code; ?> to <?php echo $destination_airport_code; ?></option>
                                                     <?php
                                                 }
                                             }
