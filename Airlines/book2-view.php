@@ -55,9 +55,7 @@ require 'admin/message.php';
                             </div>
 
                             <td>
-                                <form action="bookform3.php" method='POST' class="d-inline">
-                                    <button type="submit" name="save_to_booked_info" class="btn">Confirm</a>
-                                </form>
+                                <a href="book3.php" class="btn">Confirm</a>
                                 <form action="delete.php" method='POST' class="d-inline">
                                     <button type="submit" name="delete_reservation" value="<?= $reservation['reservation_id']; ?>" class="btn">Cancel</a>
                                 </form>

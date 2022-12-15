@@ -12,9 +12,10 @@ if(isset($_POST['save_to_booked_info'])){
     $query_run = mysqli_query($con, $query);
     if($query_run){
 
-        $_SESSION['message'] = "Reservation Created Successfully";
-        header("Location: book3.php");
-        exit(0);
+        //$_SESSION['message'] = "Reservation Created Successfully";
+        //header("Location: book3.php");
+        //exit(0);
+        echo $reservation_id;
     }
     else{
         $_SESSION['message'] = "Reservation Not Created";

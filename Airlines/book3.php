@@ -55,31 +55,69 @@ require 'admin/dbcon.php';
 
         <?php
 
-        $query = "select * from booked_information order by booked_id desc limit 1";
+        $query = "Select * from passenger order by passenger_id desc limit 1";
         $query_run = mysqli_query($con, $query);
 
         if (mysqli_num_rows($query_run) > 0) {
-            foreach ($query_run as $booked_information) {
+            foreach ($query_run as $passenger) {
             }
         }
+        ?>
+        <input type="hidden" name="passenger_id" value="<?= $passenger['passenger_id']; ?>">
 
         ?>
-        <div class="flex">
-            <div class="inputBox">
-                <span>Reservation ID : <span style="color:red;">*</span> </span>
-                <input type="text" name="first_name" value="<?= $booked_information['passenger_id']; ?>">
-            </div>
-            <div class="inputBox">
-                <span>Passenger ID : <span style="color:red;">*</span> </span>
-                <input type="text" name="last_name" value="<?= $booked_information['flight_id']; ?>">
-            </div>
-            <div class="inputBox">
-                <span>Flight ID : <span style="color:red;">*</span> </span>
-                <input type="text" name="date_of_birth" value="<?= $booked_information['reservation_id']; ?>">
-            </div>
-        </div>
+        <form name="Form" action="bookform.php" autocomplete="off" onsubmit="return validateForm()" method="post" class="bookform" required>-
 
-        <input type="submit" value="submit and finish" name="send" class="btn">
+            <div class="flex">
+                <div class="inputBox">
+                    <span>first name : </span>
+                    <input type="text" name="first_name" value="<?= $passenger['first_name']; ?>">
+                </div>
+                <div class="inputBox">
+                    <span>last name : </span>
+                    <input type="text" name="last_name" value="<?= $passenger['last_name']; ?>">
+                </div>
+                <div class="inputBox">
+                    <span>date of birth : </span>
+                    <input type="date" name="date_of_birth" value="<?= $passenger['date_of_birth']; ?>">
+                </div>
+                <div class="inputBox">
+                    <span>citizenship : </span>
+                    <input type="text" name="citizenship" value="<?= $passenger['citizenship']; ?>">
+                </div>
+                <div class="inputBox">
+                    <span>phone number : </span>
+                    <input type="text" name="p_number" value="<?= $passenger['p_number']; ?>">
+                </div>
+                <div class="inputBox">
+                    <span>email : </span>
+                    <input type="email" name="email" value="<?= $passenger['email']; ?>">
+                </div>
+            </div>
+
+            <br><br>
+
+            <?php
+
+            $query2 = "Select * from reservation order by reservation_id desc limit 1";
+            $query_run2 = mysqli_query($con, $query2);
+
+            if (mysqli_num_rows($query_run2) > 0) {
+                foreach ($query_run2 as $reservation) {
+                }
+            }
+            ?>
+            <input type="hidden" name="passenger_id" value="<?= $reservation['reservation_id']; ?>">
+
+            <div class="flex">
+                <div class="inputBox">
+                    <span>flight : </span>
+                    <input type="text" name="first_name" value="<?= $reservation['flight_id']; ?>">
+                </div>
+
+            </div>
+        </form>
+
 
 
     </section>
