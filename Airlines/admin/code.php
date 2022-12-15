@@ -432,9 +432,8 @@ if(isset($_POST['update_schedule'])){
 if(isset($_POST['save_reservation'])){
     $passenger_id = mysqli_real_escape_string($con, $_POST['passenger_id']);
     $flight_id = mysqli_real_escape_string($con, $_POST['flight_id']);
-    $reservation_status = mysqli_real_escape_string($con, $_POST['reservation_status']);
 
-    $query = "INSERT INTO reservation (passenger_id, flight_id, reservation_status) VALUES ('$passenger_id', '$flight_id', '$reservation_status')";
+    $query = "INSERT INTO reservation (passenger_id, flight_id) VALUES ('$passenger_id', '$flight_id')";
 
     $query_run = mysqli_query($con, $query);
     if($query_run){
@@ -453,9 +452,8 @@ if(isset($_POST['save_reservation'])){
 if(isset($_POST['update_reservation'])){
     $passenger_id = mysqli_real_escape_string($con, $_POST['passenger_id']);
     $flight_id = mysqli_real_escape_string($con, $_POST['flight_id']);
-    $reservation_status = mysqli_real_escape_string($con, $_POST['reservation_status']);
 
-    $query = "UPDATE reservation SET passenger_id='$passenger_id', flight_id='$flight_id', reservation_status='$reservation_status'";
+    $query = "UPDATE reservation SET passenger_id='$passenger_id', flight_id='$flight_id' ";
     $query_run = mysqli_query($con, $query);
 
     if($query_run){
@@ -476,7 +474,7 @@ if(isset($_POST['delete_reservation'])){
     $reservation_id = mysqli_real_escape_string($con, $_POST['delete_reservation']);
 
     $query = "DELETE FROM reservation WHERE reservation_id='$reservation_id'";
-    $query_run = mysqli_query($con, $query);
+    $query_run = mysqli_query($con, $query);                                                                                        
     
     if($query_run){
 

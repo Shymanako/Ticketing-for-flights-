@@ -35,8 +35,7 @@ require 'dbcon.php';
                             function validateForm() {
                                 var a = document.forms["Form"]["passenger_id"].value;
                                 var b = document.forms["Form"]["flight_id"].value;
-                                var c = document.forms["Form"]["reservation_status"].value;
-                                if (a == null || a == "", b == null || b == "", c == null || c == ""){
+                                if (a == null || a == "", b == null || b == ""){
                                 alert("Please Fill In All Required Details");
                                 return false;
                                 }
@@ -122,10 +121,6 @@ require 'dbcon.php';
                                     </select>
                             </div>
 
-                            <div class="mb-3">
-                                <label>Reservation Status :</label>
-                                <input type="number" name="reservation_status">
-                            </div>
                             <div class="mb-3">
                                 <button type="submit" name="save_reservation" class="btn btn-primary">Save Reservation</button>
                             </div>

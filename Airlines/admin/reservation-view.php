@@ -49,11 +49,6 @@ require 'dbcon.php';
                                         <label> Flight ID </label>
                                         <p class="form-control"><?=$reservation['flight_id'];?></p>
                                     </div>
-                                    <div class="mb-3">
-                                        <label> Reservation Status </label>
-                                        <p class="form-control"><?=$reservation['reservation_status'];?></p>
-                                    </div>
-
                                 <?php
                             }
                             else

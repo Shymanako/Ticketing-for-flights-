@@ -1,4 +1,5 @@
 <?php
+session_start();
 require 'admin/dbcon.php';
 require 'admin/message.php';
 
@@ -54,7 +55,7 @@ require 'admin/message.php';
                                     <td>
                                         <a href="book2.php?passenger_id=<?= $passenger['passenger_id']; ?>" class="btn">Confirm</a>
                                         <form action="delete.php" method='POST' class="d-inline">
-                                            <button type="submit" name="delete" value="<?= $passenger['passenger_id']; ?>" class="btn">Cancel</a>
+                                            <button type="submit" name="delete_passenger" value="<?= $passenger['passenger_id']; ?>" class="btn">Cancel</a>
                                         </form>
                                     </td>
                                 </tr>

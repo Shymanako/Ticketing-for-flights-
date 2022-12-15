@@ -41,7 +41,6 @@ require 'dbcon.php';
 
                             $current_passenger_id = $row['passenger_id'];
                             $current_flight_id = $row['flight_id'];
-                            $reservation_status = $row['reservation_status'];
 
                             if(mysqli_num_rows($query_run) > 0)
                             {
@@ -128,10 +127,6 @@ require 'dbcon.php';
                                                     }
                                                 ?>
                                             </select>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label>Reservation Status :</label>
-                                        <input type="number" value="<?php echo $reservation_status; ?>" name="reservation_status">
                                     </div>
 
                                     <div class="mb-3">

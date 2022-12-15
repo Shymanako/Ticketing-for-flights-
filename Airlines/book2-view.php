@@ -34,44 +34,39 @@ require 'admin/message.php';
                     <div class="card-body">
 
                         <?php
-                        if (isset($_GET['flight_id'])) {
 
-                            $flight_id = mysqli_real_escape_string($con, $_GET['flight_id']);
-                            $query = "SELECT flight.flight_id, schedule.schedule_id, schedule.direction_id, direction.origin_airport_code, direction.destination_airport_code from flight left join schedule on flight.schedule_id = schedule.schedule_id left join direction on schedule.direction_id = direction.direction_id where flight_id = '$flight_id';";
-                            $query_run = mysqli_query($con, $query);
+                        $query = "Select * from reservation order by reservation_id desc limit 1";
+                        $query_run = mysqli_query($con, $query);
 
-                            if(mysqli_num_rows($query_run) > 0)
-                            {
-                                $flight = mysqli_fetch_array($query_run);
-                                ?>
+                        if (mysqli_num_rows($query_run) > 0) {
+                            $reservation = mysqli_fetch_array($query_run);
+                        ?>
 
-                                <input type="hidden" name="flight_id" value="<?=$flight['flight_id'];?>">
-                                    <div class="mb-3">
-                                        <label> Flight Destination   </label>
-                                        <p class="form-control">
-                                            <?=$flight['origin_airport_code'];?> 
-                                        </p>
-                                        <p>To</p>
-                                        <p class="form-control">
-                                            <?=$flight['destination_airport_code'];?> 
-                                        </p>
-                                    </div>
+                            <input type="hidden" name="reservation_id" value="<?= $reservation['reservation_id']; ?>">
+                            <div class="mb-3">
+                                <label> Reservation Details </label>
+                                <p class="form-control">
+                                    <?= $reservation['passenger_id']; ?>
+                                </p>
+                                <p>To</p>
+                                <p class="form-control">
+                                    <?= $reservation['flight_id']; ?>
+                                </p>
+                            </div>
 
-                                    <td>
-                                        <form action="bookform2.php" method='POST' class="d-inline">
-                                            <button type="submit" name="save" value="<?= $flight['flight_id']; ?>" class="btn">Confirm</a>
-                                        </form>
-                                        <a href="book2.php" class="btn">Cancel</a>
-                                    </td>
+                            <td>
+                                <form action="bookform3.php" method='POST' class="d-inline">
+                                    <button type="submit" name="save_to_booked_info" class="btn">Confirm</a>
+                                </form>
+                                <form action="delete.php" method='POST' class="d-inline">
+                                    <button type="submit" name="delete_reservation" value="<?= $reservation['reservation_id']; ?>" class="btn">Cancel</a>
+                                </form>
+                            </td>
 
-                                <?php
-                            }
-                            else
-                            {
-                                echo "<h4>No ID Found</h4>";
-                            }
+                        <?php
+                        } else {
+                            echo "<h4>No ID Found</h4>";
                         }
-
                         ?>
 
                     </div>
