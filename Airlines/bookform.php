@@ -15,7 +15,7 @@
 
         mysqli_query($connection, $request);
 
-        header('location:book2-view.php');
+        header('location:book1-view.php');
     }else{
         echo 'Something went wrong. Please try again.';
     }

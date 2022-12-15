@@ -131,7 +131,7 @@
             }
             ?>
 
-            <a href="book3-view.php?flight_id=<?=$flight['flight_id']; ?>" class="btn btn-info btn-sm">Submit</a>
+            <a href="book2-view.php?flight_id=<?=$flight['flight_id']; ?>" class="btn btn-info btn-sm">Submit</a>
             <button type="submit" name="send" value="<?=$flight['flight_id']; ?>" class="btn">Submit</a>
         </div>
     

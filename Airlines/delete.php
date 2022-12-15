@@ -17,7 +17,7 @@ require 'admin/dbcon.php';
         else{
     
             $_SESSION['message'] = "Passenger Deletion Failed";
-            header("Location: book2-view.php");
+            header("Location: book1-view.php");
             exit(0);
         }
     }
