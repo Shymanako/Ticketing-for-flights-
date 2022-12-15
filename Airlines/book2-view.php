@@ -28,7 +28,7 @@ require 'admin/message.php';
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
-                        <h4>Flight Details
+                        <h4>Reservation Details
                         </h4>
                     </div>
                     <div class="card-body">
