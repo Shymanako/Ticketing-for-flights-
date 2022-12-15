@@ -36,7 +36,7 @@ session_start();
                                 var b = document.forms["Form"]["last_name"].value;
                                 var c = document.forms["Form"]["date_of_birth"].value;
                                 var d = document.forms["Form"]["citizenship"].value;
-                                var e = document.forms["Form"]["phone_number"].value;
+                                var e = document.forms["Form"]["p_number"].value;
                                 if (a == null || a == "", b == null || b == "", c == null || c == "", d == null || d == "", e == null || e == ""){
                                 alert("Please Fill In All Required Details");
                                 return false;
