@@ -64,7 +64,7 @@ include('login-check.php');
                 var d = document.forms["Form"]["citizenship"].value;
                 var e = document.forms["Form"]["p_number"].value;
                 var f = document.forms["Form"]["email"].value;
-                if (a == null || a == "", b == null || b == "", c == null || c == "", d == null || d == "", e == null || e == "", f == null || f == "") {
+                if ((a == null || a == "") || (b == null || b == "") || (c == null || c == "") || (d == null || d == "") || (e == null || e == "") || (f == null || f == "")) {
                     alert("Please Fill In All Required Details");
                     return false;
                 }
@@ -102,7 +102,7 @@ include('login-check.php');
             </div>
 
 
-            <input type="submit" name="send" class="btn">
+            <input type="submit" value="Finalize" name="send" class="btn">
 
         </form>
         
