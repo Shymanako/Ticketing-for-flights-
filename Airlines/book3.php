@@ -3,6 +3,19 @@ session_start();
 require 'admin/dbcon.php';
 ?>
 
+<?php
+if (isset($_POST['use_reservation'])) {
+    $reservation_id = mysqli_real_escape_string($con, $_POST['reservation_id']);
+    $query2 = "Select reservation.passenger_id, passenger.passenger_id, passenger.first_name, passenger.last_name, passenger.date_of_birth, passenger.citizenship, passenger.p_number, passenger.email from reservation left join passenger on reservation.passenger_id = passenger.passenger_id where reservation.reservation_id = $reservation_id";
+    $query_run2 = mysqli_query($con, $query2);
+
+    if (mysqli_num_rows($query_run2) > 0)
+        foreach ($query_run2 as $reservation) {
+        }
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -53,63 +66,50 @@ require 'admin/dbcon.php';
 
         <h1 class="heading-title">Booking Details</h1>
 
-        <?php
+        <form name="Form" action="bookform.php" autocomplete="off" onsubmit="return validateForm()" method="post" class="bookform" required>
+            <?php
 
-        $query = "Select * from passenger order by passenger_id desc limit 1";
-        $query_run = mysqli_query($con, $query);
+            if (isset($_GET['reservation_id'])) {
+                $reservation_id = mysqli_real_escape_string($con, $_GET['reservation_id']);
+                $query = "Select reservation.passenger_id, reservation.flight_id, passenger.passenger_id, passenger.first_name, passenger.last_name, passenger.date_of_birth, passenger.citizenship, passenger.p_number, passenger.email from reservation left join passenger on reservation.passenger_id = passenger.passenger_id where reservation.reservation_id = '$reservation_id'";
+                $query_run = mysqli_query($con, $query);
 
-        if (mysqli_num_rows($query_run) > 0) {
-            foreach ($query_run as $passenger) {
+                if (mysqli_num_rows($query_run) > 0) {
+                    $reservation = mysqli_fetch_array($query_run);
+                } else {
+                    echo "<h4>No ID Found</h4>";
+                }
             }
-        }
-        ?>
-        <input type="hidden" name="passenger_id" value="<?= $passenger['passenger_id']; ?>">
 
-        ?>
-        <form name="Form" action="bookform.php" autocomplete="off" onsubmit="return validateForm()" method="post" class="bookform" required>-
-
+            ?>
             <div class="flex">
                 <div class="inputBox">
                     <span>first name : </span>
-                    <input type="text" name="first_name" value="<?= $passenger['first_name']; ?>">
+                    <input type="text" name="first_name" value="<?= $reservation['first_name']; ?>">
                 </div>
                 <div class="inputBox">
                     <span>last name : </span>
-                    <input type="text" name="last_name" value="<?= $passenger['last_name']; ?>">
+                    <input type="text" name="last_name" value="<?= $reservation['last_name']; ?>">
                 </div>
                 <div class="inputBox">
                     <span>date of birth : </span>
-                    <input type="date" name="date_of_birth" value="<?= $passenger['date_of_birth']; ?>">
+                    <input type="date" name="date_of_birth" value="<?= $reservation['date_of_birth']; ?>">
                 </div>
                 <div class="inputBox">
                     <span>citizenship : </span>
-                    <input type="text" name="citizenship" value="<?= $passenger['citizenship']; ?>">
+                    <input type="text" name="citizenship" value="<?= $reservation['citizenship']; ?>">
                 </div>
                 <div class="inputBox">
                     <span>phone number : </span>
-                    <input type="text" name="p_number" value="<?= $passenger['p_number']; ?>">
+                    <input type="text" name="p_number" value="<?= $reservation['p_number']; ?>">
                 </div>
                 <div class="inputBox">
                     <span>email : </span>
-                    <input type="email" name="email" value="<?= $passenger['email']; ?>">
+                    <input type="email" name="email" value="<?= $reservation['email']; ?>">
                 </div>
             </div>
 
             <br><br>
-
-            <?php
-            if(isset($_POST['use_reservation'])){
-                reservation_id = mysqli_real_escape_string($con, $_POST['passenger_id']);
-                $query2 = "Select * from reservation order by reservation_id desc limit 1";
-                $query_run2 = mysqli_query($con, $query2);
-
-                if(myslqi_num_rows($query_run2) > 0)
-                    foreach($query_run2 as $reservation){
-
-                    }
-            }
-            ?>
-            <input type="hidden" name="reservation_id" value="<?= $reservation['reservation_id']; ?>">
 
             <div class="flex">
                 <div class="inputBox">
@@ -118,7 +118,7 @@ require 'admin/dbcon.php';
                 </div>
 
             </div>
-            
+
         </form>
 
 

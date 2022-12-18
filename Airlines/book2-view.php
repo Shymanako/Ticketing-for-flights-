@@ -55,6 +55,7 @@ require 'admin/message.php';
                             </div>
 
                             <td>
+                            <a href="book3.php?reservation_id=<?= $reservation['reservation_id']; ?>" class="btn btn-info btn-sm">Confirm</a>
                                 <form action="book3.php" method='POST' class="d-inline">
                                     <button type="submit" name="use_reservation" value="<?= $reservation['reservation_id']; ?>" class="btn">Confirm</a>
                                 </form>
