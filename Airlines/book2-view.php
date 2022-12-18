@@ -55,10 +55,10 @@ require 'admin/message.php';
                             </div>
 
                             <td>
-                                <a href="book3.php" class="btn">Confirm</a>
-                                <form action="delete.php" method='POST' class="d-inline">
-                                    <button type="submit" name="delete_reservation" value="<?= $reservation['reservation_id']; ?>" class="btn">Cancel</a>
+                                <form action="book3.php" method='POST' class="d-inline">
+                                    <button type="submit" name="use_reservation" value="<?= $reservation['reservation_id']; ?>" class="btn">Confirm</a>
                                 </form>
+                                <a href="book2.php" class="btn">Cancel</a>
                             </td>
 
                         <?php

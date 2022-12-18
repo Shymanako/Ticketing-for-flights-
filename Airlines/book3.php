@@ -98,24 +98,27 @@ require 'admin/dbcon.php';
             <br><br>
 
             <?php
+            if(isset($_POST['use_reservation'])){
+                reservation_id = mysqli_real_escape_string($con, $_POST['passenger_id']);
+                $query2 = "Select * from reservation order by reservation_id desc limit 1";
+                $query_run2 = mysqli_query($con, $query2);
 
-            $query2 = "Select * from reservation order by reservation_id desc limit 1";
-            $query_run2 = mysqli_query($con, $query2);
+                if(myslqi_num_rows($query_run2) > 0)
+                    foreach($query_run2 as $reservation){
 
-            if (mysqli_num_rows($query_run2) > 0) {
-                foreach ($query_run2 as $reservation) {
-                }
+                    }
             }
             ?>
-            <input type="hidden" name="passenger_id" value="<?= $reservation['reservation_id']; ?>">
+            <input type="hidden" name="reservation_id" value="<?= $reservation['reservation_id']; ?>">
 
             <div class="flex">
                 <div class="inputBox">
                     <span>flight : </span>
-                    <input type="text" name="first_name" value="<?= $reservation['flight_id']; ?>">
+                    <input type="text" name="reservation_id" value="<?= $reservation['flight_id']; ?>">
                 </div>
 
             </div>
+            
         </form>
 
 
