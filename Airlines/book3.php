@@ -3,19 +3,6 @@ session_start();
 require 'admin/dbcon.php';
 ?>
 
-<?php
-if (isset($_POST['use_reservation'])) {
-    $reservation_id = mysqli_real_escape_string($con, $_POST['reservation_id']);
-    $query2 = "Select reservation.passenger_id, passenger.passenger_id, passenger.first_name, passenger.last_name, passenger.date_of_birth, passenger.citizenship, passenger.p_number, passenger.email from reservation left join passenger on reservation.passenger_id = passenger.passenger_id where reservation.reservation_id = $reservation_id";
-    $query_run2 = mysqli_query($con, $query2);
-
-    if (mysqli_num_rows($query_run2) > 0)
-        foreach ($query_run2 as $reservation) {
-        }
-}
-
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -111,12 +98,39 @@ if (isset($_POST['use_reservation'])) {
 
             <br><br>
 
+            <?php
+
+            if (isset($_GET['reservation_id'])) {
+                $reservation_id2 = mysqli_real_escape_string($con, $_GET['reservation_id']);
+                $query2 = "Select reservation.passenger_id, reservation.flight_id, flight.flight_id, flight.schedule_id, schedule.schedule_id, direction.direction_id, airline.airline_id, airline.airline_name, direction.origin_airport_code, direction.destination_airport_code, schedule.direction_id, schedule.departure_time, schedule.arrival_time, schedule.airline_id from reservation left join flight on reservation.flight_id = flight.flight_id left join schedule on flight.schedule_id = schedule.schedule_id left join direction on schedule.direction_id = direction.direction_id left join airline on schedule.airline_id = airline.airline_id where reservation.reservation_id = '$reservation_id2'";
+                $query_run2 = mysqli_query($con, $query2);
+
+                if (mysqli_num_rows($query_run2) > 0) {
+                    $reservation2 = mysqli_fetch_array($query_run2);
+                } else {
+                    echo "<h4>No ID Found</h4>";
+                }
+            }
+
+            ?>
+
             <div class="flex">
                 <div class="inputBox">
-                    <span>flight : </span>
-                    <input type="text" name="reservation_id" value="<?= $reservation['flight_id']; ?>">
+                    <span>Direction name : </span>
+                    <input type="text" name="origin_airport_code" value="<?= $reservation2['origin_airport_code']; ?> to <?= $reservation2['destination_airport_code']; ?>">
                 </div>
-
+                <div class="inputBox">
+                    <span>Departure Time : </span>
+                    <input type="text" name="departure_time" value="<?= $reservation2['departure_time']; ?>">
+                </div>
+                <div class="inputBox">
+                    <span>Arrival Time : </span>
+                    <input type="date" name="arrival_time" value="<?= $reservation2['arrival_time']; ?>">
+                </div>
+                <div class="inputBox">
+                    <span>Airline : </span>
+                    <input type="text" name="airline_name" value="<?= $reservation2['airline_name']; ?>">
+                </div>
             </div>
 
         </form>
