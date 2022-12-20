@@ -125,7 +125,7 @@ require 'admin/dbcon.php';
                 </div>
                 <div class="inputBox">
                     <span>Arrival Time : </span>
-                    <input type="date" name="arrival_time" value="<?= $reservation2['arrival_time']; ?>">
+                    <input type="text" name="arrival_time" value="<?= $reservation2['arrival_time']; ?>">
                 </div>
                 <div class="inputBox">
                     <span>Airline : </span>
