@@ -184,7 +184,6 @@
                         <th>Direction ID</th>
                         <th>Origin Airport Code</th>
                         <th>Destination Airport Code</th>
-                        <th>Price</th>
                         <th>Action</th>
                       </tr>
                   </thead>
@@ -202,7 +201,6 @@
                             <td><?= $direction['direction_id']; ?></td>
                             <td><?= $direction['origin_airport_code']; ?></td>
                             <td><?= $direction['destination_airport_code']; ?></td>
-                            <td><?= $direction['price']; ?></td>
                             <td>
                               <a href="direction-view.php?direction_id=<?= $direction['direction_id']; ?>" class="btn btn-info btn-sm">View</a>
                               <a href="direction-update.php?direction_id=<?= $direction['direction_id']; ?>" class="btn btn-success btn-sm">Update</a>
@@ -438,7 +436,6 @@
                         <th>Reservation ID</th>
                         <th>Passenger ID</th>
                         <th>Flight ID</th>
-                        <th>Reservation Status</th>
                         <th>Action</th>
                       </tr>
                   </thead>
@@ -456,7 +453,6 @@
                             <td><?= $reservation['reservation_id']; ?></td>
                             <td><?= $reservation['passenger_id']; ?></td>
                             <td><?= $reservation['flight_id']; ?></td>
-                            <td><?= $reservation['reservation_status']; ?></td>
                             <td>
                               <a href="reservation-view.php?reservation_id=<?= $reservation['reservation_id']; ?>" class="btn btn-info btn-sm">View</a>
                               <a href="reservation-update.php?reservation_id=<?= $reservation['reservation_id']; ?>" class="btn btn-success btn-sm">Update</a>

@@ -102,7 +102,7 @@ include('login-check.php');
             </div>
 
 
-            <input type="submit" value="Finalize" name="send" class="btn">
+            <input type="submit" value="Confirm" name="send" class="btn">
 
         </form>
         
