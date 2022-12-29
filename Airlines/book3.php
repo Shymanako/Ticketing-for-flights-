@@ -51,9 +51,9 @@ require 'admin/dbcon.php';
 
     <section class="booking">
 
-        <h1 class="heading-title">Booking Details</h1>
+        <h1 class="heading-title">Reservation Details</h1>
 
-        <form name="Form" action="bookform.php" autocomplete="off" onsubmit="return validateForm()" method="post" class="bookform" required>
+        <form name="Form" action="book4.php" autocomplete="off" onsubmit="return validateForm()" method="post" class="bookform" required>
             <?php
 
             if (isset($_GET['reservation_id'])) {
@@ -102,7 +102,7 @@ require 'admin/dbcon.php';
 
             if (isset($_GET['reservation_id'])) {
                 $reservation_id2 = mysqli_real_escape_string($con, $_GET['reservation_id']);
-                $query2 = "Select reservation.passenger_id, reservation.flight_id, flight.flight_id, flight.schedule_id, schedule.schedule_id, direction.direction_id, airline.airline_id, airline.airline_name, direction.origin_airport_code, direction.destination_airport_code, schedule.direction_id, schedule.departure_time, schedule.arrival_time, schedule.airline_id from reservation left join flight on reservation.flight_id = flight.flight_id left join schedule on flight.schedule_id = schedule.schedule_id left join direction on schedule.direction_id = direction.direction_id left join airline on schedule.airline_id = airline.airline_id where reservation.reservation_id = '$reservation_id2'";
+                $query2 = "Select reservation.reservation_id, reservation.passenger_id, reservation.flight_id, flight.flight_id, flight.schedule_id, schedule.schedule_id, direction.direction_id, airline.airline_id, airline.airline_name, direction.origin_airport_code, direction.destination_airport_code, schedule.direction_id, schedule.departure_time, schedule.arrival_time, schedule.airline_id from reservation left join flight on reservation.flight_id = flight.flight_id left join schedule on flight.schedule_id = schedule.schedule_id left join direction on schedule.direction_id = direction.direction_id left join airline on schedule.airline_id = airline.airline_id where reservation.reservation_id = '$reservation_id2'";
                 $query_run2 = mysqli_query($con, $query2);
 
                 if (mysqli_num_rows($query_run2) > 0) {
@@ -132,6 +132,8 @@ require 'admin/dbcon.php';
                     <input type="text" name="airline_name" value="<?= $reservation2['airline_name']; ?>">
                 </div>
             </div>
+
+            <button type="submit" name="proceed_payment" value="<?= $reservation2['reservation_id'];?>" class="btn">Submit</a>
 
         </form>
 

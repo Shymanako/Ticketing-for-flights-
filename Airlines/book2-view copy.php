@@ -35,7 +35,7 @@ require 'admin/message.php';
 
                         <?php
 
-                        $query = "Select reservation.reservation_id, reservation.passenger_id, reservation.flight_id, flight.flight_id, flight.schedule_id, schedule.schedule_id, direction.direction_id, airline.airline_id, airline.airline_name, direction.origin_airport_code, direction.destination_airport_code, schedule.direction_id, schedule.departure_time, schedule.arrival_time, schedule.airline_id from reservation left join flight on reservation.flight_id = flight.flight_id left join schedule on flight.schedule_id = schedule.schedule_id left join direction on schedule.direction_id = direction.direction_id left join airline on schedule.airline_id = airline.airline_id order by reservation_id desc limit 1";
+                        $query = "Select * from reservation order by reservation_id desc limit 1";
                         $query_run = mysqli_query($con, $query);
 
                         if (mysqli_num_rows($query_run) > 0) {
@@ -44,25 +44,13 @@ require 'admin/message.php';
 
                             <input type="hidden" name="reservation_id" value="<?= $reservation['reservation_id']; ?>">
                             <div class="mb-3">
-                                <label> Flight ID </label>
+                                <label> Reservation Details </label>
+                                <p class="form-control">
+                                    <?= $reservation['passenger_id']; ?>
+                                </p>
+                                <p>To</p>
                                 <p class="form-control">
                                     <?= $reservation['flight_id']; ?>
-                                </p>
-                                <label> Origin Airport Code </label>
-                                <p class="form-control">
-                                    <?= $reservation['origin_airport_code']; ?>
-                                </p>
-                                <label> Destination Airport Code </label>
-                                <p class="form-control">
-                                    <?= $reservation['destination_airport_code']; ?>
-                                </p>
-                                <label> Departure Time </label>
-                                <p class="form-control">
-                                    <?= $reservation['departure_time']; ?>
-                                </p>
-                                <label> Arrival Time </label>
-                                <p class="form-control">
-                                    <?= $reservation['arrival_time']; ?>
                                 </p>
                             </div>
 
