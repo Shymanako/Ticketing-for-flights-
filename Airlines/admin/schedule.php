@@ -57,6 +57,7 @@
                         <th>Departure Time</th>
                         <th>Arrival Time</th>
                         <th>Airline ID</th>
+                        <th>Price</th>
                         <th>Action</th>
                       </tr>
                   </thead>
@@ -75,6 +76,7 @@
                             <td><?= $schedule['departure_time']; ?></td>
                             <td><?= $schedule['arrival_time']; ?></td>
                             <td><?= $schedule['airline_id']; ?></td>
+                            <td><?= $schedule['price']; ?></td>
                             <td>
                               <a href="schedule-view.php?schedule_id=<?= $schedule['schedule_id']; ?>" class="btn btn-info btn-sm">View</a>
                               <a href="schedule-update.php?schedule_id=<?= $schedule['schedule_id']; ?>" class="btn btn-success btn-sm">Update</a>

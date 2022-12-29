@@ -43,7 +43,7 @@ require 'dbcon.php';
                             $departure_time = $row['departure_time'];
                             $arrival_time = $row['arrival_time'];
                             $current_airline_id = $row['airline_id'];
-
+                            $price = $row['price'];
 
                             if(mysqli_num_rows($query_run) > 0)
                             {
@@ -140,6 +140,11 @@ require 'dbcon.php';
                                                     }
                                                 ?>
                                             </select>
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label>Price :</label>
+                                        <input type="number" value="<?php echo $price; ?>" name="price">
                                     </div>
 
                                     <div class="mb-3">

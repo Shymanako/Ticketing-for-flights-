@@ -54,6 +54,10 @@ require 'dbcon.php';
                                         <label> Payment Amount </label>
                                         <p class="form-control"><?=$payment['payment_amount'];?></p>
                                     </div>
+                                    <div class="mb-3">
+                                        <label> CVC </label>
+                                        <p class="form-control"><?=$payment['cvc'];?></p>
+                                    </div>
 
                                 <?php
                             }

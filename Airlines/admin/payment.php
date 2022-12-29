@@ -57,6 +57,8 @@
                         <th>Reservation ID</th>
                         <th>Payment Method</th>
                         <th>Payment Amount</th>
+                        <th>CVC</th>
+                        <th>Expiry Date</th>
                         <th>Action</th>
                       </tr>
                   </thead>
@@ -75,6 +77,8 @@
                             <td><?= $payment['reservation_id']; ?></td>
                             <td><?= $payment['payment_method']; ?></td>
                             <td><?= $payment['payment_amount']; ?></td>
+                            <td><?= $payment['cvc']; ?></td>
+                            <td><?= $payment['expiry_date']; ?></td>
                             <td>
                               <a href="payment-view.php?payment_id=<?= $payment['payment_id']; ?>" class="btn btn-info btn-sm">View</a>
                               <a href="payment-update.php?payment_id=<?= $payment['payment_id']; ?>" class="btn btn-success btn-sm">Update</a>

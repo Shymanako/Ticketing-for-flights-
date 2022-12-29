@@ -67,11 +67,11 @@ require 'admin/dbcon.php';
             }
         </script>
 
-        <form action="bookform4.php" name="Form" onsubmit="return validateForm()" autocomplete="off" method="post" class="bookform" required>
+        <form action="bookform3.php" name="Form" onsubmit="return validateForm()" autocomplete="off" method="post" class="bookform" required>
             <div class="flex">
                 <?php
 
-                $query = "Select * from reservation order by reservation_id desc limit 1";
+                $query = "Select reservation.reservation_id, reservation.flight_id, flight.flight_id, schedule.schedule_id, schedule.price from reservation left join flight on reservation.flight_id = flight.flight_id left join schedule on flight.schedule_id = schedule.schedule_id order by reservation_id desc limit 1";
                 $query_run = mysqli_query($con, $query);
 
                 if (mysqli_num_rows($query_run) > 0) {
@@ -85,6 +85,7 @@ require 'admin/dbcon.php';
             </div>
 
             <div class="flex">
+                
                 <div class="inputBox">
                     <span>Payment Method : <span style="color:red;">*</span> </span>
                     <input list="payment_method" placeholder="Select Payment Method" name="payment_method">
@@ -93,9 +94,15 @@ require 'admin/dbcon.php';
                         <option value="Mastercard">
                     </datalist>
                 </div>
+
+                <div class="inputBox">
+                    <span>CVC Code : <span style="color:red;">*</span> </span>
+                    <input type="text" placeholder="Enter CVC Code" name="cvc">
+                </div>
+
                 <div class="inputBox">
                     <span>Payment Amount : <span style="color:red;">*</span> </span>
-                    <input type="text" placeholder="Payment Amont" name="payment_amount">
+                    <input type="text" value="<?= $reservation['price']; ?>" name="payment_amount">
                 </div>
             </div>
             <div>
@@ -107,7 +114,7 @@ require 'admin/dbcon.php';
                     }
                 }
                 ?>
-                <button type="submit" name="save_reservation" value="<?= $flight['flight_id']; ?>" class="btn">Submit</a>
+                <button type="submit" name="proceed_payment" value="<?= $reservation['reservation_id']; ?>" class="btn">Submit</a>
             </div>
 
 

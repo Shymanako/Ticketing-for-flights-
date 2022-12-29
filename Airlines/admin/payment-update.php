@@ -42,6 +42,7 @@ require 'dbcon.php';
                             $current_reservation_id = $row['reservation_id'];
                             $payment_method = $row['payment_method'];
                             $payment_amount = $row['payment_amount'];
+                            $cvc = $row['cvc'];
 
                             if(mysqli_num_rows($query_run) > 0)
                             {
@@ -103,6 +104,10 @@ require 'dbcon.php';
                                     <div class="mb-3">
                                         <label>Payment Amount: </label>
                                         <input type="number" value="<?php echo $payment_amount; ?>" name="payment_amount">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label>CVC: </label>
+                                        <input type="number" value="<?php echo $cvc; ?>" name="cvc">
                                     </div>
 
                                     <div class="mb-3">

@@ -102,7 +102,7 @@ require 'admin/dbcon.php';
 
             if (isset($_GET['reservation_id'])) {
                 $reservation_id2 = mysqli_real_escape_string($con, $_GET['reservation_id']);
-                $query2 = "Select reservation.reservation_id, reservation.passenger_id, reservation.flight_id, flight.flight_id, flight.schedule_id, schedule.schedule_id, direction.direction_id, airline.airline_id, airline.airline_name, direction.origin_airport_code, direction.destination_airport_code, schedule.direction_id, schedule.departure_time, schedule.arrival_time, schedule.airline_id from reservation left join flight on reservation.flight_id = flight.flight_id left join schedule on flight.schedule_id = schedule.schedule_id left join direction on schedule.direction_id = direction.direction_id left join airline on schedule.airline_id = airline.airline_id where reservation.reservation_id = '$reservation_id2'";
+                $query2 = "Select reservation.reservation_id, reservation.passenger_id, reservation.flight_id, flight.flight_id, flight.schedule_id, schedule.schedule_id, direction.direction_id, airline.airline_id, airline.airline_name, direction.origin_airport_code, direction.destination_airport_code, schedule.direction_id, schedule.departure_time, schedule.arrival_time, schedule.airline_id, schedule.price from reservation left join flight on reservation.flight_id = flight.flight_id left join schedule on flight.schedule_id = schedule.schedule_id left join direction on schedule.direction_id = direction.direction_id left join airline on schedule.airline_id = airline.airline_id where reservation.reservation_id = '$reservation_id2'";
                 $query_run2 = mysqli_query($con, $query2);
 
                 if (mysqli_num_rows($query_run2) > 0) {
@@ -131,9 +131,13 @@ require 'admin/dbcon.php';
                     <span>Airline : </span>
                     <input type="text" name="airline_name" value="<?= $reservation2['airline_name']; ?>">
                 </div>
+                <div class="inputBox">
+                    <span>Price : </span>
+                    <input type="text" name="price" value="<?= $reservation2['price']; ?>">
+                </div>
             </div>
 
-            <button type="submit" name="proceed_payment" value="<?= $reservation2['reservation_id'];?>" class="btn">Submit</a>
+            <button type="submit" value="<?= $reservation2['reservation_id'];?>" class="btn">Submit</a>
 
         </form>
 

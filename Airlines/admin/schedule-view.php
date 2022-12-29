@@ -57,6 +57,10 @@ require 'dbcon.php';
                                         <label> Airline ID </label>
                                         <p class="form-control"><?=$schedule['airline_id'];?></p>
                                     </div>
+                                    <div class="mb-3">
+                                        <label> Price </label>
+                                        <p class="form-control"><?=$schedule['price'];?></p>
+                                    </div>
 
                                 <?php
                             }

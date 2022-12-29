@@ -136,6 +136,11 @@ require 'dbcon.php';
                             </div>
 
                             <div class="mb-3">
+                                <label>Price :</label>
+                                <input type="number" name="price">
+                            </div>
+
+                            <div class="mb-3">
                                 <button type="submit" name="save_schedule" class="btn btn-primary">Save Schedule</button>
                             </div>
 

@@ -28,35 +28,47 @@ require 'admin/message.php';
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
-                        <h4>Flight Details
+                        <h4>Payment Details
                         </h4>
                     </div>
                     <div class="card-body">
 
                         <?php
 
-                        $query = "Select * from reservation order by reservation_id desc limit 1";
+                        $query = "Select * from payment order by payment_id desc limit 1";
                         $query_run = mysqli_query($con, $query);
 
                         if (mysqli_num_rows($query_run) > 0) {
-                            $reservation = mysqli_fetch_array($query_run);
+                            $payment = mysqli_fetch_array($query_run);
                         ?>
 
-                            <input type="hidden" name="reservation_id" value="<?= $reservation['reservation_id']; ?>">
+                            <input type="hidden" name="payment_id" value="<?= $payment['payment_id']; ?>">
                             <div class="mb-3">
-                                <label> Reservation Details </label>
+                                <label> Payment ID </label>
                                 <p class="form-control">
-                                    <?= $reservation['passenger_id']; ?>
+                                    <?= $payment['payment_id']; ?>
                                 </p>
-                                <p>To</p>
+                                <label> Reservation ID </label>
                                 <p class="form-control">
-                                    <?= $reservation['flight_id']; ?>
+                                    <?= $payment['reservation_id']; ?>
+                                </p>
+                                <label> Payment Method </label>
+                                <p class="form-control">
+                                    <?= $payment['payment_method']; ?>
+                                </p>
+                                <label> Payment Amount </label>
+                                <p class="form-control">
+                                    <?= $payment['payment_amount']; ?>
+                                </p>
+                                <label> CVC Code </label>
+                                <p class="form-control">
+                                    <?= $payment['cvc']; ?>
                                 </p>
                             </div>
 
                             <td>
                                 <a href="book3.php?reservation_id=<?= $reservation['reservation_id']; ?>" class="btn btn-info btn-sm">Confirm</a>
-                                <a href="book2.php" class="btn">Cancel</a>
+                                <a href="book4.php" class="btn">Cancel</a>
                             </td>
 
                         <?php

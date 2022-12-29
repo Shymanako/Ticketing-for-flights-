@@ -160,8 +160,10 @@ if(isset($_POST['update_payment'])){
     $reservation_id = mysqli_real_escape_string($con, $_POST['reservation_id']);
     $payment_method = mysqli_real_escape_string($con, $_POST['payment_method']);
     $payment_amount = mysqli_real_escape_string($con, $_POST['payment_amount']);
+    $cvc = mysqli_real_escape_string($con, $_POST['cvc']);
 
-    $query = "UPDATE payment SET reservation_id='$reservation_id', payment_method='$payment_method', payment_amount='$payment_amount' WHERE payment_id='$payment_id'";
+
+    $query = "UPDATE payment SET reservation_id='$reservation_id', payment_method='$payment_method', payment_amount='$payment_amount', cvc='$cvc' WHERE payment_id='$payment_id'";
     $query_run = mysqli_query($con, $query);
 
     if($query_run){
@@ -182,8 +184,9 @@ if(isset($_POST['save_payment'])){
     $reservation_id = mysqli_real_escape_string($con, $_POST['reservation_id']);
     $payment_method = mysqli_real_escape_string($con, $_POST['payment_method']);
     $payment_amount = mysqli_real_escape_string($con, $_POST['payment_amount']);
+    $cvc = mysqli_real_escape_string($con, $_POST['cvc']);
 
-    $query = "INSERT INTO payment (reservation_id, payment_method, payment_amount) VALUES ('$reservation_id', '$payment_method', '$payment_amount')";
+    $query = "INSERT INTO payment (reservation_id, payment_method, payment_amount, cvc) VALUES ('$reservation_id', '$payment_method', '$payment_amount'. '$cvc')";
 
     $query_run = mysqli_query($con, $query);
     if($query_run){
@@ -368,8 +371,9 @@ if(isset($_POST['save_schedule'])){
     $departure_time = mysqli_real_escape_string($con, $_POST['departure_time']);
     $arrival_time = mysqli_real_escape_string($con, $_POST['arrival_time']);
     $airline_id = mysqli_real_escape_string($con, $_POST['airline_id']);
+    $price = mysqli_real_escape_string($con, $_POST['price']);
 
-    $query = "INSERT INTO schedule (direction_id, departure_time, arrival_time, airline_id) VALUES ('$direction_id', '$departure_time', '$arrival_time', '$airline_id')";
+    $query = "INSERT INTO schedule (direction_id, departure_time, arrival_time, airline_id, price) VALUES ('$direction_id', '$departure_time', '$arrival_time', '$airline_id', '$price')";
 
     $query_run = mysqli_query($con, $query);
     if($query_run){
@@ -411,8 +415,9 @@ if(isset($_POST['update_schedule'])){
     $departure_time = mysqli_real_escape_string($con, $_POST['departure_time']);
     $arrival_time = mysqli_real_escape_string($con, $_POST['arrival_time']);
     $airline_id = mysqli_real_escape_string($con, $_POST['airline_id']);
+    $price = mysqli_real_escape_string($con, $_POST['price']);
 
-    $query = "UPDATE schedule SET direction_id='$direction_id', departure_time='$departure_time', arrival_time='$arrival_time', airline_id='$airline_id' where schedule_id='$schedule_id' ";
+    $query = "UPDATE schedule SET direction_id='$direction_id', departure_time='$departure_time', arrival_time='$arrival_time', airline_id='$airline_id', price='$price' where schedule_id='$schedule_id' ";
     $query_run = mysqli_query($con, $query);
 
     if($query_run){

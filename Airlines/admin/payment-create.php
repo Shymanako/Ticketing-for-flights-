@@ -95,6 +95,11 @@ require 'dbcon.php';
                                     <label> Payment Amount: </label>
                                     <input type="number" name="payment_amount" placeholder="Enter payment amount" class="form-control">
                                 </div>
+                                
+                                <div class="mb-3">
+                                    <label> CVC: </label>
+                                    <input type="number" name="cvc" placeholder="Enter cvc" class="form-control">
+                                </div>
 
                                 <div class="mb-3">
                                     <button type="submit" name="save_payment" class="btn btn-primary">Save Payment</button>
