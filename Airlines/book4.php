@@ -71,57 +71,31 @@ require 'admin/dbcon.php';
             <div class="flex">
                 <?php
 
-                $query = "Select * from passenger order by passenger_id desc limit 1";
+                $query = "Select * from reservation order by reservation_id desc limit 1";
                 $query_run = mysqli_query($con, $query);
 
                 if (mysqli_num_rows($query_run) > 0) {
-                    foreach ($query_run as $passenger) {
+                    foreach ($query_run as $reservation) {
                     }
                 }
                 ?>
-                <input type="hidden" name="passenger_id" value="<?= $passenger['passenger_id']; ?>">
+                <input type="hidden" name="reservation_id" value="<?= $reservation['reservation_id']; ?>">
 
-                
+
             </div>
 
             <div class="flex">
                 <div class="inputBox">
-                    <span>Select Flight : <span style="color:red;">*</span> </span>
-                    <select name="flight_id">
-                        <?php
-                        // php code to display available airports from database
-                        // query to select all available airports in database
-                        $query = "SELECT flight.flight_id, schedule.schedule_id, schedule.direction_id, direction.origin_airport_code, direction.destination_airport_code from flight left join schedule on flight.schedule_id = schedule.schedule_id left join direction on schedule.direction_id = direction.direction_id order by flight.schedule_id;";
-
-                        // Executing query
-                        $query_run = mysqli_query($con, $query);
-
-                        // count rows to check whether we have airport or not
-                        $count = mysqli_num_rows($query_run);
-
-                        // if count is greater than 0 we have airport else we do not have an airport
-                        if ($count > 0) {
-                            // we have airport
-                            while ($row = mysqli_fetch_assoc($query_run)) {
-                                // get the detail of airport
-                                $flight_id = $row['flight_id'];
-                                $schedule_id = $row['schedule_id'];
-                                $direction_id = $row['direction_id'];
-                                $origin_airport_code = $row['origin_airport_code'];
-                                $destination_airport_code = $row['destination_airport_code'];
-
-                        ?>
-                                <option value="<?php echo $flight_id; ?>"><?php echo $origin_airport_code; ?> to <?php echo $destination_airport_code; ?></option>
-                            <?php
-                            }
-                        } else {
-                            // we do not have airport
-                            ?>
-                            <option value="0">No Flight Found</option>
-                        <?php
-                        }
-                        ?>
-                    </select>
+                    <span>Payment Method : <span style="color:red;">*</span> </span>
+                    <input list="payment_method" placeholder="Select Payment Method" name="payment_method">
+                    <datalist id="payment_method">
+                        <option value="Visa">
+                        <option value="Mastercard">
+                    </datalist>
+                </div>
+                <div class="inputBox">
+                    <span>Payment Amount : <span style="color:red;">*</span> </span>
+                    <input type="text" placeholder="Payment Amont" name="payment_amount">
                 </div>
             </div>
             <div>
@@ -133,7 +107,7 @@ require 'admin/dbcon.php';
                     }
                 }
                 ?>
-                <button type="submit" name="save_reservation" value="<?= $flight['flight_id'];?>" class="btn">Submit</a>
+                <button type="submit" name="save_reservation" value="<?= $flight['flight_id']; ?>" class="btn">Submit</a>
             </div>
 
 
