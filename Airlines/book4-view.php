@@ -64,6 +64,10 @@ require 'admin/message.php';
                                 <p class="form-control">
                                     <?= $payment['cvc']; ?>
                                 </p>
+                                <label> Expiry Date </label>
+                                <p class="form-control">
+                                    <?= $payment['expiry_date']; ?>
+                                </p>
                             </div>
 
                             <td>

@@ -60,7 +60,9 @@ require 'admin/dbcon.php';
                 var b = document.forms["Form"]["reservation_id"].value;
                 var c = document.forms["Form"]["payment_method"].value;
                 var d = document.forms["Form"]["payment_amount"].value;
-                if (a == null || a == "", b == null || b == "", c == null || c == "", d == null || d == "") {
+                var e = document.forms["Form"]["cvc"].value;
+                var f = document.forms["Form"]["expiry_date"].value;
+                if (a == null || a == "", b == null || b == "", c == null || c == "", d == null || d == "", e == null || e == "", f == null || f == "") {
                     alert("Please Fill In All Required Details");
                     return false;
                 }
@@ -85,7 +87,7 @@ require 'admin/dbcon.php';
             </div>
 
             <div class="flex">
-                
+
                 <div class="inputBox">
                     <span>Payment Method : <span style="color:red;">*</span> </span>
                     <input list="payment_method" placeholder="Select Payment Method" name="payment_method">
@@ -96,27 +98,23 @@ require 'admin/dbcon.php';
                 </div>
 
                 <div class="inputBox">
+                    <span>Payment Amount : <span style="color:red;">*</span> </span>
+                    <input type="text" value="<?= $reservation['price']; ?>" name="payment_amount">
+                </div>
+
+                <div class="inputBox">
                     <span>CVC Code : <span style="color:red;">*</span> </span>
                     <input type="text" placeholder="Enter CVC Code" name="cvc">
                 </div>
 
                 <div class="inputBox">
-                    <span>Payment Amount : <span style="color:red;">*</span> </span>
-                    <input type="text" value="<?= $reservation['price']; ?>" name="payment_amount">
+                    <span>Expiry Date : <span style="color:red;">*</span> </span>
+                    <input type="month" value="<?= date('F-Y') ?>" name="expiry_date">
                 </div>
-            </div>
-            <div>
-                <?php
-                $query = "SELECT * FROM flight";
-                $query_run = mysqli_query($con, $query);
-                if (mysqli_num_rows($query_run) > 0) {
-                    foreach ($query_run as $flight) {
-                    }
-                }
-                ?>
-                <button type="submit" name="proceed_payment" value="<?= $reservation['reservation_id']; ?>" class="btn">Submit</a>
+
             </div>
 
+            <button type="submit" name="proceed_payment" value="<?= $reservation['reservation_id']; ?>" class="btn">Submit</a>
 
         </form>
     </section>

@@ -7,8 +7,10 @@ if(isset($_POST['proceed_payment'])){
     $payment_method = mysqli_real_escape_string($con, $_POST['payment_method']);
     $payment_amount = mysqli_real_escape_string($con, $_POST['payment_amount']);
     $cvc = mysqli_real_escape_string($con, $_POST['cvc']);
+    $expiry_date = mysqli_real_escape_string($con, $_POST['expiry_date']);
 
-    $query = "INSERT INTO payment (reservation_id, payment_method, payment_amount, cvc) VALUES ('$reservation_id', '$payment_method', '$payment_amount', '$cvc')";
+
+    $query = "INSERT INTO payment (reservation_id, payment_method, payment_amount, cvc, expiry_date) VALUES ('$reservation_id', '$payment_method', '$payment_amount', '$cvc', '$expiry_date')";
 
     $query_run = mysqli_query($con, $query);
     if($query_run){
