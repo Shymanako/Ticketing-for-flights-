@@ -109,7 +109,7 @@ require 'admin/dbcon.php';
 
                 <div class="inputBox">
                     <span>Expiry Date : <span style="color:red;">*</span> </span>
-                    <input type="month" value="<?= date('F-Y') ?>" name="expiry_date">
+                    <input type="date" value="<?= date('F-Y') ?>" name="expiry_date">
                 </div>
 
             </div>

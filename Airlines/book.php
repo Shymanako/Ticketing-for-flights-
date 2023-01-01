@@ -72,7 +72,7 @@ include('login-check.php');
         </script>
 
 
-        <form name="Form" action="bookform.php" autocomplete="off" onsubmit="return validateForm()" method="post" class="bookform" required>-
+        <form name="Form" action="bookform.php" autocomplete="off" onsubmit="return validateForm()" method="post" class="bookform" required>
 
             <div class="flex">
                 <div class="inputBox">
