@@ -144,14 +144,9 @@ require 'admin/dbcon.php';
 
     <section class="home-trips">
 
-        <h1 class="heading-title"> popular places </h1>
+        <h1 class="heading-title"> Available Flights </h1>
 
         <div class="box-container">
-
-            <div class="box">
-                <div class="image">
-                    <img src="img/manila-philippines.jpg" alt="">
-                </div>
                 <div class="content">
                     <?php
                     $query = "SELECT * FROM direction limit 3";
