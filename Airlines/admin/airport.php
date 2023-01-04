@@ -55,6 +55,7 @@
                       <tr>
                         <th>Airport Code</th>
                         <th>Airport Name</th>
+                        <th>Action</th>
                       </tr>
                   </thead>
                   <tbody>

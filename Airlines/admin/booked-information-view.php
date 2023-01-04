@@ -1,42 +1,39 @@
 <?php
-require 'admin/dbcon.php';
-require 'admin/message.php';
-
+require 'dbcon.php';
 ?>
 
 <!doctype html>
 <html lang="en">
-
-<head>
+  <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+  
+    <title>View</title>
 
-    <title>Passenger Data</title>
-
-</head>
-
-<body>
+  </head>
+  <body>
 
 
     <div class="container mt-5">
 
-        <?php include('admin/message.php'); ?>
+        <?php include('message.php'); ?>
 
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
                         <h4>Booking Details
+                            <a href="booked-information.php" class="btn btn-danger float-end">Back</a>
                         </h4>
                     </div>
+                    <div class="card-body">
 
-                    <form id="act-container" action="about.php" method='POST' class="d-inline">
-                        <div class="card-body">
+                        <?php
 
-                            <?php
-
+                        if(isset($_GET['booked_id'])){
+                            $booked_id = mysqli_real_escape_string($con, $_GET['booked_id']);
                             $query = "SELECT booked_information.booked_id, booked_information.reservation_id, 
                             booked_information.passenger_id, booked_information.flight_id, booked_information.payment_id, 
                             reservation.reservation_id, reservation.passenger_id, reservation.flight_id, passenger.passenger_id, 
@@ -49,14 +46,15 @@ require 'admin/message.php';
                             passenger.passenger_id left join flight on booked_information.flight_id = flight.flight_id left join schedule on 
                             flight.schedule_id = schedule.schedule_id left join direction on schedule.direction_id = direction.direction_id 
                             left join airline on schedule.airline_id = airline.airline_id left join payment on booked_information.payment_id = 
-                            payment.payment_id order by booked_id desc limit 1";
+                            payment.payment_id where booked_information.booked_id = '$booked_id' ";
                             $query_run = mysqli_query($con, $query);
 
-                            if (mysqli_num_rows($query_run) > 0) {
+                            if(mysqli_num_rows($query_run) > 0)
+                            {
                                 $booked_info = mysqli_fetch_array($query_run);
-                            ?>
+                                ?>
 
-                                <div class="mb-3">
+                                    <div class="mb-3">
                                     <label> Reservation ID </label>
                                     <p class="form-control">
                                         <?= $booked_info['reservation_id']; ?>
@@ -90,7 +88,6 @@ require 'admin/message.php';
                                     <p class="form-control">
                                         <?= $booked_info['email']; ?>
                                     </p>
-
                                     <label> Flight ID </label>
                                     <p class="form-control">
                                         <?= $booked_info['flight_id']; ?>
@@ -115,7 +112,6 @@ require 'admin/message.php';
                                     <p class="form-control">
                                         <?= $booked_info['price']; ?>
                                     </p>
-
                                     <label> Payment ID </label>
                                     <p class="form-control">
                                         <?= $booked_info['payment_id']; ?>
@@ -138,27 +134,25 @@ require 'admin/message.php';
                                     </p>
                                 </div>
 
-                                <!-- confirm -->
-                                <button type="submit" name="finish_booking" value="<?= $booked_info['booked_id']; ?>" class="btn btn-info btn-sm">Finish</a>
-                            <?php
-                            } else {
+                                <?php
+                            }
+                            else
+                            {
                                 echo "<h4>No ID Found</h4>";
                             }
-                            ?>
-                        </div>  
-                    </form>
+                        }
 
+                        ?>
 
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
     </div>
 
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
 
-
-</body>
-
+    
+  </body>
 </html>

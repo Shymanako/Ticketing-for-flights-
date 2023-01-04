@@ -263,6 +263,26 @@ if(isset($_POST['delete_airline'])){
     }
 }
 
+if(isset($_POST['delete_airport'])){
+    $airport_code = mysqli_real_escape_string($con, $_POST['delete_airport']);
+
+    $query = "DELETE FROM airport WHERE airport_code='$airport_code'";
+    $query_run = mysqli_query($con, $query);
+    
+    if($query_run){
+
+        $_SESSION['message'] = "Airport Deleted Successfully";
+        header("Location: airport.php");
+        exit(0);
+    }
+    else{
+
+        $_SESSION['message'] = "Airport Deletion Failed";
+        header("Location: airport.php");
+        exit(0);
+    }
+}
+
 if(isset($_POST['save_airport'])){
     $airport_code = mysqli_real_escape_string($con, $_POST['airport_code']);
     $airport_name = mysqli_real_escape_string($con, $_POST['airport_name']);
@@ -491,6 +511,26 @@ if(isset($_POST['delete_reservation'])){
 
         $_SESSION['message'] = "Reservation Deletion Failed";
         header("Location: reservation.php");
+        exit(0);
+    }
+}
+
+if(isset($_POST['delete_booked_information'])){
+    $booked_id = mysqli_real_escape_string($con, $_POST['delete_booked_information']);
+
+    $query = "DELETE FROM booked_information WHERE booked_id='$booked_id'";
+    $query_run = mysqli_query($con, $query);
+    
+    if($query_run){
+
+        $_SESSION['message'] = "Booked Information Deleted Successfully";
+        header("Location: booked-information.php");
+        exit(0);
+    }
+    else{
+
+        $_SESSION['message'] = "Booked Information Deletion Failed";
+        header("Location: booked-information.php");
         exit(0);
     }
 }

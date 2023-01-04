@@ -77,6 +77,12 @@
                             <td><?= $booked_information['passenger_id']; ?></td>
                             <td><?= $booked_information['flight_id']; ?></td>
                             <td><?= $booked_information['payment_id']; ?></td>
+                            <td>
+                              <a href="booked-information-view.php?booked_id=<?= $booked_information['booked_id']; ?>" class="btn btn-info btn-sm">View</a>
+                              <form action="code.php" method='POST' class="d-inline">
+                                <button type="submit" name="delete_booked_information" value="<?=$booked_information['booked_id']; ?>" class="btn btn-danger btn-sm">Delete</a>
+                              </form>
+                            </td>
                           </tr>
                           <?php
                         }
