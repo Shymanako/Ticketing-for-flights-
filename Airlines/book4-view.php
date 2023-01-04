@@ -11,7 +11,8 @@ require 'admin/message.php';
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous"> -->
+    <link rel="stylesheet" href="css/book1-view.css">
 
     <title>Passenger Data</title>
 
@@ -28,7 +29,8 @@ require 'admin/message.php';
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
-                        <h4>Payment Details
+                         <!-- PROMPT double check entry -->
+                        <h4 id="prompt-head">Payment Details
                         </h4>
                     </div>
 
@@ -48,7 +50,7 @@ require 'admin/message.php';
                                 <input type="hidden" name="reservation_id" value="<?= $payment['reservation_id']; ?>">
                                 <input type="hidden" name="flight_id" value="<?= $payment['flight_id']; ?>">
 
-                                <div class="mb-3">
+                                <!-- <div class="mb-3">
                                     <label> Reservation ID </label>
                                     <p class="form-control">
                                         <?= $payment['reservation_id']; ?>
@@ -69,10 +71,90 @@ require 'admin/message.php';
                                     <p class="form-control">
                                         <?= $payment['expiry_date']; ?>
                                     </p>
-                                </div>
+                                </div> -->
 
                                 <!-- confirm -->
-                                <button type="submit" name="save_book" value="<?= $payment['payment_id']; ?>" class="btn btn-info btn-sm">Confirm</a>
+                                <!-- <a type="submit" name="save_book" value="<?= $payment['payment_id']; ?>" class="btn btn-info btn-sm">Confirm</a> -->
+
+                                <div id="main-card">
+
+                                    <!-- entry container -->
+                                    <div id="entry-container">
+
+                                        <!-- indv entries -->
+
+                                            <!-- Reservation ID -->
+                                            <div class="indv-container">
+
+                                                <!-- label -->
+                                                <h2 class="label">Reservation ID:</h2>
+
+                                                <!-- entry -->
+                                                <h4 class="entry"><?= $payment['reservation_id']; ?></h4>
+
+                                            </div>
+
+                                            <!-- Payment Method -->
+                                            <div class="indv-container">
+
+                                                <!-- label -->
+                                                <h2 class="label">Payment Method:</h2>
+
+                                                <!-- entry -->
+                                                <h4 class="entry"><?= $payment['payment_method']; ?></h4>
+
+                                            </div>
+                                            
+                                            <!-- Payment Amount -->
+                                            <div class="indv-container">
+
+                                                <!-- label -->
+                                                <h2 class="label">Payment Amount:</h2>
+
+                                                <!-- entry -->
+                                                <h4 class="entry"><?= $payment['payment_amount']; ?></h4>
+
+                                            </div>
+                                            
+                                            <!-- CVC Code -->
+                                            <div class="indv-container">
+
+                                                <!-- label -->
+                                                <h2 class="label">CVC Code:</h2>
+
+                                                <!-- entry -->
+                                                <h4 class="entry"><?= $payment['cvc']; ?></h4>
+
+                                            </div>
+                                            
+                                            <!-- Expiry Date -->
+                                            <div class="indv-container">
+
+                                                <!-- label -->
+                                                <h2 class="label">Expiry Date:</h2>
+
+                                                <!-- entry -->
+                                                <h4 class="entry"><?= $payment['expiry_date']; ?></h4>
+
+                                            </div>
+
+                                    </div>
+
+                                    <!-- actions form -->
+                                    <form id="act-container"  action="delete.php" method='POST' class="d-inline">
+
+                                        <!-- confirm -->
+                                        <a id="confirm-btn" href="book5.php?reservation_id=<?= $reservation['reservation_id']; ?>" class="btn btn-info btn-sm">
+                                                Confirm
+                                        </a>
+
+                                        <!-- Cancel -->
+                                        <button id="cancel-btn" type="submit" name="delete_passenger" value="<?= $passenger['passenger_id']; ?>" class="btn" onclick="history.back()">Cancel</button>
+
+                                    </form>
+
+                                </div>
+
 
                             <?php
                             } else {

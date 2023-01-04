@@ -11,7 +11,8 @@ require 'admin/message.php';
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous"> -->
+    <link rel="stylesheet" href="css/book1-view.css">
 
     <title>Passenger Data</title>
 
@@ -28,8 +29,8 @@ require 'admin/message.php';
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
-                        <h4>Flight Details
-                        </h4>
+                        <!-- PROMPT double check entry -->
+                        <h4 id="prompt-head">Double Check Your Entries </h4>
                     </div>
                     <div class="card-body">
 
@@ -43,7 +44,7 @@ require 'admin/message.php';
                         ?>
 
                             <input type="hidden" name="reservation_id" value="<?= $reservation['reservation_id']; ?>">
-                            <div class="mb-3">
+                            <!-- <div class="mb-3">
                                 <label> Flight ID </label>
                                 <p class="form-control">
                                     <?= $reservation['flight_id']; ?>
@@ -73,7 +74,98 @@ require 'admin/message.php';
                             <td>
                                 <a href="book3.php?reservation_id=<?= $reservation['reservation_id']; ?>" class="btn btn-info btn-sm">Confirm</a>
                                 <a href="book2.php" class="btn">Cancel</a>
-                            </td>
+                            </td> -->
+
+                            <!-- main card -->
+                            <div id="main-card">
+
+                                <!-- entry container -->
+                                <div id="entry-container">
+
+                                    <!-- indv entries -->
+
+                                        <!-- flight id -->
+                                        <div class="indv-container">
+
+                                            <!-- label -->
+                                            <h2 class="label">Flight ID:</h2>
+
+                                            <!-- entry -->
+                                            <h4 class="entry"><?= $reservation['flight_id']; ?></h4>
+
+                                        </div>
+
+                                        <!-- origin port code -->
+                                        <div class="indv-container">
+
+                                            <!-- label -->
+                                            <h2 class="label">Origin Airport Code:</h2>
+
+                                            <!-- entry -->
+                                            <h4 class="entry"><?= $reservation['origin_airport_code']; ?></h4>
+
+                                        </div>
+                                        
+                                        <!-- Destination Airport Code -->
+                                        <div class="indv-container">
+
+                                            <!-- label -->
+                                            <h2 class="label">Destination Airport Code:</h2>
+
+                                            <!-- entry -->
+                                            <h4 class="entry"><?= $reservation['destination_airport_code']; ?></h4>
+
+                                        </div>
+                                        
+                                        <!-- Departure Time -->
+                                        <div class="indv-container">
+
+                                            <!-- label -->
+                                            <h2 class="label">Departure Time:</h2>
+
+                                            <!-- entry -->
+                                            <h4 class="entry"><?= $reservation['departure_time']; ?></h4>
+
+                                        </div>
+                                        
+                                        <!-- Arrival Time -->
+                                        <div class="indv-container">
+
+                                            <!-- label -->
+                                            <h2 class="label">Arrival Time:</h2>
+
+                                            <!-- entry -->
+                                            <h4 class="entry"><?= $reservation['arrival_time']; ?></h4>
+
+                                        </div>
+                                        
+                                        <!-- Price -->
+                                        <div class="indv-container">
+
+                                            <!-- label -->
+                                            <h2 class="label">Price:</h2>
+
+                                            <!-- entry -->
+                                            <h4 class="entry"><?= $reservation['price']; ?></h4>
+
+                                        </div>
+
+                                </div>
+
+                                <!-- actions form -->
+                                <form id="act-container"  action="delete.php" method='POST' class="d-inline">
+
+                                    <!-- confirm -->
+                                    <a id="confirm-btn" href="book3.php?reservation_id=<?= $reservation['reservation_id']; ?>" class="btn btn-info btn-sm">
+                                            Confirm
+                                    </a>
+
+                                    <!-- Cancel -->
+                                    <button id="cancel-btn" type="submit" name="delete_passenger" value="<?= $passenger['passenger_id']; ?>" class="btn" onclick="history.back()">Cancel</button>
+
+                                </form>
+
+                            </div>
 
                         <?php
                         } else {
