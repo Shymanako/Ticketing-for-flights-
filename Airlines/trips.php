@@ -84,14 +84,14 @@ require 'admin/dbcon.php';
                     foreach ($query_run2 as $direction2) {
             ?>
 
-                        <div class="box">
-                            <a href="" value="origin_airport_code"><?= $direction['airport_name']; ?></a> to
-                            <a href="" value="destination_airport_code"><?= $direction2['airport_name']; ?></a>
-                            <td>
-                                <a href="book.php" class="btn">book here!</a>
-                            </td>
+                <div class="box">
+                    <a href="" value="origin_airport_code"><?= $direction['airport_name']; ?></a> to
+                    <a href="" value="destination_airport_code"><?= $direction2['airport_name']; ?></a>
+                    <td>
+                        <a href="book.php" class="btn">book here!</a>
+                    </td>
 
-                        </div>
+                </div>
 
             <?php
                     }
