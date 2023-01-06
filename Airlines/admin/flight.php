@@ -82,14 +82,14 @@ require 'dbcon.php';
                       <td>
                         <?php
                         // check whether image is available or not
-                        if ($image) {
+                        if ($image=="") {
                           // display image
-                        ?>
-                          <img src="<?php echo 'http://localhost/Ticketing-for-flights-/Airlines/'; ?>img/flight/<?php echo $image; ?>" width="100px">
-                        <?php
+                          echo "Image not added";
                         } else {
                           // Display message
-                          echo "Image not added";
+                          ?>
+                          <img src="<?php echo 'http://localhost/Ticketing-for-flights-/Airlines/'; ?>img/flight/<?php echo $image; ?>" width="100px">
+                        <?php
                         }
                         ?>
                       </td>

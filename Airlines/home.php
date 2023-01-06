@@ -148,12 +148,14 @@ require 'admin/dbcon.php';
 
         <div class="box-container">
             <?php
-            $query = "SELECT flight.flight_id, schedule.schedule_id, schedule.direction_id, direction.origin_airport_code, direction.destination_airport_code, airport.airport_name from flight left join schedule on flight.schedule_id = schedule.schedule_id left join direction on schedule.direction_id = direction.direction_id left join airport on direction.origin_airport_code = airport.airport_code limit 3";
+            $query = "SELECT flight.flight_id, flight.image, flight.description, schedule.schedule_id, schedule.direction_id, direction.origin_airport_code, direction.destination_airport_code, airport.airport_name from flight left join schedule on flight.schedule_id = schedule.schedule_id left join direction on schedule.direction_id = direction.direction_id left join airport on direction.origin_airport_code = airport.airport_code limit 3";
             $query_run = mysqli_query($con, $query);
 
             if (mysqli_num_rows($query_run) > 0) {
                 while ($row = mysqli_fetch_assoc($query_run)) {
                     $flight_id = $row['flight_id'];
+                    $image = $row['image'];
+                    $description = $row['description'];
                     $origin_airport_code = $row['origin_airport_code'];
                     $destination_airport_code = $row['destination_airport_code'];
                     $airport_name = $row['airport_name'];
@@ -173,12 +175,24 @@ require 'admin/dbcon.php';
                     $origin_airport_code = $row2['origin_airport_code'];
                     $destination_airport_code = $row2['destination_airport_code'];
                     $airport_name = $row2['airport_name'];
-                    foreach ($query_run2 as $direction2) {
             ?>
 
                         <div class="box">
-                            <a href="" value="origin_airport_code"><?= $direction['airport_name']; ?></a> to
-                            <a href="" value="destination_airport_code"><?= $direction2['airport_name']; ?></a>
+                            <a href="" value="flight_id"><?php echo $flight_id; ?>></a>
+                            <?php
+                            if ($image == "") {
+                                //Image not Available
+                                echo "<div class='error'>Image not found.</div>";
+                            } else {
+                                //Image Available
+                            ?>
+                                <img src="<?php echo 'http://localhost/Ticketing-for-flights-/Airlines/'; ?>img/flight/<?php echo $image; ?>" width="400px">
+                            <?php
+                            }
+
+                            ?>
+                            <a href="" value="origin_airport_code"><?php echo $airport_name; ?></a> to
+                            <a href="" value="destination_airport_code"><?php echo $airport_name; ?></a>
                             <td>
                                 <a href="book.php" class="btn">book here!</a>
                             </td>
@@ -188,7 +202,7 @@ require 'admin/dbcon.php';
             <?php
                     }
                 }
-            } else {
+             else {
                 echo '<h5>No Record Found </h5>';
             }
 
