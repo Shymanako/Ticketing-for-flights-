@@ -118,8 +118,41 @@ if(isset($_POST['update_flight'])){
 
 if(isset($_POST['save_flight'])){
     $schedule_id = mysqli_real_escape_string($con, $_POST['schedule_id']);
+    $description = mysqli_real_escape_string($con, $_POST['description']);
 
-    $query = "INSERT INTO flight (schedule_id) VALUES ('$schedule_id')";
+    // check whether the image is selected or not and set the value for image name
+    if(isset($_FILES['image']['name'])){
+        // upload image
+        $image = $_FILES['image']['name'];
+
+        // auto rename image
+        // get the extension of ourt image (jpg, png, gif, etc.) e.g. "food.jpg"
+        $ext = end(explode('.', $image));
+
+        // rename the image
+        $image = "Flight_Image_".rand(000, 999).'.'.$ext; // e.g. flight_name_69.jpg
+
+        $source_path = $_FILES['image']['tmp_name'];
+
+        $destination_path = "../img/flight/".$image;
+
+        // upload the image
+        $upload = move_uploaded_file($source_path, $destination_path);
+
+        //check whether the image is uploaded or not
+        if($upload==false)
+        {
+            $_SESSION['message'] = "Failed to upload image";
+            header("Location: flight-create.php");
+            die();
+        }
+    }
+    else{
+        //dont upload image and set the image value as blank
+        $image="";
+    }
+
+    $query = "INSERT INTO flight (schedule_id, image, description) VALUES ('$schedule_id', '$image', '$description')";
 
     $query_run = mysqli_query($con, $query);
     if($query_run){
