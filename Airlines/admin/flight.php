@@ -85,7 +85,7 @@ require 'dbcon.php';
                         if ($image) {
                           // display image
                         ?>
-                          <img src="<?php echo 'http://localhost/Ticketing-for-flights-/Airlines/'; ?>img/flight/<?php echo $image; ?>">
+                          <img src="<?php echo 'http://localhost/Ticketing-for-flights-/Airlines/'; ?>img/flight/<?php echo $image; ?>" width="100px">
                         <?php
                         } else {
                           // Display message
@@ -97,9 +97,7 @@ require 'dbcon.php';
                       <td>
                         <a href="flight-view.php?flight_id=<?php echo $flight_id; ?>" class="btn btn-info btn-sm">View</a>
                         <a href="flight-update.php?flight_id=<?php echo $flight_id; ?>" class="btn btn-success btn-sm">Update</a>
-                        <form action="code.php" method='POST' class="d-inline">
-                          <a href="flight-delete.php?flight_id=<?php echo $flight_id; ?>&image=<?php echo $image;?>" class="btn btn-danger btn-sm">Update</a>
-                        </form>
+                        <a href="flight-delete.php?delete_flight_id=<?php echo $flight_id; ?>&delete_image=<?php echo $image;?>" class="btn btn-danger btn-sm">Delete</a>
                       </td>
                     </tr>
                 <?php

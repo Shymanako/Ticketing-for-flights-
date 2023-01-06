@@ -17,7 +17,7 @@ if (isset($_GET['delete_flight_id']) and isset($_GET['delete_image'])) {
         $remove = unlink($path);
         if ($remove == false) {
             //failed to remove remove image
-            $_SESSION['message'] = "Immage not Available";
+            $_SESSION['message'] = "Image not Available";
             header("Location: flight.php");
             die();
         } else {
@@ -35,12 +35,12 @@ if (isset($_GET['delete_flight_id']) and isset($_GET['delete_image'])) {
         exit(0);
     } else {
 
-        $_SESSION['message'] = "Flight Deletion Failed";
+        $_SESSION['message'] = "Flight Deletion Failed 2";
         header("Location: flight.php");
         exit(0);
     }
 } else {
-    $_SESSION['message'] = "Flight Deletion Failed";
+    $_SESSION['message'] = "Flight Deletion Failed 1";
     header("Location: flight.php");
     exit(0);
 }

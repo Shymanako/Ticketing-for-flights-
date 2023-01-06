@@ -76,18 +76,83 @@ if (isset($_POST['save_passenger'])) {
 if (isset($_POST['update_flight'])) {
     $flight_id = mysqli_real_escape_string($con, $_POST['flight_id']);
     $schedule_id = mysqli_real_escape_string($con, $_POST['schedule_id']);
+    $current_image = mysqli_real_escape_string($con, $_POST['current_image']);
+    $description = mysqli_real_escape_string($con, $_POST['description']);
 
-    $query = "UPDATE flight SET schedule_id='$schedule_id' where flight_id='$flight_id' ";
+    // update new image if selected
+    // check whether the image is selected or not
+    if (isset($_FILES['image']['name'])) {
+        // get the image details
+        $image = $_FILES['image']['name'];
+        //Check whether the image is available or not
+        if ($image != "") {
+            //Image Available
+
+            //A. UPload the New Image
+
+            //Auto Rename our Image
+            //Get the Extension of our image (jpg, png, gif, etc) e.g. "specialfood1.jpg"
+            $ext = end(explode('.', $image));
+
+            //Rename the Image
+            $image = "flight_image_" . rand(000, 999) . '.' . $ext; // e.g. Flight_image_834.jpg
+
+
+            $source_path = $_FILES['image']['tmp_name'];
+
+            $destination_path = "../img/flight/" . $image;
+
+            //Finally Upload the Image
+            $upload = move_uploaded_file($source_path, $destination_path);
+
+            //Check whether the image is uploaded or not
+            //And if the image is not uploaded then we will stop the process and redirect with error message
+            if ($upload == false) {
+                //SEt message
+                $_SESSION['message'] = "Failed to Upload Image.";
+                //Redirect to Add CAtegory Page
+                header('location: flight.php');
+                //STop the Process
+                die();
+            }
+
+            //B. Remove the Current Image if available
+            if ($current_image != "") {
+                $remove_path = "../img/flight/" . $current_image;
+
+                $remove = unlink($remove_path);
+
+                //CHeck whether the image is removed or not
+                //If failed to remove then display message and stop the processs
+                if ($remove == false) {
+                    //Failed to remove image
+                    $_SESSION['message'] = "Failed to remove current Image.";
+                    header('location: flight.php');
+                    die(); //Stop the Process
+                }
+            }
+        } else {
+            $image = $current_image;
+        }
+    } else {
+        $image = $current_image;
+    }
+
+    // update the database
+    $query = "update flight set schedule_id = '$schedule_id', image = '$image', description = '$description' where flight_id = $flight_id";
+    // excecute query
     $query_run = mysqli_query($con, $query);
 
+    //check whether excecuted or not
     if ($query_run) {
 
         $_SESSION['message'] = "Flight Updated Successfully";
         header("Location: flight.php");
         exit(0);
+
     } else {
 
-        $_SESSION['message'] = "Flight Update Failed";
+        $_SESSION['message'] = "Flight Failed to Update";
         header("Location: flight-update.php");
         exit(0);
     }

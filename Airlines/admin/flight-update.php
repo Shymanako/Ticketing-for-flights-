@@ -43,6 +43,8 @@ require 'dbcon.php';
 
                             $current_schedule_id = $row['schedule_id'];
                             $current_image = $row['image'];
+                            $description = $row['description'];
+
 
                             if (mysqli_num_rows($query_run) > 0) {
                                 $flight = mysqli_fetch_array($query_run);
@@ -92,15 +94,15 @@ require 'dbcon.php';
                                         <label> Current Image </label>
                                         <td>
                                             <?php
-                                                if($current_image!=""){
-                                                    // Display the image
-                                                    ?>
-                                                    <img src="<?php echo 'http://localhost/Ticketing-for-flights-/Airlines/';?>img/flight/<?php echo $current_image; ?>">
-                                                    <?php
-                                                }else{
-                                                    // display message
-                                                    echo "Image not added";
-                                                }
+                                            if ($current_image != "") {
+                                                // Display the image
+                                            ?>
+                                                <img src="<?php echo 'http://localhost/Ticketing-for-flights-/Airlines/'; ?>img/flight/<?php echo $current_image; ?>" width="150px">
+                                            <?php
+                                            } else {
+                                                // display message
+                                                echo "Image not added";
+                                            }
                                             ?>
                                         </td>
                                     </div>
@@ -113,6 +115,13 @@ require 'dbcon.php';
                                     </div>
 
                                     <div class="mb-3">
+                                        <label> Description </label>
+                                        <input type="text" name="description" value="<?php echo $description; ?>">
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <input type="hidden" name="current_image" value="<?php echo $current_image; ?>">
+                                        <input type="hidden" name="flight_id" value="<?php echo $flight_id; ?>">
                                         <button type="submit" name="update_flight" class="btn btn-primary">Update Flight</button>
                                     </div>
 
