@@ -98,7 +98,7 @@ require 'dbcon.php';
                         <a href="flight-view.php?flight_id=<?php echo $flight_id; ?>" class="btn btn-info btn-sm">View</a>
                         <a href="flight-update.php?flight_id=<?php echo $flight_id; ?>" class="btn btn-success btn-sm">Update</a>
                         <form action="code.php" method='POST' class="d-inline">
-                          <button type="submit" name="delete_flight" value="<?php echo $flight_id; ?>" class="btn btn-danger btn-sm">Delete</a>
+                          <a href="flight-delete.php?flight_id=<?php echo $flight_id; ?>&image=<?php echo $image;?>" class="btn btn-danger btn-sm">Update</a>
                         </form>
                       </td>
                     </tr>
