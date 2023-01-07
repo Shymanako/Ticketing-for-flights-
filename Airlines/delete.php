@@ -43,4 +43,38 @@ require 'admin/dbcon.php';
             exit(0);
         }
     }
+
+    if(isset($_GET['d_reservation_id']) and isset($_GET['d_passenger_id'])){
+        $reservation_id = $_GET['d_reservation_id'];
+        $passenger_id = $_GET['d_passenger_id'];
+    
+        $query = "DELETE FROM reservation WHERE reservation_id='$reservation_id'";
+        $query_run = mysqli_query($con, $query);                                                                                        
+        
+        if($query_run){
+    
+            $query2 = "DELETE FROM passenger WHERE passenger_id='$passenger_id'";
+            $query_run2 = mysqli_query($con, $query2);                                                                                        
+            
+            if($query_run2){
+        
+                $_SESSION['message'] = "Reservation Deleted Successfully";
+                header("Location: home.php");
+                exit(0);
+            }
+            else{
+        
+                $_SESSION['message'] = "Passenger Deletion Failed";
+                header("Location: book3.php");
+                exit(0);
+            }
+        }
+        else{
+    
+            $_SESSION['message'] = "Reservation Deletion Failed";
+            header("Location: book3.php");
+            exit(0);
+        }
+    }
+
 ?>

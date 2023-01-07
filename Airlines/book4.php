@@ -73,7 +73,7 @@ require 'admin/dbcon.php';
             <div class="flex">
                 <?php
 
-                $query = "Select reservation.reservation_id, reservation.flight_id, flight.flight_id, schedule.schedule_id, schedule.price from reservation left join flight on reservation.flight_id = flight.flight_id left join schedule on flight.schedule_id = schedule.schedule_id order by reservation_id desc limit 1";
+                $query = "Select reservation.reservation_id, reservation.flight_id, flight.flight_id, schedule.schedule_id, schedule.price, passenger.passenger_id from reservation left join passenger on reservation.passenger_id = passenger.passenger_id left join flight on reservation.flight_id = flight.flight_id left join schedule on flight.schedule_id = schedule.schedule_id order by reservation_id desc limit 1";
                 $query_run = mysqli_query($con, $query);
 
                 if (mysqli_num_rows($query_run) > 0) {
@@ -82,7 +82,7 @@ require 'admin/dbcon.php';
                 }
                 ?>
                 <input type="hidden" name="reservation_id" value="<?= $reservation['reservation_id']; ?>">
-
+                <input type="hidden" name="passenger_id" value="<?= $reservation['passenger_id']; ?>">
 
             </div>
 
@@ -115,6 +115,10 @@ require 'admin/dbcon.php';
             </div>
 
             <button type="submit" name="proceed_payment" value="<?= $reservation['reservation_id']; ?>" class="btn">Submit</a>
+
+            <td>
+            <a href="delete.php?d_reservation_id=<?= $reservation['reservation_id']; ?>&d_passenger_id=<?= $reservation['passenger_id']; ?>" class="btn">Cancel</a>
+            </td>
 
         </form>
     </section>

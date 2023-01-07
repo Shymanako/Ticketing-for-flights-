@@ -144,58 +144,60 @@ require 'admin/dbcon.php';
 
     <section class="home-trips">
 
+        <?php include('admin/message.php'); ?>
+
         <h1 class="heading-title"> Available Flights </h1>
 
         <div class="box-container">
 
-<?php
-$query = "SELECT flight.flight_id, flight.image, flight.description, direction.location from flight left join schedule on flight.schedule_id = schedule.schedule_id left join direction on schedule.direction_id = direction.direction_id";
-$query_run = mysqli_query($con, $query);
-$count = mysqli_num_rows($query_run);
-
-if ($count > 0) {
-    while ($row = mysqli_fetch_assoc($query_run)) {
-        $flight_id = $row['flight_id'];
-        $location = $row['location'];
-        $image = $row['image'];
-        $description = $row['description'];
-
-?>
-
-        <div class="box">
             <?php
-            if ($image == "") {
-                //Image not Available
-                echo "Image not found.";
-            } else {
-                //Image Available
+            $query = "SELECT flight.flight_id, flight.image, flight.description, direction.location from flight left join schedule on flight.schedule_id = schedule.schedule_id left join direction on schedule.direction_id = direction.direction_id";
+            $query_run = mysqli_query($con, $query);
+            $count = mysqli_num_rows($query_run);
+
+            if ($count > 0) {
+                while ($row = mysqli_fetch_assoc($query_run)) {
+                    $flight_id = $row['flight_id'];
+                    $location = $row['location'];
+                    $image = $row['image'];
+                    $description = $row['description'];
+
             ?>
-                <img src="<?php echo 'http://localhost/Ticketing-for-flights-/Airlines/'; ?>img/flight/<?php echo $image; ?>" width="300px">
+
+                    <div class="box">
+                        <?php
+                        if ($image == "") {
+                            //Image not Available
+                            echo "Image not found.";
+                        } else {
+                            //Image Available
+                        ?>
+                            <img src="<?php echo 'http://localhost/Ticketing-for-flights-/Airlines/'; ?>img/flight/<?php echo $image; ?>" width="300px">
+                        <?php
+                        }
+
+                        ?>
+                        <td><?php echo $location; ?></td>
+                        <br>
+                        <td><?php echo $description; ?></td>
+                        <br>
+
+                        <td>
+                            <a href="book.php" class="btn">book here!</a>
+                        </td>
+
+                    </div>
+
             <?php
+                }
+            } else {
+                echo '<h5>No Record Found </h5>';
             }
 
             ?>
-            <td><?php echo $location; ?></td>
-            <br>
-            <td><?php echo $description; ?></td>
-            <br>
 
-            <td>
-                <a href="book.php" class="btn">book here!</a>
-            </td>
 
         </div>
-
-<?php
-    }
-} else {
-    echo '<h5>No Record Found </h5>';
-}
-
-?>
-
-
-</div>
 
         <div class="load-more"> <a href="trips.php" class="btn">see more</a> </div>
 

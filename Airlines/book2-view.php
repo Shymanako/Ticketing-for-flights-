@@ -56,14 +56,6 @@ require 'admin/message.php';
                                 <input type="hidden" name="reservation_id" value="<?php echo $reservation_id; ?>">
 
                                 <div class="mb-3">
-                                <label> Reservation ID </label>
-                                    <p class="form-control">
-                                        <?php echo $reservation_id; ?>
-                                    </p>
-                                    <label> Passenger ID </label>
-                                    <p class="form-control">
-                                        <?php echo $passenger_id; ?>
-                                    </p>
                                     <label> Flight ID </label>
                                     <p class="form-control">
                                         <?php echo $flight_id; ?>
@@ -72,14 +64,41 @@ require 'admin/message.php';
                                     <p class="form-control">
                                         <?php echo $location; ?>
                                     </p>
-                                    <label> Origin Airport Code </label>
-                                    <p class="form-control">
-                                        <?php echo $origin_airport_code; ?>
-                                    </p>
-                                    <label> Destination Airport Code </label>
-                                    <p class="form-control">
-                                        <?php echo $destination_airport_code; ?>
-                                    </p>
+                                        <?php
+                                            $query2 = "select direction.origin_airport_code, airport.airport_name from flight left join schedule on flight.schedule_id = schedule.schedule_id left join direction on schedule.direction_id = direction.direction_id left join airport on direction.origin_airport_code = airport.airport_code where flight_id='$flight_id'";
+                                            $query_run2 = mysqli_query($con, $query2);
+                                            if(mysqli_num_rows($query_run2) > 0){
+                                                while ($row2 = mysqli_fetch_assoc($query_run2)){
+                                                    $origin_airport_code = $row2['origin_airport_code'];
+                                                    $airport_name = $row2['airport_name'];
+
+                                                    ?>
+                                                    <label> Origin Airport </label>
+                                                    <p class="form-control"><?php echo $airport_name; ?></p>
+                                                    <?php
+                                                    
+                                                }
+                                            }
+                                            
+                                        
+                                        ?>
+                                        <?php
+                                            $query3 = "select direction.destination_airport_code, airport.airport_name from flight left join schedule on flight.schedule_id = schedule.schedule_id left join direction on schedule.direction_id = direction.direction_id left join airport on direction.destination_airport_code = airport.airport_code where flight_id='$flight_id'";
+                                            $query_run3 = mysqli_query($con, $query3);
+                                            if(mysqli_num_rows($query_run3) > 0){
+                                                while ($row3 = mysqli_fetch_assoc($query_run3)){
+                                                    $airport_name = $row3['airport_name'];
+
+                                                    ?>
+                                                    <label> Destination Airport </label>
+                                                    <p class="form-control"><?php echo $airport_name; ?></p>
+                                                    <?php
+                                                    
+                                                }
+                                            }
+                                            
+                                        
+                                        ?>
                                     <label> Departure Time </label>
                                     <p class="form-control">
                                         <?php echo $departure_time; ?>
@@ -96,7 +115,7 @@ require 'admin/message.php';
 
                                 <td>
                                     <a href="book3.php?reservation_id=<?php echo $reservation_id; ?>" class="btn btn-info btn-sm">Confirm</a>
-                                    <a href="delete.php?reservation_id=<?php echo $reservation_id; ?>&passenger_id=<?php echo $passenger_id; ?>" class="btn">Cancel</a>
+                                    <a href="delete.php?reservation_id=<?php echo $reservation_id; ?>&passenger_id=<?php echo $passenger_id; ?>" class="btn">Back</a>
                                 </td>
 
                                 <?php
