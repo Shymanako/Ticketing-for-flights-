@@ -55,6 +55,7 @@
                       <tr>
                         <th>Origin Airport Code</th>
                         <th>Destination Airport Code</th>
+                        <th>Location</th>
                       </tr>
                   </thead>
                   <tbody>
@@ -70,6 +71,7 @@
                           <tr>
                             <td><?= $direction['origin_airport_code']; ?></td>
                             <td><?= $direction['destination_airport_code']; ?></td>
+                            <td><?= $direction['location']; ?></td>
                             <td>
                               <a href="direction-view.php?direction_id=<?= $direction['direction_id']; ?>" class="btn btn-info btn-sm">View</a>
                               <a href="direction-update.php?direction_id=<?= $direction['direction_id']; ?>" class="btn btn-success btn-sm">Update</a>

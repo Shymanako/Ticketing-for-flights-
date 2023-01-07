@@ -394,8 +394,10 @@ if (isset($_POST['update_airport'])) {
 if (isset($_POST['save_direction'])) {
     $origin_airport_code = mysqli_real_escape_string($con, $_POST['origin_airport_code']);
     $destination_airport_code = mysqli_real_escape_string($con, $_POST['destination_airport_code']);
+    $location = mysqli_real_escape_string($con, $_POST['location']);
 
-    $query = "INSERT INTO direction (origin_airport_code, destination_airport_code) VALUES ('$origin_airport_code', '$destination_airport_code')";
+
+    $query = "INSERT INTO direction (origin_airport_code, destination_airport_code, location) VALUES ('$origin_airport_code', '$destination_airport_code', '$location')";
 
     $query_run = mysqli_query($con, $query);
     if ($query_run) {
@@ -433,8 +435,9 @@ if (isset($_POST['update_direction'])) {
     $direction_id = mysqli_real_escape_string($con, $_POST['direction_id']);
     $origin_airport_code = mysqli_real_escape_string($con, $_POST['origin_airport_code']);
     $destination_airport_code = mysqli_real_escape_string($con, $_POST['destination_airport_code']);
+    $location = mysqli_real_escape_string($con, $_POST['location']);
 
-    $query = "UPDATE direction SET origin_airport_code='$origin_airport_code', destination_airport_code='$destination_airport_code' where direction_id='$direction_id' ";
+    $query = "UPDATE direction SET origin_airport_code='$origin_airport_code', destination_airport_code='$destination_airport_code', location='$location' where direction_id='$direction_id' ";
     $query_run = mysqli_query($con, $query);
 
     if ($query_run) {

@@ -147,68 +147,55 @@ require 'admin/dbcon.php';
         <h1 class="heading-title"> Available Flights </h1>
 
         <div class="box-container">
-            <?php
-            $query = "SELECT flight.flight_id, flight.image, flight.description, schedule.schedule_id, schedule.direction_id, direction.origin_airport_code, direction.destination_airport_code, airport.airport_name from flight left join schedule on flight.schedule_id = schedule.schedule_id left join direction on schedule.direction_id = direction.direction_id left join airport on direction.origin_airport_code = airport.airport_code limit 3";
-            $query_run = mysqli_query($con, $query);
 
-            if (mysqli_num_rows($query_run) > 0) {
-                while ($row = mysqli_fetch_assoc($query_run)) {
-                    $flight_id = $row['flight_id'];
-                    $image = $row['image'];
-                    $description = $row['description'];
-                    $origin_airport_code = $row['origin_airport_code'];
-                    $destination_airport_code = $row['destination_airport_code'];
-                    $airport_name = $row['airport_name'];
-                    foreach ($query_run as $direction) {
-                    }
-                }
+<?php
+$query = "SELECT flight.flight_id, flight.image, flight.description, direction.location from flight left join schedule on flight.schedule_id = schedule.schedule_id left join direction on schedule.direction_id = direction.direction_id";
+$query_run = mysqli_query($con, $query);
+$count = mysqli_num_rows($query_run);
+
+if ($count > 0) {
+    while ($row = mysqli_fetch_assoc($query_run)) {
+        $flight_id = $row['flight_id'];
+        $location = $row['location'];
+        $image = $row['image'];
+        $description = $row['description'];
+
+?>
+
+        <div class="box">
+            <?php
+            if ($image == "") {
+                //Image not Available
+                echo "Image not found.";
             } else {
-                echo '<h5>No Record Found </h5>';
-            }
-
-            $query2 = "SELECT flight.flight_id, schedule.schedule_id, schedule.direction_id, direction.origin_airport_code, direction.destination_airport_code, airport.airport_name from flight left join schedule on flight.schedule_id = schedule.schedule_id left join direction on schedule.direction_id = direction.direction_id left join airport on direction.destination_airport_code = airport.airport_code limit 3";
-            $query_run2 = mysqli_query($con, $query2);
-
-            if (mysqli_num_rows($query_run2) > 0) {
-                while ($row2 = mysqli_fetch_assoc($query_run2)) {
-                    $flight_id = $row2['flight_id'];
-                    $origin_airport_code = $row2['origin_airport_code'];
-                    $destination_airport_code = $row2['destination_airport_code'];
-                    $airport_name = $row2['airport_name'];
+                //Image Available
             ?>
-
-                        <div class="box">
-                            <a href="" value="flight_id"><?php echo $flight_id; ?>></a>
-                            <?php
-                            if ($image == "") {
-                                //Image not Available
-                                echo "<div class='error'>Image not found.</div>";
-                            } else {
-                                //Image Available
-                            ?>
-                                <img src="<?php echo 'http://localhost/Ticketing-for-flights-/Airlines/'; ?>img/flight/<?php echo $image; ?>" width="400px">
-                            <?php
-                            }
-
-                            ?>
-                            <a href="" value="origin_airport_code"><?php echo $airport_name; ?></a> to
-                            <a href="" value="destination_airport_code"><?php echo $airport_name; ?></a>
-                            <td>
-                                <a href="book.php" class="btn">book here!</a>
-                            </td>
-
-                        </div>
-
+                <img src="<?php echo 'http://localhost/Ticketing-for-flights-/Airlines/'; ?>img/flight/<?php echo $image; ?>" width="300px">
             <?php
-                    }
-                }
-             else {
-                echo '<h5>No Record Found </h5>';
             }
 
-
             ?>
+            <td><?php echo $location; ?></td>
+            <br>
+            <td><?php echo $description; ?></td>
+            <br>
+
+            <td>
+                <a href="book.php" class="btn">book here!</a>
+            </td>
+
         </div>
+
+<?php
+    }
+} else {
+    echo '<h5>No Record Found </h5>';
+}
+
+?>
+
+
+</div>
 
         <div class="load-more"> <a href="trips.php" class="btn">see more</a> </div>
 
@@ -254,7 +241,7 @@ require 'admin/dbcon.php';
 
         </div>
 
-        <div class="credit"> created by <span>richard joshua bangoy</span> | all rights reserved</div>
+        <div class="credit"> created by <span>Incognito</span> | all rights reserved</div>
 
     </section>
 

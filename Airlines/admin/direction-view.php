@@ -56,7 +56,7 @@ require 'dbcon.php';
 
                         if(isset($_GET['direction_id'])){
                             $direction_id = mysqli_real_escape_string($con, $_GET['direction_id']);
-                            $query = "SELECT direction.origin_airport_code, direction.destination_airport_code, airport.airport_name from direction left join airport on direction.destination_airport_code = airport.airport_code WHERE direction_id='$direction_id'";
+                            $query = "SELECT direction.origin_airport_code, direction.destination_airport_code, direction.location, airport.airport_name from direction left join airport on direction.destination_airport_code = airport.airport_code WHERE direction_id='$direction_id'";
                             $query_run = mysqli_query($con, $query);
 
                             if(mysqli_num_rows($query_run) > 0)
@@ -66,6 +66,11 @@ require 'dbcon.php';
                                     <div class="mb-3">
                                         <label> Origin Airport Code </label>
                                         <p class="form-control" value="<?=$direction['destination_airport_code'];?>"><?=$direction['airport_name'];?></p>
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label> Location </label>
+                                        <p class="form-control"><?=$direction['location'];?></p>
                                     </div>
 
                                 <?php

@@ -35,7 +35,8 @@ require 'dbcon.php';
                             function validateForm() {
                                 var a = document.forms["Form"]["origin_airport_code"].value;
                                 var b = document.forms["Form"]["destination_airport_code"].value;
-                                if (a == null || a == "", b == null || b == ""){
+                                var c = document.forms["Form"]["location"].value;
+                                if (a == null || a == "", b == null || b == "", c == null || c == ""){
                                 alert("Please Fill In All Required Details");
                                 return false;
                                 }
@@ -121,6 +122,11 @@ require 'dbcon.php';
                                         }
                                     ?>
                                 </select>
+                            </div>
+
+                            <div class="mb-3">
+                                <label> Location </label>
+                                <input type="text" name="location" placeholder="Enter Location" class="form-control">
                             </div>
 
                             <div class="mb-3">
