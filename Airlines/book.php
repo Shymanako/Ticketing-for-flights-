@@ -159,7 +159,7 @@ include('login-check.php');
 
         </div>
 
-        <div class="credit"> created by <span>richard joshua bangoy</span> | all rights reserved</div>
+        <div class="credit"> created by <span>Incognito</span> | all rights reserved</div>
 
     </section>
 

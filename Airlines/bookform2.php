@@ -20,6 +20,8 @@ if(isset($_POST['save_reservation'])){
         header("Location: book2.php");
         exit(0);
     }
+}else{
+    echo "data not available";
 }
 
 ?>

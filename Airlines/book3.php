@@ -52,7 +52,8 @@ require 'admin/dbcon.php';
     <section class="booking">
 
         <h1 class="heading-title">Reservation Details</h1>
-
+        <h2>Note: Please double check data before submitting.</h2>
+        <?php include('admin/message.php'); ?>
         <form name="Form" action="book4.php" autocomplete="off" onsubmit="return validateForm()" method="post" class="bookform" required>
             <?php
 
@@ -102,7 +103,7 @@ require 'admin/dbcon.php';
 
             if (isset($_GET['reservation_id'])) {
                 $reservation_id2 = mysqli_real_escape_string($con, $_GET['reservation_id']);
-                $query2 = "Select reservation.reservation_id, reservation.passenger_id, reservation.flight_id, flight.flight_id, flight.schedule_id, schedule.schedule_id, direction.direction_id, airline.airline_id, airline.airline_name, direction.origin_airport_code, direction.destination_airport_code, schedule.direction_id, schedule.departure_time, schedule.arrival_time, schedule.airline_id, schedule.price from reservation left join flight on reservation.flight_id = flight.flight_id left join schedule on flight.schedule_id = schedule.schedule_id left join direction on schedule.direction_id = direction.direction_id left join airline on schedule.airline_id = airline.airline_id where reservation.reservation_id = '$reservation_id2'";
+                $query2 = "Select reservation.reservation_id, reservation.passenger_id, reservation.flight_id, flight.flight_id, flight.schedule_id, schedule.schedule_id, direction.direction_id, airline.airline_id, airline.airline_name, direction.origin_airport_code, direction.destination_airport_code, direction.location, schedule.direction_id, schedule.departure_time, schedule.arrival_time, schedule.airline_id, schedule.price from reservation left join flight on reservation.flight_id = flight.flight_id left join schedule on flight.schedule_id = schedule.schedule_id left join direction on schedule.direction_id = direction.direction_id left join airline on schedule.airline_id = airline.airline_id where reservation.reservation_id = '$reservation_id2'";
                 $query_run2 = mysqli_query($con, $query2);
 
                 if (mysqli_num_rows($query_run2) > 0) {
@@ -116,8 +117,41 @@ require 'admin/dbcon.php';
 
             <div class="flex">
                 <div class="inputBox">
-                    <span>Direction name : </span>
-                    <input type="text" name="origin_airport_code" value="<?= $reservation2['origin_airport_code']; ?> to <?= $reservation2['destination_airport_code']; ?>">
+                    <span>Location : </span>
+                    <input type="text" name="location" value="<?= $reservation2['location']; ?>">
+                </div>
+                <div class="inputBox">
+                    <span>Origin Airport : </span>
+                    <?php
+                    $query3 = "select direction.origin_airport_code, airport.airport_name from reservation left join flight on reservation.flight_id = flight.flight_id left join schedule on flight.schedule_id = schedule.schedule_id left join direction on schedule.direction_id = direction.direction_id left join airport on direction.origin_airport_code = airport.airport_code where reservation_id='$reservation_id'";
+                    $query_run3 = mysqli_query($con, $query3);
+                    if (mysqli_num_rows($query_run3) > 0) {
+                        while ($row3 = mysqli_fetch_assoc($query_run3)) {
+                            $origin_airport_code = $row3['origin_airport_code'];
+                            $airport_name = $row3['airport_name'];
+                        ?>
+                        <input type="text" name="origin_airport_code" value="<?php echo $airport_name; ?>">
+                        <?php
+                        }
+                    }
+                    ?>
+                </div>
+                <div class="inputBox">
+                    <span>Destination Airport : </span>
+                    <?php
+                    $query3 = "select passenger.passenger_id, direction.origin_airport_code, airport.airport_name from reservation left join passenger on reservation.passenger_id = passenger.passenger_id left join flight on reservation.flight_id = flight.flight_id left join schedule on flight.schedule_id = schedule.schedule_id left join direction on schedule.direction_id = direction.direction_id left join airport on direction.destination_airport_code = airport.airport_code where reservation_id='$reservation_id'";
+                    $query_run3 = mysqli_query($con, $query3);
+                    if (mysqli_num_rows($query_run3) > 0) {
+                        while ($row3 = mysqli_fetch_assoc($query_run3)) {
+                            $origin_airport_code = $row3['origin_airport_code'];
+                            $passenger_id = $row3['passenger_id'];
+                            $airport_name = $row3['airport_name'];
+                        ?>
+                        <input type="text" name="destination_airport_code" value="<?php echo $airport_name; ?>">
+                        <?php
+                        }
+                    }
+                    ?>
                 </div>
                 <div class="inputBox">
                     <span>Departure Time : </span>
@@ -137,7 +171,10 @@ require 'admin/dbcon.php';
                 </div>
             </div>
 
-            <button type="submit" value="<?= $reservation2['reservation_id'];?>" class="btn">Submit</a>
+            <button type="submit" value="<?= $reservation2['reservation_id']; ?>" class="btn">Continue</a>
+            <td>
+            <a href="delete.php?d_reservation_id=<?php echo $reservation_id; ?>&d_passenger_id=<?php echo $passenger_id; ?>" class="btn">Cancel</a>
+            </td>
 
         </form>
 

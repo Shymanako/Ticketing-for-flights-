@@ -69,18 +69,18 @@ require 'admin/dbcon.php';
             <div class="flex">
                 <?php
 
-                $query = "Select * from passenger order by passenger_id desc limit 1";
-                $query_run = mysqli_query($con, $query);
-
-                if (mysqli_num_rows($query_run) > 0) {
-                    foreach ($query_run as $passenger) {
+                if(isset($_GET['passenger_id'])){
+                    $passenger_id = $_GET['passenger_id'];
+                }else{
+                    if(isset($_SESSION['passenger'])){
+                        $passenger_id = $_SESSION['passenger'];
+                        //$passenger_id = 'passenger_id';
                     }
                 }
                 ?>
-                <input type="hidden" name="passenger_id" value="<?= $passenger['passenger_id']; ?>">
-
-                
+                <input type="hidden" name="passenger_id" value="<?php echo $passenger_id; ?>">
             </div>
+
 
             <div class="flex">
                 <div class="inputBox">
@@ -89,7 +89,7 @@ require 'admin/dbcon.php';
                         <?php
                         // php code to display available airports from database
                         // query to select all available airports in database
-                        $query = "SELECT flight.flight_id, schedule.schedule_id, schedule.direction_id, direction.origin_airport_code, direction.destination_airport_code from flight left join schedule on flight.schedule_id = schedule.schedule_id left join direction on schedule.direction_id = direction.direction_id order by flight.schedule_id;";
+                        $query = "SELECT flight.flight_id, direction.location from flight left join schedule on flight.schedule_id = schedule.schedule_id left join direction on schedule.direction_id = direction.direction_id";
 
                         // Executing query
                         $query_run = mysqli_query($con, $query);
@@ -103,13 +103,10 @@ require 'admin/dbcon.php';
                             while ($row = mysqli_fetch_assoc($query_run)) {
                                 // get the detail of airport
                                 $flight_id = $row['flight_id'];
-                                $schedule_id = $row['schedule_id'];
-                                $direction_id = $row['direction_id'];
-                                $origin_airport_code = $row['origin_airport_code'];
-                                $destination_airport_code = $row['destination_airport_code'];
+                                $location = $row['location'];
 
                         ?>
-                                <option value="<?php echo $flight_id; ?>"><?php echo $origin_airport_code; ?> to <?php echo $destination_airport_code; ?></option>
+                                <option value="<?php echo $flight_id; ?>"><?php echo $location; ?></option>
                             <?php
                             }
                         } else {

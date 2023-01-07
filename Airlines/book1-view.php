@@ -142,9 +142,7 @@ require 'admin/message.php';
                                     <form id="act-container"  action="delete.php" method='POST' class="d-inline">
 
                                         <!-- confirm -->
-                                        <a id="confirm-btn" href="book2.php?passenger_id=<?= $passenger['passenger_id']; ?>">
-                                                Confirm
-                                        </a>
+                                        <a id="confirm-btn" href="book2.php?passenger_id=<?= $passenger['passenger_id']; ?>">Confirm</a>
 
                                         <!-- Cancel -->
                                         <button id="cancel-btn" type="submit" name="delete_passenger" value="<?= $passenger['passenger_id']; ?>" class="btn" onclick="history.back()">Cancel</button>
