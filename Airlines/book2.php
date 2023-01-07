@@ -69,25 +69,18 @@ require 'admin/dbcon.php';
             <div class="flex">
                 <?php
 
-                $query = "Select * from passenger order by passenger_id desc limit 1";
-                $query_run = mysqli_query($con, $query);
-
-                if (mysqli_num_rows($query_run) > 0) {
-                    foreach ($query_run as $passenger) {
+                if(isset($_GET['passenger_id'])){
+                    $passenger_id = $_GET['passenger_id'];
+                }else{
+                    if(isset($_SESSION['passenger'])){
+                        $passenger_id = $_SESSION['passenger'];
+                        //$passenger_id = 'passenger_id';
                     }
-                }
-                ?>
-                <input type="hidden" name="passenger_id" value="<?= $passenger['passenger_id']; ?>">
-            </div>
-
-            <div class="flex">
-                <?php
-                if(isset($_SESSION['passenger'])){
-                    $passenger_id = 'passenger_id';
                 }
                 ?>
                 <input type="hidden" name="passenger_id" value="<?php echo $passenger_id; ?>">
             </div>
+
 
             <div class="flex">
                 <div class="inputBox">
@@ -135,7 +128,7 @@ require 'admin/dbcon.php';
                     }
                 }
                 ?>
-                <button type="submit" name="save_reservation" value="<?= $flight['flight_id'];?>&passenger_id=<?php echo $passenger_id;?>" class="btn">Submit</a>
+                <button type="submit" name="save_reservation" value="<?= $flight['flight_id'];?>" class="btn">Submit</a>
             </div>
 
 

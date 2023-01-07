@@ -56,11 +56,11 @@ require 'admin/message.php';
                                 <input type="hidden" name="reservation_id" value="<?php echo $reservation_id; ?>">
 
                                 <div class="mb-3">
-                                <label> Flight ID </label>
+                                <label> Reservation ID </label>
                                     <p class="form-control">
                                         <?php echo $reservation_id; ?>
                                     </p>
-                                    <label> Flight ID </label>
+                                    <label> Passenger ID </label>
                                     <p class="form-control">
                                         <?php echo $passenger_id; ?>
                                     </p>

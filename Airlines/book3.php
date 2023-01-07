@@ -137,7 +137,7 @@ require 'admin/dbcon.php';
                 </div>
             </div>
 
-            <button type="submit" value="<?= $reservation2['reservation_id'];?>" class="btn">Submit</a>
+            <button type="submit" value="<?= $reservation2['reservation_id'];?>" class="btn">Continue</a>
 
         </form>
 
