@@ -32,7 +32,7 @@ require 'admin/message.php';
                         </h4>
                     </div>
 
-                    <form id="act-container" action="about.php" method='POST' class="d-inline">
+                    <form id="act-container" action="ticket.php" method='POST' class="d-inline">
                         <div class="card-body">
 
                             <?php
@@ -56,7 +56,7 @@ require 'admin/message.php';
                                 $booked_info = mysqli_fetch_array($query_run);
                             
                             ?>
-
+                            <input type="hidden" name="booked_id" value="<?= $booked_info['booked_id']; ?>">
                                 <div class="mb-3">
                                     <label> Reservation ID </label>
                                     <p class="form-control">
