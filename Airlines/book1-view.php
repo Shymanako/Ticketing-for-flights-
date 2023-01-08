@@ -45,22 +45,6 @@ require 'admin/message.php';
 
                                 // echo
                         ?>
-                                <!-- <tr>
-                                    <input type="hidden" name="passenger_id" value="<?= $passenger['passenger_id']; ?>">
-                                    <td><?= $passenger['first_name']; ?></td>
-                                    <td><?= $passenger['last_name']; ?></td>
-                                    <td><?= $passenger['date_of_birth']; ?></td>
-                                    <td><?= $passenger['citizenship']; ?></td>
-                                    <td><?= $passenger['p_number']; ?></td>
-                                    <td><?= $passenger['email']; ?></td>
-
-                                    <td>
-                                        <a href="book2.php?passenger_id=<?= $passenger['passenger_id']; ?>" class="btn">Confirm</a>
-                                        <form action="delete.php" method='POST' class="d-inline">
-                                            <button type="submit" name="delete_passenger" value="<?= $passenger['passenger_id']; ?>" class="btn">Cancel</button>
-                                        </form>
-                                    </td>
-                                </tr> -->
 
                                 <!-- main card -->
                                 <div id="main-card">

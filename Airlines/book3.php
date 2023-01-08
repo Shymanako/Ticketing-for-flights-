@@ -171,7 +171,7 @@ require 'admin/dbcon.php';
                 </div>
             </div>
 
-            <button type="submit" value="<?= $reservation2['reservation_id']; ?>" class="btn">Continue</a>
+            <button type="submit" value="<?= $reservation2['reservation_id']; ?>" class="btn">Continue</button>
             <td>
             <a href="delete.php?d_reservation_id=<?php echo $reservation_id; ?>&d_passenger_id=<?php echo $passenger_id; ?>" class="btn">Cancel</a>
             </td>

@@ -11,7 +11,8 @@ require 'admin/message.php';
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous"> -->
+    <link rel="stylesheet" href="css/book1-view.css">
 
     <title>Passenger Data</title>
 
@@ -28,98 +29,145 @@ require 'admin/message.php';
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
-                        <h4>Flight Details
-                        </h4>
+                        <!-- PROMPT double check entry -->
+                        <h4 id="prompt-head">Double Check Your Entries </h4>
                     </div>
                     <div class="card-body">
 
                         <?php
 
-                        $query = "Select reservation.reservation_id, reservation.passenger_id, reservation.flight_id, direction.location, airline.airline_name, direction.origin_airport_code, direction.destination_airport_code, direction.location, schedule.departure_time, schedule.arrival_time, schedule.airline_id, schedule.price from reservation left join flight on reservation.flight_id = flight.flight_id left join schedule on flight.schedule_id = schedule.schedule_id left join direction on schedule.direction_id = direction.direction_id left join airline on schedule.airline_id = airline.airline_id order by reservation_id desc limit 1";
+                        $query = "Select reservation.reservation_id, reservation.passenger_id, reservation.flight_id, flight.flight_id, flight.schedule_id, schedule.schedule_id, direction.direction_id, airline.airline_id, airline.airline_name, direction.origin_airport_code, direction.destination_airport_code, schedule.direction_id, schedule.departure_time, schedule.arrival_time, schedule.airline_id, schedule.price from reservation left join flight on reservation.flight_id = flight.flight_id left join schedule on flight.schedule_id = schedule.schedule_id left join direction on schedule.direction_id = direction.direction_id left join airline on schedule.airline_id = airline.airline_id order by reservation_id desc limit 1";
                         $query_run = mysqli_query($con, $query);
 
-
                         if (mysqli_num_rows($query_run) > 0) {
-                            while ($row = mysqli_fetch_assoc($query_run)) {
-                                $flight_id = $row['flight_id'];
-                                $passenger_id = $row['passenger_id'];
-                                $reservation_id = $row['reservation_id'];
-                                $origin_airport_code = $row['origin_airport_code'];
-                                $destination_airport_code = $row['destination_airport_code'];
-                                $location = $row['location'];
-                                $departure_time = $row['departure_time'];
-                                $arrival_time = $row['arrival_time'];
-                                $price = $row['price'];
+                            $reservation = mysqli_fetch_array($query_run);
+                        ?>
 
-                                ?>
+                            <input type="hidden" name="reservation_id" value="<?= $reservation['reservation_id']; ?>">
+                            <!-- <div class="mb-3">
+                                <label> Flight ID </label>
+                                <p class="form-control">
+                                    <?= $reservation['flight_id']; ?>
+                                </p>
+                                <label> Origin Airport Code </label>
+                                <p class="form-control">
+                                    <?= $reservation['origin_airport_code']; ?>
+                                </p>
+                                <label> Destination Airport Code </label>
+                                <p class="form-control">
+                                    <?= $reservation['destination_airport_code']; ?>
+                                </p>
+                                <label> Departure Time </label>
+                                <p class="form-control">
+                                    <?= $reservation['departure_time']; ?>
+                                </p>
+                                <label> Arrival Time </label>
+                                <p class="form-control">
+                                    <?= $reservation['arrival_time']; ?>
+                                </p>
+                                <label> Price </label>
+                                <p class="form-control">
+                                    <?= $reservation['price']; ?>
+                                </p>
+                            </div>
 
-                                <input type="hidden" name="reservation_id" value="<?php echo $reservation_id; ?>">
+                            <td>
+                                <a href="book3.php?reservation_id=<?= $reservation['reservation_id']; ?>" class="btn btn-info btn-sm">Confirm</a>
+                                <a href="book2.php" class="btn">Cancel</a>
+                            </td> -->
 
-                                <div class="mb-3">
-                                    <label> Flight ID </label>
-                                    <p class="form-control">
-                                        <?php echo $flight_id; ?>
-                                    </p>
-                                    <label> Location </label>
-                                    <p class="form-control">
-                                        <?php echo $location; ?>
-                                    </p>
-                                        <?php
-                                            $query2 = "select direction.origin_airport_code, airport.airport_name from flight left join schedule on flight.schedule_id = schedule.schedule_id left join direction on schedule.direction_id = direction.direction_id left join airport on direction.origin_airport_code = airport.airport_code where flight_id='$flight_id'";
-                                            $query_run2 = mysqli_query($con, $query2);
-                                            if(mysqli_num_rows($query_run2) > 0){
-                                                while ($row2 = mysqli_fetch_assoc($query_run2)){
-                                                    $origin_airport_code = $row2['origin_airport_code'];
-                                                    $airport_name = $row2['airport_name'];
+                            <!-- main card -->
+                            <div id="main-card">
 
-                                                    ?>
-                                                    <label> Origin Airport </label>
-                                                    <p class="form-control"><?php echo $airport_name; ?></p>
-                                                    <?php
-                                                    
-                                                }
-                                            }
-                                            
+                                <!-- entry container -->
+                                <div id="entry-container">
+
+                                    <!-- indv entries -->
+
+                                        <!-- flight id -->
+                                        <div class="indv-container">
+
+                                            <!-- label -->
+                                            <h2 class="label">Flight ID:</h2>
+
+                                            <!-- entry -->
+                                            <h4 class="entry"><?= $reservation['flight_id']; ?></h4>
+
+                                        </div>
+
+                                        <!-- origin port code -->
+                                        <div class="indv-container">
+
+                                            <!-- label -->
+                                            <h2 class="label">Origin Airport Code:</h2>
+
+                                            <!-- entry -->
+                                            <h4 class="entry"><?= $reservation['origin_airport_code']; ?></h4>
+
+                                        </div>
                                         
-                                        ?>
-                                        <?php
-                                            $query3 = "select direction.destination_airport_code, airport.airport_name from flight left join schedule on flight.schedule_id = schedule.schedule_id left join direction on schedule.direction_id = direction.direction_id left join airport on direction.destination_airport_code = airport.airport_code where flight_id='$flight_id'";
-                                            $query_run3 = mysqli_query($con, $query3);
-                                            if(mysqli_num_rows($query_run3) > 0){
-                                                while ($row3 = mysqli_fetch_assoc($query_run3)){
-                                                    $airport_name = $row3['airport_name'];
+                                        <!-- Destination Airport Code -->
+                                        <div class="indv-container">
 
-                                                    ?>
-                                                    <label> Destination Airport </label>
-                                                    <p class="form-control"><?php echo $airport_name; ?></p>
-                                                    <?php
-                                                    
-                                                }
-                                            }
-                                            
+                                            <!-- label -->
+                                            <h2 class="label">Destination Airport Code:</h2>
+
+                                            <!-- entry -->
+                                            <h4 class="entry"><?= $reservation['destination_airport_code']; ?></h4>
+
+                                        </div>
                                         
-                                        ?>
-                                    <label> Departure Time </label>
-                                    <p class="form-control">
-                                        <?php echo $departure_time; ?>
-                                    </p>
-                                    <label> Arrival Time </label>
-                                    <p class="form-control">
-                                        <?php echo $arrival_time; ?>
-                                    </p>
-                                    <label> Price </label>
-                                    <p class="form-control">
-                                        <?php echo $price; ?>
-                                    </p>
+                                        <!-- Departure Time -->
+                                        <div class="indv-container">
+
+                                            <!-- label -->
+                                            <h2 class="label">Departure Time:</h2>
+
+                                            <!-- entry -->
+                                            <h4 class="entry"><?= $reservation['departure_time']; ?></h4>
+
+                                        </div>
+                                        
+                                        <!-- Arrival Time -->
+                                        <div class="indv-container">
+
+                                            <!-- label -->
+                                            <h2 class="label">Arrival Time:</h2>
+
+                                            <!-- entry -->
+                                            <h4 class="entry"><?= $reservation['arrival_time']; ?></h4>
+
+                                        </div>
+                                        
+                                        <!-- Price -->
+                                        <div class="indv-container">
+
+                                            <!-- label -->
+                                            <h2 class="label">Price:</h2>
+
+                                            <!-- entry -->
+                                            <h4 class="entry"><?= $reservation['price']; ?></h4>
+
+                                        </div>
+
                                 </div>
 
-                                <td>
-                                    <a href="book3.php?reservation_id=<?php echo $reservation_id; ?>" class="btn btn-info btn-sm">Confirm</a>
-                                    <a href="delete.php?reservation_id=<?php echo $reservation_id; ?>&passenger_id=<?php echo $passenger_id; ?>" class="btn">Back</a>
-                                </td>
+                                <!-- actions form -->
+                                <form id="act-container"  action="delete.php" method='POST' class="d-inline">
 
-                                <?php
-                            }
+                                    <!-- confirm -->
+                                    <a id="confirm-btn" href="book3.php?reservation_id=<?= $reservation['reservation_id']; ?>" class="btn btn-info btn-sm">
+                                            Confirm
+                                    </a>
+
+                                    <!-- Cancel -->
+                                    <button id="cancel-btn" type="submit" name="delete_passenger" value="<?= $passenger['passenger_id']; ?>" class="btn" onclick="history.back()">Cancel</button>
+
+                                </form>
+
+                            </div>
+
+                        <?php
                         } else {
                             echo "<h4>No ID Found</h4>";
                         }
