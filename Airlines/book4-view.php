@@ -83,25 +83,29 @@ require 'admin/message.php';
                         </div>  
                     </form> -->
 
-                    <div class="card-body">
+                    <!-- actions form -->
 
-                        <?php
-                        $query = "Select * from passenger order by passenger_id desc limit 1";
-                        $query_run = mysqli_query($con, $query);
+                    <form action="bookform4.php" name="Form" onsubmit="return validateForm()" autocomplete="off" method="post" class="bookform" required>
 
-                        if (mysqli_num_rows($query_run) > 0) {
-                            foreach ($query_run as $passenger) {
+                        <div class="card-body">
 
-                                // echo
-                        ?>
+                            <?php
+                            $query2 = "select payment.payment_id, payment.reservation_id, payment.payment_method, payment.payment_amount, payment.cvc, payment.expiry_date, reservation.reservation_id, reservation.passenger_id, reservation.flight_id from payment left join reservation on payment.reservation_id = reservation.reservation_id order by payment_id desc limit 1";
+                            $query_run2 = mysqli_query($con, $query2);
 
-                                <!-- main card -->
-                                <div id="main-card">
+                            if (mysqli_num_rows($query_run2) > 0) {
+                                foreach ($query_run2 as $payment) {
 
-                                    <!-- entry container -->
-                                    <div id="entry-container">
+                                    // echo
+                            ?>
 
-                                        <!-- indv entries -->
+                                    <!-- main card -->
+                                    <div id="main-card">
+
+                                        <!-- entry container -->
+                                        <div id="entry-container">
+
+                                            <!-- indv entries -->
 
                                             <!-- Reservation ID -->
                                             <div class="indv-container">
@@ -124,7 +128,7 @@ require 'admin/message.php';
                                                 <h4 class="entry"><?= $payment['payment_method']; ?></h4>
 
                                             </div>
-                                            
+
                                             <!-- Payment Amount -->
                                             <div class="indv-container">
 
@@ -135,7 +139,7 @@ require 'admin/message.php';
                                                 <h4 class="entry"><?= $payment['payment_amount']; ?></h4>
 
                                             </div>
-                                            
+
                                             <!-- CVC Code -->
                                             <div class="indv-container">
 
@@ -146,7 +150,7 @@ require 'admin/message.php';
                                                 <h4 class="entry"><?= $payment['cvc']; ?></h4>
 
                                             </div>
-                                            
+
                                             <!-- Expiry Date -->
                                             <div class="indv-container">
 
@@ -158,28 +162,25 @@ require 'admin/message.php';
 
                                             </div>
 
-                                    </div>
+                                        </div>
 
-                                    <!-- actions form -->
-                                    <form action="bookform4.php" name="Form" onsubmit="return validateForm()" autocomplete="off" method="post" class="bookform" required>
 
                                         <!-- confirm -->
                                         <button id="confirm-btn" type="submit" name="save_book" value="<?= $payment['payment_id']; ?>" class="btn btn-info btn-sm">Confirm</button>
 
                                         <!-- Cancel -->
-                                        <button id="cancel-btn" type="submit" name="delete_passenger" value="<?= $passenger['passenger_id']; ?>" class="btn" onclick="history.back()">Cancel</button>
+                                        <a id="cancel-btn" href="delete.php?p_payment_id=<?= $payment['payment_id']; ?>&p_reservation_id=<?= $payment['reservation_id']; ?>" class="btn" onclick="history.back()">Cancel</a>
 
-                                    </form>
-
-                                </div>
-                        <?php
+                                    </div>
+                            <?php
+                                }
+                            } else {
+                                echo '<h5>No Record Found </h5>';
                             }
-                        } else {
-                            echo '<h5>No Record Found </h5>';
-                        }
-                        ?>
+                            ?>
 
-                    </div>
+                        </div>
+                    </form>
 
 
                 </div>

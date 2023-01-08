@@ -77,4 +77,25 @@ require 'admin/dbcon.php';
         }
     }
 
+    if(isset($_GET['p_payment_id']) and isset($_GET['p_reservation_id'])){
+        $payment_id = $_GET['p_payment_id'];
+        $reservation_id = $_GET['p_reservation_id'];
+    
+        $query = "DELETE FROM payment WHERE payment_id='$payment_id'";
+        $query_run = mysqli_query($con, $query);                                                                                        
+        
+        if($query_run){
+    
+            $_SESSION['message'] = "Payment Cancelled";
+            $_SESSION['reservation'] = $reservation_id;
+            header("Location: book4.php");
+            exit(0);
+        }
+        else{
+    
+            $_SESSION['message'] = "payment Cancellation Failed";
+            header("Location: book4-view.php");
+            exit(0);
+        }
+    }
 ?>

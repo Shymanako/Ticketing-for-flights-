@@ -54,6 +54,7 @@ require 'admin/message.php';
 
                             if (mysqli_num_rows($query_run) > 0) {
                                 $booked_info = mysqli_fetch_array($query_run);
+                            
                             ?>
 
                                 <div class="mb-3">

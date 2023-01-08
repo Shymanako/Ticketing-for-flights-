@@ -72,15 +72,24 @@ require 'admin/dbcon.php';
         <form action="bookform3.php" name="Form" onsubmit="return validateForm()" autocomplete="off" method="post" class="bookform" required>
             <div class="flex">
                 <?php
+                if (isset($_GET['reservation_id'])) {
+                    $reservation_id = mysqli_real_escape_string($con, $_GET['reservation_id']);
+                } else {
+                    if (isset($_SESSION['reservation'])) {
+                        $reservation_id = $_SESSION['reservation'];
+                    }
+                }
 
-                $query = "Select reservation.reservation_id, reservation.flight_id, flight.flight_id, schedule.schedule_id, schedule.price, passenger.passenger_id from reservation left join passenger on reservation.passenger_id = passenger.passenger_id left join flight on reservation.flight_id = flight.flight_id left join schedule on flight.schedule_id = schedule.schedule_id order by reservation_id desc limit 1";
+                $query = "Select reservation.reservation_id, reservation.flight_id, flight.flight_id, schedule.schedule_id, schedule.price, passenger.passenger_id from reservation left join passenger on reservation.passenger_id = passenger.passenger_id left join flight on reservation.flight_id = flight.flight_id left join schedule on flight.schedule_id = schedule.schedule_id where reservation_id='$reservation_id'";
                 $query_run = mysqli_query($con, $query);
 
                 if (mysqli_num_rows($query_run) > 0) {
                     foreach ($query_run as $reservation) {
                     }
                 }
+
                 ?>
+
                 <input type="hidden" name="reservation_id" value="<?= $reservation['reservation_id']; ?>">
                 <input type="hidden" name="passenger_id" value="<?= $reservation['passenger_id']; ?>">
 
@@ -117,7 +126,7 @@ require 'admin/dbcon.php';
             <button type="submit" name="proceed_payment" value="<?= $reservation['reservation_id']; ?>" class="btn">Submit</button>
 
             <td>
-            <a href="delete.php?d_reservation_id=<?= $reservation['reservation_id']; ?>&d_passenger_id=<?= $reservation['passenger_id']; ?>" class="btn">Cancel</a>
+                <a href="delete.php?d_reservation_id=<?= $reservation['reservation_id']; ?>&d_passenger_id=<?= $reservation['passenger_id']; ?>" class="btn">Cancel</a>
             </td>
 
         </form>
