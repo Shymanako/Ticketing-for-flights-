@@ -52,7 +52,7 @@ require 'admin/dbcon.php';
     <section class="booking">
 
         <h1 class="heading-title">Flight Reservation</h1>
-        <h2>Note: Please double check data before submitting.</h2>
+        <h2>Note: Please double check data before continuing.</h2>
 
         <script type="text/javascript">
             function validateForm() {
@@ -77,6 +77,7 @@ require 'admin/dbcon.php';
                 } else {
                     if (isset($_SESSION['reservation'])) {
                         $reservation_id = $_SESSION['reservation'];
+                        echo $reservation_id;
                     }
                 }
 
@@ -126,7 +127,7 @@ require 'admin/dbcon.php';
             <button type="submit" name="proceed_payment" value="<?= $reservation['reservation_id']; ?>" class="btn">Submit</button>
 
             <td>
-                <a href="delete.php?d_reservation_id=<?= $reservation['reservation_id']; ?>&d_passenger_id=<?= $reservation['passenger_id']; ?>" class="btn">Cancel</a>
+                <a href="delete.php?back_reservation_details=<?= $reservation['reservation_id']; ?>" class="btn">Back</a>
             </td>
 
         </form>

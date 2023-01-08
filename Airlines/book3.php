@@ -59,14 +59,19 @@ require 'admin/dbcon.php';
 
             if (isset($_GET['reservation_id'])) {
                 $reservation_id = mysqli_real_escape_string($con, $_GET['reservation_id']);
-                $query = "Select reservation.passenger_id, reservation.flight_id, passenger.passenger_id, passenger.first_name, passenger.last_name, passenger.date_of_birth, passenger.citizenship, passenger.p_number, passenger.email from reservation left join passenger on reservation.passenger_id = passenger.passenger_id where reservation.reservation_id = '$reservation_id'";
-                $query_run = mysqli_query($con, $query);
-
-                if (mysqli_num_rows($query_run) > 0) {
-                    $reservation = mysqli_fetch_array($query_run);
-                } else {
-                    echo "<h4>No ID Found</h4>";
+            } else {
+                if (isset($_SESSION['reservation'])) {
+                    $reservation_id = $_SESSION['reservation'];
                 }
+            }
+
+            $query = "Select reservation.passenger_id, reservation.flight_id, passenger.passenger_id, passenger.first_name, passenger.last_name, passenger.date_of_birth, passenger.citizenship, passenger.p_number, passenger.email from reservation left join passenger on reservation.passenger_id = passenger.passenger_id where reservation.reservation_id = '$reservation_id'";
+            $query_run = mysqli_query($con, $query);
+
+            if (mysqli_num_rows($query_run) > 0) {
+                $reservation = mysqli_fetch_array($query_run);
+            } else {
+                echo "<h4>No ID Found</h4>";
             }
 
             ?>
@@ -103,14 +108,19 @@ require 'admin/dbcon.php';
 
             if (isset($_GET['reservation_id'])) {
                 $reservation_id2 = mysqli_real_escape_string($con, $_GET['reservation_id']);
-                $query2 = "Select reservation.passenger_id, reservation.flight_id, flight.flight_id, flight.schedule_id, schedule.schedule_id, direction.direction_id, airline.airline_id, airline.airline_name, direction.origin_airport_code, direction.destination_airport_code, direction.location, schedule.direction_id, schedule.departure_time, schedule.arrival_time, schedule.airline_id, schedule.price from reservation left join flight on reservation.flight_id = flight.flight_id left join schedule on flight.schedule_id = schedule.schedule_id left join direction on schedule.direction_id = direction.direction_id left join airline on schedule.airline_id = airline.airline_id where reservation.reservation_id = '$reservation_id2'";
-                $query_run2 = mysqli_query($con, $query2);
-
-                if (mysqli_num_rows($query_run2) > 0) {
-                    $reservation2 = mysqli_fetch_array($query_run2);
-                } else {
-                    echo "<h4>No ID Found</h4>";
+            } else {
+                if (isset($_SESSION['reservation'])) {
+                    $reservation_id2 = $_SESSION['reservation'];
                 }
+            }
+
+            $query2 = "Select reservation.passenger_id, reservation.flight_id, flight.flight_id, flight.schedule_id, schedule.schedule_id, direction.direction_id, airline.airline_id, airline.airline_name, direction.origin_airport_code, direction.destination_airport_code, direction.location, schedule.direction_id, schedule.departure_time, schedule.arrival_time, schedule.airline_id, schedule.price from reservation left join flight on reservation.flight_id = flight.flight_id left join schedule on flight.schedule_id = schedule.schedule_id left join direction on schedule.direction_id = direction.direction_id left join airline on schedule.airline_id = airline.airline_id where reservation.reservation_id = '$reservation_id2'";
+            $query_run2 = mysqli_query($con, $query2);
+
+            if (mysqli_num_rows($query_run2) > 0) {
+                $reservation2 = mysqli_fetch_array($query_run2);
+            } else {
+                echo "<h4>No ID Found</h4>";
             }
 
             ?>

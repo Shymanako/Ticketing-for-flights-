@@ -98,4 +98,11 @@ require 'admin/dbcon.php';
             exit(0);
         }
     }
+
+    if(isset($_GET['back_reservation_details'])){
+        $reservation_id = $_GET['back_reservation_details'];
+        $_SESSION['reservation'] = $reservation_id;
+        header("Location: book3.php");
+        exit(0);
+    }
 ?>

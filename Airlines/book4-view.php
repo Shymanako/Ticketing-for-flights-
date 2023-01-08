@@ -98,6 +98,10 @@ require 'admin/message.php';
 
                                     // echo
                             ?>
+                                    <input type="hidden" name="payment_id" value="<?= $payment['payment_id']; ?>">
+                                    <input type="hidden" name="passenger_id" value="<?= $payment['passenger_id']; ?>">
+                                    <input type="hidden" name="reservation_id" value="<?= $payment['reservation_id']; ?>">
+                                    <input type="hidden" name="flight_id" value="<?= $payment['flight_id']; ?>">
 
                                     <!-- main card -->
                                     <div id="main-card">
