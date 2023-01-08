@@ -164,19 +164,20 @@ require 'admin/dbcon.php';
 
             ?>
 
-                    <div class="box">
+                    <div class="box flight-card">
                         <?php
-                        if ($image == "") {
-                            //Image not Available
-                            echo "Image not found.";
-                        } else {
-                            //Image Available
-                        ?>
-                            <img src="<?php echo 'http://localhost/Ticketing-for-flights-/Airlines/'; ?>img/flight/<?php echo $image; ?>" width="300px">
-                        <?php
-                        }
+                            if ($image == "") {
+                                //Image not Available
+                                echo "Image not found.";
+                            } else {
+                                //Image Available
+                            ?>
+                                <img src="<?php echo 'http://localhost/Ticketing-for-flights-/Airlines/'; ?>img/flight/<?php echo $image; ?>" width="300px">
+                                <?php
+                            }
 
                         ?>
+
                         <td><?php echo $location; ?></td>
                         <br>
                         <td><?php echo $description; ?></td>

@@ -1,5 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600&display=swap');
 
+/* <?php
+    header("Content-type: text/css; charset: UTF-8");
+?> */
+
 :root{
     --main-color:#8e44ad;
     --black:#222;
@@ -650,5 +654,9 @@ section{
     html{
         font-size: 50%;
     }
+}
 
+/* popular places */
+.flight-card{
+    border: 5px red solid;
 }
