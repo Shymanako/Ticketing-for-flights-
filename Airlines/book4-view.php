@@ -34,55 +34,6 @@ require 'admin/message.php';
                         <h4 id="prompt-head">Payment Details</h4>
                     </div>
 
-                    <!-- <form action="bookform4.php" name="Form" onsubmit="return validateForm()" autocomplete="off" method="post" class="bookform" required>
-                        <div class="card-body">
-
-                            <?php
-                            $query = "select payment.payment_id, payment.reservation_id, payment.payment_method, payment.payment_amount, payment.cvc, payment.expiry_date, reservation.reservation_id, reservation.passenger_id, reservation.flight_id from payment left join reservation on payment.reservation_id = reservation.reservation_id order by payment_id desc limit 1";
-                            $query_run = mysqli_query($con, $query);
-
-                            if (mysqli_num_rows($query_run) > 0) {
-                                $payment = mysqli_fetch_array($query_run);
-                            ?>
-
-                                <input type="hidden" name="payment_id" value="<?= $payment['payment_id']; ?>">
-                                <input type="hidden" name="passenger_id" value="<?= $payment['passenger_id']; ?>">
-                                <input type="hidden" name="reservation_id" value="<?= $payment['reservation_id']; ?>">
-                                <input type="hidden" name="flight_id" value="<?= $payment['flight_id']; ?>">
-
-                                <div class="mb-3">
-                                    <label> Reservation ID </label>
-                                    <p class="form-control">
-                                        <?= $payment['reservation_id']; ?>
-                                    </p>
-                                    <label> Payment Method </label>
-                                    <p class="form-control">
-                                        <?= $payment['payment_method']; ?>
-                                    </p>
-                                    <label> Payment Amount </label>
-                                    <p class="form-control">
-                                        <?= $payment['payment_amount']; ?>
-                                    </p>
-                                    <label> CVC Code </label>
-                                    <p class="form-control">
-                                        <?= $payment['cvc']; ?>
-                                    </p>
-                                    <label> Expiry Date </label>
-                                    <p class="form-control">
-                                        <?= $payment['expiry_date']; ?>
-                                    </p>
-                                </div>
-   
-                                <button type="submit" name="save_book" value="<?= $payment['payment_id']; ?>" class="btn btn-info btn-sm">Confirm</button>
-
-                            <?php
-                            } else {
-                                echo "<h4>No ID Found</h4>";
-                            }
-                            ?>
-                        </div>  
-                    </form> -->
-
                     <!-- actions form -->
 
                     <form action="bookform4.php" name="Form" onsubmit="return validateForm()" autocomplete="off" method="post" class="bookform" required>
@@ -168,12 +119,15 @@ require 'admin/message.php';
 
                                         </div>
 
+                                        <div id="act-container">
 
-                                        <!-- confirm -->
-                                        <button id="confirm-btn" type="submit" name="save_book" value="<?= $payment['payment_id']; ?>" class="btn btn-info btn-sm">Confirm</button>
+                                            <!-- confirm -->
+                                            <button id="confirm-btn" type="submit" name="save_book" value="<?= $payment['payment_id']; ?>" class="btn btn-info btn-sm">Confirm</button>
+    
+                                            <!-- Cancel -->
+                                            <a id="cancel-btn" href="delete.php?p_payment_id=<?= $payment['payment_id']; ?>&p_reservation_id=<?= $payment['reservation_id']; ?>" class="btn" onclick="history.back()">Cancel</a>
 
-                                        <!-- Cancel -->
-                                        <a id="cancel-btn" href="delete.php?p_payment_id=<?= $payment['payment_id']; ?>&p_reservation_id=<?= $payment['reservation_id']; ?>" class="btn" onclick="history.back()">Cancel</a>
+                                        </div>
 
                                     </div>
                             <?php

@@ -12,6 +12,7 @@ require 'admin/message.php';
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+     <link rel="stylesheet" href="css/book1-view.css">
 
     <title>Passenger Data</title>
 
@@ -28,11 +29,13 @@ require 'admin/message.php';
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
-                        <h4>Booking Details
-                        </h4>
+                        <!-- PROMPT double check entry -->
+                        <h4 id="prompt-head">Booking Details </h4>
                     </div>
 
                     <form id="act-container" action="ticket.php" method='POST' class="d-inline">
+
+
                         <div class="card-body">
 
                             <?php
@@ -139,14 +142,16 @@ require 'admin/message.php';
                                     </p>
                                 </div>
 
-                                <!-- confirm -->
                                 <button type="submit" name="finish_booking" value="<?= $booked_info['booked_id']; ?>" class="btn btn-info btn-sm">Finish</a>
                             <?php
                             } else {
                                 echo "<h4>No ID Found</h4>";
                             }
                             ?>
-                        </div>  
+                        </div>
+
+                        
+
                     </form>
 
 
