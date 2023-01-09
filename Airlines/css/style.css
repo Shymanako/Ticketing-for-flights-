@@ -260,6 +260,18 @@ section{
     color: var(--black);
 }
 
+.home-trips .image-menu{
+    padding: 0;
+}
+
+.home-trips .flight-home-desc{
+    width: 80%;
+    float: left;
+    margin-left: 8%;
+    text-align: center;
+    font-size: medium;
+}
+
 .home-trips{
     background: var(--light-bg);
 }
@@ -312,6 +324,10 @@ section{
 .home-trips .load-more{
     text-align: center;
     margin-top: 2rem;
+}
+
+.home-trips .center{
+    margin-left: 90px;
 }
 
 .about{
@@ -423,6 +439,22 @@ section{
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
     gap: 2rem;
+}
+
+.trips .image-menu{
+    padding: 0;
+}
+
+.trips .center{
+    margin-left: 90px;
+}
+
+.trips .flight-home-desc{
+    width: 80%;
+    float: left;
+    margin-left: 8%;
+    text-align: center;
+    font-size: medium;
 }
  
 .trips .box-container .box{
