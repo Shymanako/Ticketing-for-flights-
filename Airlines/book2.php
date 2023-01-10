@@ -69,14 +69,10 @@ require 'admin/dbcon.php';
             <div class="flex">
                 <?php
 
-                if(isset($_GET['passenger_id'])){
+                if (isset($_GET['passenger_id'])) {
                     $passenger_id = $_GET['passenger_id'];
-                }else{
-                    if(isset($_SESSION['passenger'])){
-                        $passenger_id = $_SESSION['passenger'];
-                        //$passenger_id = 'passenger_id';
-                    }
                 }
+
                 ?>
                 <input type="hidden" name="passenger_id" value="<?php echo $passenger_id; ?>">
             </div>
@@ -84,12 +80,12 @@ require 'admin/dbcon.php';
 
             <div class="flex">
                 <div class="inputBox">
-                    <span>Select Flight : <span style="color:red;">*</span> </span>
+                    <span>Select Flight : </span>
                     <select name="flight_id">
                         <?php
                         // php code to display available airports from database
                         // query to select all available airports in database
-                        $query = "SELECT flight.flight_id, direction.location from flight left join schedule on flight.schedule_id = schedule.schedule_id left join direction on schedule.direction_id = direction.direction_id";
+                        $query = "SELECT flight.flight_id, schedule.schedule_id, direction.location from flight left join schedule on flight.schedule_id = schedule.schedule_id left join direction on schedule.direction_id = direction.direction_id";
 
                         // Executing query
                         $query_run = mysqli_query($con, $query);
@@ -104,10 +100,15 @@ require 'admin/dbcon.php';
                                 // get the detail of airport
                                 $flight_id = $row['flight_id'];
                                 $location = $row['location'];
+                                $schedule_id = $row['schedule_id'];
 
                         ?>
-                                <option value="<?php echo $flight_id; ?>"><?php echo $location; ?></option>
+                                <div class="inputBox">
+                                    <option value="<?php echo $flight_id; ?>"><?php echo $location; ?></option>
+                                </div>
                             <?php
+
+
                             }
                         } else {
                             // we do not have airport
@@ -117,6 +118,11 @@ require 'admin/dbcon.php';
                         }
                         ?>
                     </select>
+                </div>
+
+                <div class="inputBox">
+                    <span>Departure :</span>
+                    <input type="datetime-local" name="departure_time">
                 </div>
             </div>
             <div>
@@ -128,7 +134,7 @@ require 'admin/dbcon.php';
                     }
                 }
                 ?>
-                <button type="submit" name="save_reservation" value="<?= $flight['flight_id'];?>" class="btn">Submit</a>
+                <button type="submit" name="save_reservation" value="<?= $flight['flight_id']; ?>" class="btn">Submit</a>
             </div>
 
 
