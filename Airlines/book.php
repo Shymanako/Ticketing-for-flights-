@@ -53,7 +53,7 @@ include('login-check.php');
 
     <section class="booking">
 
-        <h1 class="heading-title">booking details</h1>
+        <h1 class="heading-title">Passenger details</h1>
         <h2>Note: Please double check data before submitting.</h2>
 
         <script type="text/javascript">

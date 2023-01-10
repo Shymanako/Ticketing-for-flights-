@@ -12,8 +12,16 @@ if(isset($_POST['save_reservation'])){
     if($query_run){
 
         $_SESSION['message'] = "Reservation Created Successfully";
-        header("Location: book2-view.php");
-        exit(0);
+        $query2 = "select * from reservation order by reservation_id desc limit 1";
+        $query_run2 = mysqli_query($con, $query2);
+        if (mysqli_num_rows($query_run2) > 0) {
+            $reservation = mysqli_fetch_array($query_run2);
+            $reservation_id = $reservation['reservation_id'];
+            
+            $_SESSION['get_reservation'] = $reservation_id;
+            header("Location: book2-view.php");
+            exit(0);
+        }
     }
     else{
         $_SESSION['message'] = "Reservation Not Created";

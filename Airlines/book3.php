@@ -53,7 +53,6 @@ require 'admin/dbcon.php';
 
         <h1 class="heading-title">Reservation Details</h1>
         <h2>Note: Please double check data before submitting.</h2>
-        <?php include('admin/message.php'); ?>
         <form name="Form" action="book4.php" autocomplete="off" onsubmit="return validateForm()" method="post" class="bookform" required>
             <?php
 

@@ -34,7 +34,11 @@ require 'admin/message.php';
                     </div>
                     <div class="card-body">
 
+
                         <?php
+                        if (isset($_SESSION['get_reservation'])){
+                            $reservation_id = $_SESSION['get_reservation'];
+                        }
 
                         $query = "Select reservation.reservation_id, reservation.passenger_id, reservation.flight_id, flight.flight_id, flight.schedule_id, schedule.schedule_id, direction.direction_id, airline.airline_id, airline.airline_name, direction.origin_airport_code, direction.destination_airport_code, schedule.direction_id, schedule.departure_time, schedule.arrival_time, schedule.airline_id, schedule.price from reservation left join flight on reservation.flight_id = flight.flight_id left join schedule on flight.schedule_id = schedule.schedule_id left join direction on schedule.direction_id = direction.direction_id left join airline on schedule.airline_id = airline.airline_id order by reservation_id desc limit 1";
                         $query_run = mysqli_query($con, $query);
@@ -198,6 +202,8 @@ require 'admin/message.php';
                         } else {
                             echo "<h4>No ID Found</h4>";
                         }
+
+
                         ?>
 
                     </div>
