@@ -34,10 +34,12 @@ require 'dbcon.php';
                         <script type="text/javascript">
                             function validateForm() {
                                 var a = document.forms["Form"]["direction_id"].value;
-                                var b = document.forms["Form"]["departure_time"].value;
-                                var c = document.forms["Form"]["arrival_time"].value;
-                                var d = document.forms["Form"]["airline_id"].value;
-                                if (a == null || a == "", b == null || b == "", c == null || c == "", d == null || d == ""){
+                                var b = document.forms["Form"]["departure_date"].value;
+                                var c = document.forms["Form"]["departure_time"].value;
+                                var d = document.forms["Form"]["arrival_date"].value;
+                                var e = document.forms["Form"]["arrival_time"].value;
+                                var f = document.forms["Form"]["airline_id"].value;
+                                if (a == null || a == "", b == null || b == "", c == null || c == "", d == null || d == "", e == null || e == "", f == null || f == ""){
                                 alert("Please Fill In All Required Details");
                                 return false;
                                 }
@@ -87,12 +89,20 @@ require 'dbcon.php';
                             </div>
 
                             <div class="mb-3">
-                                <label>Departure :</label>
-                                <input type="datetime-local" name="departure_time">
+                                <label>Departure Date:</label>
+                                <input type="date" name="departure_date">
                             </div>
                             <div class="mb-3">
-                                <label>Arrival :</label>
-                                <input type="datetime-local" name="arrival_time">
+                                <label>Departure Time:</label>
+                                <input type="time" name="departure_time">
+                            </div>
+                            <div class="mb-3">
+                                <label>Arrival Date:</label>
+                                <input type="date" name="arrival_date">
+                            </div>
+                            <div class="mb-3">
+                                <label>Arrival Time:</label>
+                                <input type="time" name="arrival_time">
                             </div>
 
                             <div class="mb-3">

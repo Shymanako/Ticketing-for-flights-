@@ -54,7 +54,9 @@
                   <thead>
                       <tr>
                         <th>Direction ID</th>
+                        <th>Departure Date</th>
                         <th>Departure Time</th>
+                        <th>Arrival Date</th>
                         <th>Arrival Time</th>
                         <th>Airline ID</th>
                         <th>Price</th>
@@ -73,7 +75,9 @@
                           ?>
                           <tr>
                             <td><?= $schedule['direction_id']; ?></td>
+                            <td><?= $schedule['departure_date']; ?></td>
                             <td><?= $schedule['departure_time']; ?></td>
+                            <td><?= $schedule['arrival_date']; ?></td>
                             <td><?= $schedule['arrival_time']; ?></td>
                             <td><?= $schedule['airline_id']; ?></td>
                             <td><?= $schedule['price']; ?></td>

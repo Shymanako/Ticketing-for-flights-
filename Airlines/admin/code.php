@@ -455,12 +455,14 @@ if (isset($_POST['update_direction'])) {
 
 if (isset($_POST['save_schedule'])) {
     $direction_id = mysqli_real_escape_string($con, $_POST['direction_id']);
+    $departure_date = mysqli_real_escape_string($con, $_POST['departure_date']);
     $departure_time = mysqli_real_escape_string($con, $_POST['departure_time']);
+    $arrival_date = mysqli_real_escape_string($con, $_POST['arrival_date']);
     $arrival_time = mysqli_real_escape_string($con, $_POST['arrival_time']);
     $airline_id = mysqli_real_escape_string($con, $_POST['airline_id']);
     $price = mysqli_real_escape_string($con, $_POST['price']);
 
-    $query = "INSERT INTO schedule (direction_id, departure_time, arrival_time, airline_id, price) VALUES ('$direction_id', '$departure_time', '$arrival_time', '$airline_id', '$price')";
+    $query = "INSERT INTO schedule (direction_id, departure_date, departure_time, arrival_date, arrival_time, airline_id, price) VALUES ('$direction_id', '$departure_date', '$departure_time', '$arrival_date', '$arrival_time', '$airline_id', '$price')";
 
     $query_run = mysqli_query($con, $query);
     if ($query_run) {
@@ -497,12 +499,14 @@ if (isset($_POST['delete_schedule'])) {
 if (isset($_POST['update_schedule'])) {
     $schedule_id = mysqli_real_escape_string($con, $_POST['schedule_id']);
     $direction_id = mysqli_real_escape_string($con, $_POST['direction_id']);
+    $departure_date = mysqli_real_escape_string($con, $_POST['departure_date']);
     $departure_time = mysqli_real_escape_string($con, $_POST['departure_time']);
+    $arrival_date = mysqli_real_escape_string($con, $_POST['arrival_date']);
     $arrival_time = mysqli_real_escape_string($con, $_POST['arrival_time']);
     $airline_id = mysqli_real_escape_string($con, $_POST['airline_id']);
     $price = mysqli_real_escape_string($con, $_POST['price']);
 
-    $query = "UPDATE schedule SET direction_id='$direction_id', departure_time='$departure_time', arrival_time='$arrival_time', airline_id='$airline_id', price='$price' where schedule_id='$schedule_id' ";
+    $query = "UPDATE schedule SET direction_id='$direction_id', departure_date='$departure_date', departure_time='$departure_time', arrival_date='$arrival_date', arrival_time='$arrival_time', airline_id='$airline_id', price='$price' where schedule_id='$schedule_id' ";
     $query_run = mysqli_query($con, $query);
 
     if ($query_run) {

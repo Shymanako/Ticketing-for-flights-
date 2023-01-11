@@ -46,8 +46,16 @@ require 'dbcon.php';
                                         <p class="form-control"><?=$schedule['direction_id'];?></p>
                                     </div>
                                     <div class="mb-3">
+                                        <label> Departure Date </label>
+                                        <p class="form-control"><?=$schedule['departure_date'];?></p>
+                                    </div>
+                                    <div class="mb-3">
                                         <label> Departure Time </label>
                                         <p class="form-control"><?=$schedule['departure_time'];?></p>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label> Arrival Date </label>
+                                        <p class="form-control"><?=$schedule['arrival_date'];?></p>
                                     </div>
                                     <div class="mb-3">
                                         <label> Arrival Time </label>
