@@ -186,6 +186,7 @@ require 'admin/dbcon.php';
 
                             if (mysqli_num_rows($query_run) > 0) {
                                 $booked_info = mysqli_fetch_array($query_run);
+                                $booked_id = $booked_info['booked_id'];
 
                             ?>
                                 <input type="hidden" name="booked_id" value="<?= $booked_info['booked_id']; ?>">
@@ -281,7 +282,19 @@ require 'admin/dbcon.php';
                                             <h2 class="label">Origin Airport:</h2>
 
                                             <!-- entry -->
-                                            <h4 class="entry"><?php echo $airport_name1; ?></h4>
+                                            <h4 class="entry">
+                                                <?php
+                                                $query = "select direction.origin_airport_code, airport.airport_name from booked_information left join flight on booked_information.flight_id = flight.flight_id left join schedule on flight.schedule_id = schedule.schedule_id left join direction on schedule.direction_id = direction.direction_id left join airport on direction.origin_airport_code = airport.airport_code where booked_id='$booked_id'";
+                                                $query_run = mysqli_query($con, $query);
+                                                if (mysqli_num_rows($query_run) > 0) {
+                                                    while ($row = mysqli_fetch_assoc($query_run)) {
+                                                        $origin_airport_code = $row['origin_airport_code'];
+                                                        $airport_name1 = $row['airport_name'];
+                                                        echo $airport_name1;
+                                                    }
+                                                }
+                                                ?>
+                                            </h4>
 
                                         </div>
 
@@ -292,7 +305,19 @@ require 'admin/dbcon.php';
                                             <h2 class="label">Destination Airport:</h2>
 
                                             <!-- entry -->
-                                            <h4 class="entry"><?php echo $airport_name2; ?></h4>
+                                            <h4 class="entry">
+                                                <?php
+                                                $query = "select direction.origin_airport_code, airport.airport_name from booked_information left join flight on booked_information.flight_id = flight.flight_id left join schedule on flight.schedule_id = schedule.schedule_id left join direction on schedule.direction_id = direction.direction_id left join airport on direction.destination_airport_code = airport.airport_code where booked_id='$booked_id'";
+                                                $query_run = mysqli_query($con, $query);
+                                                if (mysqli_num_rows($query_run) > 0) {
+                                                    while ($row = mysqli_fetch_assoc($query_run)) {
+                                                        $origin_airport_code = $row['origin_airport_code'];
+                                                        $airport_name2 = $row['airport_name'];
+                                                        echo $airport_name2;
+                                                    }
+                                                }
+                                                ?>
+                                            </h4>
 
                                         </div>
 

@@ -21,9 +21,6 @@ require 'admin/dbcon.php';
             width: 100%;
         }
 
-        #cancel-btn {
-            display: none;
-        }
     </style>
 
 </head>
@@ -376,7 +373,7 @@ require 'admin/dbcon.php';
                                     <div id="act-container">
                                         <a id="confirm-btn" href="book4.php?reservation_id=<?php echo $reservation_id; ?>" class="btn btn-info btn-sm">continue</a>
                                         <td>
-                                            <a href="delete.php?d_reservation_id=<?php echo $reservation_id; ?>&d_passenger_id=<?php echo $passenger_id; ?>" class="btn" onclick="history.back()">Cancel</a>
+                                            <a id="cancel-btn" href="delete.php?d_reservation_id=<?php echo $reservation_id; ?>&d_passenger_id=<?php echo $passenger_id; ?>" class="btn" onclick="history.back()">Cancel</a>
                                         </td>
 
                                     </div>
