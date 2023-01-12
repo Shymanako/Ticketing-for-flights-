@@ -113,7 +113,7 @@ require 'admin/dbcon.php';
                 }
             }
 
-            $query2 = "Select reservation.passenger_id, reservation.flight_id, flight.flight_id, flight.schedule_id, schedule.schedule_id, direction.direction_id, airline.airline_id, airline.airline_name, direction.origin_airport_code, direction.destination_airport_code, direction.location, schedule.direction_id, schedule.departure_time, schedule.arrival_time, schedule.airline_id, schedule.price from reservation left join flight on reservation.flight_id = flight.flight_id left join schedule on flight.schedule_id = schedule.schedule_id left join direction on schedule.direction_id = direction.direction_id left join airline on schedule.airline_id = airline.airline_id where reservation.reservation_id = '$reservation_id2'";
+            $query2 = "Select reservation.passenger_id, reservation.flight_id, flight.flight_id, flight.schedule_id, schedule.schedule_id, direction.direction_id, airline.airline_id, airline.airline_name, direction.origin_airport_code, direction.destination_airport_code, direction.location, schedule.direction_id, schedule.departure_date, schedule.departure_time, schedule.arrival_date, schedule.arrival_time, schedule.airline_id, schedule.price from reservation left join flight on reservation.flight_id = flight.flight_id left join schedule on flight.schedule_id = schedule.schedule_id left join direction on schedule.direction_id = direction.direction_id left join airline on schedule.airline_id = airline.airline_id where reservation.reservation_id = '$reservation_id2'";
             $query_run2 = mysqli_query($con, $query2);
 
             if (mysqli_num_rows($query_run2) > 0) {
@@ -166,8 +166,16 @@ require 'admin/dbcon.php';
                     ?>
                 </div>
                 <div class="inputBox">
+                    <span>Departure Date : </span>
+                    <input type="text" name="departure_date" value="<?= $reservation2['departure_date']; ?>">
+                </div>
+                <div class="inputBox">
                     <span>Departure Time : </span>
                     <input type="text" name="departure_time" value="<?= $reservation2['departure_time']; ?>">
+                </div>
+                <div class="inputBox">
+                    <span>Arrival Date : </span>
+                    <input type="text" name="arrival_date" value="<?= $reservation2['arrival_date']; ?>">
                 </div>
                 <div class="inputBox">
                     <span>Arrival Time : </span>

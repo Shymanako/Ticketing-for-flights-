@@ -14,12 +14,10 @@ if(isset($_POST['proceed_payment'])){
     $query_run = mysqli_query($con, $query);
     if($query_run){
 
-        $_SESSION['message'] = "Reservation Created Successfully";
         header("Location: book4-view.php");
         exit(0);
     }
     else{
-        $_SESSION['message'] = "Reservation Not Created";
         header("Location: book2-view.php");
         exit(0);
     }

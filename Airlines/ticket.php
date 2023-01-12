@@ -1,7 +1,5 @@
 <?php
 require 'admin/dbcon.php';
-require 'admin/message.php';
-
 ?>
 
 <!doctype html>
@@ -19,10 +17,8 @@ require 'admin/message.php';
 
 <body>
 
-
     <div class="container mt-5">
 
-        <?php include('admin/message.php'); ?>
 
         <div class="row">
             <div class="col-md-12">
@@ -47,7 +43,7 @@ require 'admin/message.php';
                             passenger.email, flight.flight_id, flight.schedule_id, schedule.schedule_id, schedule.direction_id, schedule.departure_time, 
                             schedule.arrival_time, schedule.airline_id, schedule.price, direction.direction_id, direction.origin_airport_code, 
                             direction.destination_airport_code, airline.airline_id, airline.airline_name, payment.payment_id, payment.payment_method, 
-                            payment.payment_amount, payment.cvc, payment.expiry_date FROM booked_information left join reservation on 
+                            payment.payment_amount, payment.cvc, payment.expiry_date, schedule.departure_date FROM booked_information left join reservation on 
                             booked_information.reservation_id = reservation.reservation_id left join passenger on booked_information.passenger_id = 
                             passenger.passenger_id left join flight on booked_information.flight_id = flight.flight_id left join schedule on 
                             flight.schedule_id = schedule.schedule_id left join direction on schedule.direction_id = direction.direction_id 
@@ -77,7 +73,7 @@ require 'admin/message.php';
 
                                     <label> From </label>
                                     <?php
-                                    $query2 = "select direction.origin_airport_code, airport.airport_name from booked_information left join flight on booked_information.flight_id = flight.flight_id left join schedule on flight.schedule_id = schedule.schedule_id left join direction on schedule.direction_id = direction.direction_id left join airport on direction.origin_airport_code = airport.airport_code where reservation_id='$booked_id'";
+                                    $query2 = "select direction.origin_airport_code, airport.airport_name from booked_information left join flight on booked_information.flight_id = flight.flight_id left join schedule on flight.schedule_id = schedule.schedule_id left join direction on schedule.direction_id = direction.direction_id left join airport on direction.origin_airport_code = airport.airport_code where booked_id='$booked_id'";
                                     $query_run2 = mysqli_query($con, $query2);
                                     if (mysqli_num_rows($query_run2) > 0) {
                                         while ($row2 = mysqli_fetch_assoc($query_run2)) {
@@ -92,7 +88,7 @@ require 'admin/message.php';
 
                                     <label> To </label>
                                     <?php
-                                    $query2 = "select direction.origin_airport_code, airport.airport_name from booked_information left join flight on booked_information.flight_id = flight.flight_id left join schedule on flight.schedule_id = schedule.schedule_id left join direction on schedule.direction_id = direction.direction_id left join airport on direction.destination_airport_code = airport.airport_code where reservation_id='$booked_id'";
+                                    $query2 = "select direction.origin_airport_code, airport.airport_name from booked_information left join flight on booked_information.flight_id = flight.flight_id left join schedule on flight.schedule_id = schedule.schedule_id left join direction on schedule.direction_id = direction.direction_id left join airport on direction.destination_airport_code = airport.airport_code where booked_id='$booked_id'";
                                     $query_run2 = mysqli_query($con, $query2);
                                     if (mysqli_num_rows($query_run2) > 0) {
                                         while ($row2 = mysqli_fetch_assoc($query_run2)) {
@@ -105,19 +101,22 @@ require 'admin/message.php';
                                     }
                                     ?>
 
+                                    <label> Departure Date </label>
+                                    <p class="form-control">
+                                        <?= $booked_info['departure_date']; ?>
+                                    </p>
 
-
-                                    <label> Departure Time </label>
+                                    <label> Boarding Time </label>
                                     <p class="form-control">
                                         <?= $booked_info['departure_time']; ?>
                                     </p>
                                 </div>
 
-                                <?php
+                            <?php
                             } else {
                                 echo "<h4>No ID Found</h4>";
                             }
-                                ?>
+                            ?>
                         </div>
                     </form>
 

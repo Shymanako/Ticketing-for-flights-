@@ -14,12 +14,10 @@ if(isset($_POST['save_book'])){
     
     if($query_run){
 
-        $_SESSION['message'] = "Booked Information Created Successfully";
         header("Location: book5.php");
         exit(0);
     }
     else{
-        $_SESSION['message'] = "Reservation Not Created";
         header("Location: book4-view.php");
         exit(0);
     }

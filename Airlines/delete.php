@@ -22,6 +22,37 @@ require 'admin/dbcon.php';
         }
     }
 
+    if(isset($_POST['cancel_flight'])){
+        $passenger_id = mysqli_real_escape_string($con, $_POST['cancel_flight']);
+    
+        $_SESSION['cancel_passenger'] = $passenger_id;
+        header("Location: book2.php");
+        exit(0);
+
+    }
+
+    if(isset($_GET['f_reservation_id']) and isset($_GET['f_passenger_id'])){
+        $passenger_id = mysqli_real_escape_string($con, $_GET['f_passenger_id']);
+        $reservation_id = mysqli_real_escape_string($con, $_GET['f_reservation_id']);
+
+        $query = "delete from reservation where reservation_id='$reservation_id' ";
+        $query_run = mysqli_query($con, $query);
+
+        if($query_run){
+    
+            $_SESSION['cancel_passenger'] = $passenger_id;
+            header("Location: book2.php");
+            exit(0);
+        }
+        else{
+    
+            $_SESSION['message'] = "Passenger Deletion Failed";
+            header("Location: book2-view.php");
+            exit(0);
+        }    
+
+    }
+
     if(isset($_GET['reservation_id']) and isset($_GET['passenger_id'])){
         $reservation_id = $_GET['reservation_id'];
         $passenger_id = $_GET['passenger_id'];
@@ -105,4 +136,3 @@ require 'admin/dbcon.php';
         header("Location: book3.php");
         exit(0);
     }
-?>

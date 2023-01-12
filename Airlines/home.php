@@ -44,8 +44,6 @@ require 'admin/dbcon.php';
 
     <!-- header section end -->
 
-    <?php include('admin/message.php'); ?>
-
     <!-- home starts -->
     <section class="home">
 
@@ -144,14 +142,12 @@ require 'admin/dbcon.php';
 
     <section class="home-trips">
 
-        <?php include('admin/message.php'); ?>
-
         <h1 class="heading-title"> Available Flights </h1>
 
         <div class="box-container">
 
             <?php
-            $query = "SELECT flight.flight_id, flight.image, flight.description, direction.location from flight left join schedule on flight.schedule_id = schedule.schedule_id left join direction on schedule.direction_id = direction.direction_id";
+            $query = "SELECT flight.flight_id, flight.image, flight.description, direction.location from flight left join schedule on flight.schedule_id = schedule.schedule_id left join direction on schedule.direction_id = direction.direction_id limit 3";
             $query_run = mysqli_query($con, $query);
             $count = mysqli_num_rows($query_run);
 
