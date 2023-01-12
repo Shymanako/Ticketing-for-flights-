@@ -58,20 +58,27 @@ require 'admin/dbcon.php';
             function validateForm() {
                 var a = document.forms["Form"]["passenger_id"].value;
                 var b = document.forms["Form"]["flight_id"].value;
-                if (a == null || a == "", b == null || b == "") {
+                var b = document.forms["Form"]["departure_date"].value;
+                if (a == null || a == "", b == null || b == "", c == null || c == "") {
                     alert("Please Fill In All Required Details");
                     return false;
                 }
             }
         </script>
 
-        <form action="bookform2.php" name="Form" onsubmit="return validateForm()" autocomplete="off" method="post" class="bookform" required>
+        <form action="book2-search.php" name="Form" onsubmit="return validateForm()" autocomplete="off" method="post" class="bookform" required>
             <div class="flex">
                 <?php
 
                 if (isset($_GET['passenger_id'])) {
                     $passenger_id = $_GET['passenger_id'];
+                } else {
+                    if (isset($_SESSION['cancel_passenger'])) {
+                        $passenger_id = $_SESSION['cancel_passenger'];
+                    }
                 }
+
+                echo $passenger_id;
 
                 ?>
                 <input type="hidden" name="passenger_id" value="<?php echo $passenger_id; ?>">
@@ -80,12 +87,12 @@ require 'admin/dbcon.php';
 
             <div class="flex">
                 <div class="inputBox">
-                    <span>Select Flight : </span>
-                    <select name="flight_id">
+                    <span>Select Location : </span>
+                    <select name="direction_id">
                         <?php
                         // php code to display available airports from database
                         // query to select all available airports in database
-                        $query = "SELECT flight.flight_id, schedule.schedule_id, direction.location from flight left join schedule on flight.schedule_id = schedule.schedule_id left join direction on schedule.direction_id = direction.direction_id";
+                        $query = "SELECT * from direction";
 
                         // Executing query
                         $query_run = mysqli_query($con, $query);
@@ -98,13 +105,12 @@ require 'admin/dbcon.php';
                             // we have airport
                             while ($row = mysqli_fetch_assoc($query_run)) {
                                 // get the detail of airport
-                                $flight_id = $row['flight_id'];
+                                $direction_id = $row['direction_id'];
                                 $location = $row['location'];
-                                $schedule_id = $row['schedule_id'];
 
                         ?>
                                 <div class="inputBox">
-                                    <option value="<?php echo $flight_id; ?>"><?php echo $location; ?></option>
+                                    <option value="<?php echo $direction_id; ?>"><?php echo $location; ?></option>
                                 </div>
                             <?php
 
@@ -121,20 +127,12 @@ require 'admin/dbcon.php';
                 </div>
 
                 <div class="inputBox">
-                    <span>Departure :</span>
-                    <input type="datetime-local" name="departure_time">
+                    <span>Departure Date:</span>
+                    <input type="date" name="departure_date">
                 </div>
             </div>
             <div>
-                <?php
-                $query = "SELECT * FROM flight";
-                $query_run = mysqli_query($con, $query);
-                if (mysqli_num_rows($query_run) > 0) {
-                    foreach ($query_run as $flight) {
-                    }
-                }
-                ?>
-                <button type="submit" name="save_reservation" value="<?= $flight['flight_id']; ?>" class="btn">Submit</a>
+                <button type="search" name="search_flight" class="btn">Search</a>
             </div>
 
 

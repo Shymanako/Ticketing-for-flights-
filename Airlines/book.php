@@ -93,7 +93,7 @@ include('login-check.php');
                 </div>
                 <div class="inputBox">
                     <span>phone number : <span style="color:red;">*</span> </span>
-                    <input type="text" placeholder="enter your number" name="p_number">
+                    <input type="number" placeholder="enter your number" name="p_number">
                 </div>
                 <div class="inputBox">
                     <span>email : <span style="color:red;">*</span> </span>

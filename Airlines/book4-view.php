@@ -1,7 +1,5 @@
 <?php
 require 'admin/dbcon.php';
-require 'admin/message.php';
-
 ?>
 
 <!doctype html>
@@ -23,8 +21,6 @@ require 'admin/message.php';
 
 
     <div class="container mt-5">
-
-        <?php include('admin/message.php'); ?>
 
         <div class="row">
             <div class="col-md-12">

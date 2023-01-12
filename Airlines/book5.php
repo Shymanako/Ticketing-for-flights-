@@ -1,7 +1,5 @@
 <?php
 require 'admin/dbcon.php';
-require 'admin/message.php';
-
 ?>
 
 <!doctype html>
@@ -34,8 +32,6 @@ require 'admin/message.php';
 
     <div class="container mt-5">
 
-        <?php include('admin/message.php'); ?>
-
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
@@ -58,7 +54,7 @@ require 'admin/message.php';
                             passenger.email, flight.flight_id, flight.schedule_id, schedule.schedule_id, schedule.direction_id, schedule.departure_time, 
                             schedule.arrival_time, schedule.airline_id, schedule.price, direction.direction_id, direction.origin_airport_code, 
                             direction.destination_airport_code, airline.airline_id, airline.airline_name, payment.payment_id, payment.payment_method, 
-                            payment.payment_amount, payment.cvc, payment.expiry_date FROM booked_information left join reservation on 
+                            payment.payment_amount, payment.cvc, payment.expiry_date, direction.location, schedule.departure_date, schedule.arrival_date FROM booked_information left join reservation on 
                             booked_information.reservation_id = reservation.reservation_id left join passenger on booked_information.passenger_id = 
                             passenger.passenger_id left join flight on booked_information.flight_id = flight.flight_id left join schedule on 
                             flight.schedule_id = schedule.schedule_id left join direction on schedule.direction_id = direction.direction_id 
@@ -114,9 +110,17 @@ require 'admin/message.php';
                                     <p class="form-control">
                                         <?= $booked_info['origin_airport_code']; ?> to <?= $booked_info['destination_airport_code']; ?>
                                     </p>
+                                    <label> Departure Date </label>
+                                    <p class="form-control">
+                                    <?= $booked_info['departure_date']; ?>
+                                    </p>
                                     <label> Departure Time </label>
                                     <p class="form-control">
                                         <?= $booked_info['departure_time']; ?>
+                                    </p>
+                                    <label> Arrival Date </label>
+                                    <p class="form-control">
+                                    <?= $booked_info['arrival_date']; ?>
                                     </p>
                                     <label> Arrival Time </label>
                                     <p class="form-control">
@@ -171,7 +175,7 @@ require 'admin/message.php';
                             passenger.email, flight.flight_id, flight.schedule_id, schedule.schedule_id, schedule.direction_id, schedule.departure_time, 
                             schedule.arrival_time, schedule.airline_id, schedule.price, direction.direction_id, direction.origin_airport_code, 
                             direction.destination_airport_code, airline.airline_id, airline.airline_name, payment.payment_id, payment.payment_method, 
-                            payment.payment_amount, payment.cvc, payment.expiry_date FROM booked_information left join reservation on 
+                            payment.payment_amount, payment.cvc, payment.expiry_date, direction.location, schedule.departure_date, schedule.arrival_date FROM booked_information left join reservation on 
                             booked_information.reservation_id = reservation.reservation_id left join passenger on booked_information.passenger_id = 
                             passenger.passenger_id left join flight on booked_information.flight_id = flight.flight_id left join schedule on 
                             flight.schedule_id = schedule.schedule_id left join direction on schedule.direction_id = direction.direction_id 
@@ -192,28 +196,6 @@ require 'admin/message.php';
                                         <div id="entry-container">
 
                                             <!-- indv entries -->
-
-                                            <!-- Reservation ID -->
-                                            <div class="indv-container">
-
-                                                <!-- label -->
-                                                <h2 class="label">Reservation ID:</h2>
-
-                                                <!-- entry -->
-                                                <h4 class="entry"><?= $booked_info['reservation_id']; ?></h4>
-
-                                            </div>
-
-                                            <!-- Passenger ID -->
-                                            <div class="indv-container">
-
-                                                <!-- label -->
-                                                <h2 class="label">Passenger ID:</h2>
-
-                                                <!-- entry -->
-                                                <h4 class="entry"><?= $booked_info['passenger_id']; ?></h4>
-
-                                            </div>
 
                                             <!-- First Name -->
                                             <div class="indv-container">
@@ -281,25 +263,25 @@ require 'admin/message.php';
 
                                             </div>
                                             
-                                            <!-- Flight ID -->
+                                            <!-- Location -->
                                             <div class="indv-container">
 
                                                 <!-- label -->
-                                                <h2 class="label">Flight ID:</h2>
+                                                <h2 class="label">Location:</h2>
 
                                                 <!-- entry -->
-                                                <h4 class="entry"><?= $booked_info['flight_id']; ?></h4>
+                                                <h4 class="entry"><?= $booked_info['location']; ?></h4>
 
                                             </div>
-                                            
-                                            <!-- Direction -->
+
+                                            <!-- Departure Date -->
                                             <div class="indv-container">
 
                                                 <!-- label -->
-                                                <h2 class="label">Direction:</h2>
+                                                <h2 class="label">Departure Date:</h2>
 
                                                 <!-- entry -->
-                                                <h4 class="entry"><?= $booked_info['origin_airport_code']; ?> to <?= $booked_info['destination_airport_code']; ?></h4>
+                                                <h4 class="entry"><?= $booked_info['departure_date']; ?></h4>
 
                                             </div>
 
@@ -311,6 +293,17 @@ require 'admin/message.php';
 
                                                 <!-- entry -->
                                                 <h4 class="entry"><?= $booked_info['departure_time']; ?></h4>
+
+                                            </div>
+
+                                            <!-- Arrival Date -->
+                                            <div class="indv-container">
+
+                                                <!-- label -->
+                                                <h2 class="label">Arrival Date:</h2>
+
+                                                <!-- entry -->
+                                                <h4 class="entry"><?= $booked_info['arrival_date']; ?></h4>
 
                                             </div>
 
@@ -343,18 +336,7 @@ require 'admin/message.php';
                                                 <h2 class="label">Price:</h2>
 
                                                 <!-- entry -->
-                                                <h4 class="entry"><?= $booked_info['origin_airport_code']; ?> to <?= $booked_info['destination_airport_code']; ?></h4>
-
-                                            </div>
-
-                                            <!-- Payment ID -->
-                                            <div class="indv-container">
-
-                                                <!-- label -->
-                                                <h2 class="label">Payment ID:</h2>
-
-                                                <!-- entry -->
-                                                <h4 class="entry"> <?= $booked_info['payment_id']; ?></h4>
+                                                <h4 class="entry"><?= $booked_info['price']; ?></h4>
 
                                             </div>
 

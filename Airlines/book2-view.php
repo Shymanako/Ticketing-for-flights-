@@ -1,7 +1,5 @@
 <?php
 require 'admin/dbcon.php';
-require 'admin/message.php';
-
 ?>
 
 <!doctype html>
@@ -23,8 +21,6 @@ require 'admin/message.php';
 
     <div class="container mt-5">
 
-        <?php include('admin/message.php'); ?>
-
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
@@ -40,7 +36,7 @@ require 'admin/message.php';
                             $reservation_id = $_SESSION['get_reservation'];
                         }
 
-                        $query = "Select reservation.reservation_id, reservation.passenger_id, reservation.flight_id, flight.flight_id, flight.schedule_id, schedule.schedule_id, direction.direction_id, airline.airline_id, airline.airline_name, direction.origin_airport_code, direction.destination_airport_code, schedule.direction_id, schedule.departure_time, schedule.arrival_time, schedule.airline_id, schedule.price from reservation left join flight on reservation.flight_id = flight.flight_id left join schedule on flight.schedule_id = schedule.schedule_id left join direction on schedule.direction_id = direction.direction_id left join airline on schedule.airline_id = airline.airline_id order by reservation_id desc limit 1";
+                        $query = "Select reservation.reservation_id, reservation.passenger_id, reservation.flight_id, flight.flight_id, flight.schedule_id, schedule.schedule_id, direction.direction_id, direction.location, airline.airline_id, airline.airline_name, direction.origin_airport_code, direction.destination_airport_code, schedule.direction_id, schedule.departure_date, schedule.departure_time, schedule.arrival_date, schedule.arrival_time, schedule.airline_id, schedule.price from reservation left join flight on reservation.flight_id = flight.flight_id left join schedule on flight.schedule_id = schedule.schedule_id left join direction on schedule.direction_id = direction.direction_id left join airline on schedule.airline_id = airline.airline_id order by reservation_id desc limit 1";
                         $query_run = mysqli_query($con, $query);
 
                         if (mysqli_num_rows($query_run) > 0) {
@@ -148,6 +144,17 @@ require 'admin/message.php';
 
                                     </div>
 
+                                    <!-- Departure Date -->
+                                    <div class="indv-container">
+
+                                        <!-- label -->
+                                        <h2 class="label">Departure Date:</h2>
+
+                                        <!-- entry -->
+                                        <h4 class="entry"><?= $reservation['departure_date']; ?></h4>
+
+                                    </div>
+
                                     <!-- Departure Time -->
                                     <div class="indv-container">
 
@@ -156,6 +163,17 @@ require 'admin/message.php';
 
                                         <!-- entry -->
                                         <h4 class="entry"><?= $reservation['departure_time']; ?></h4>
+
+                                    </div>
+
+                                    <!-- Arrival Date -->
+                                    <div class="indv-container">
+
+                                        <!-- label -->
+                                        <h2 class="label">Arrival Date:</h2>
+
+                                        <!-- entry -->
+                                        <h4 class="entry"><?= $reservation['arrival_date']; ?></h4>
 
                                     </div>
 
@@ -192,7 +210,7 @@ require 'admin/message.php';
                                     </a>
 
                                     <!-- Cancel -->
-                                    <button id="cancel-btn" type="submit" name="delete_passenger" value="<?= $passenger['passenger_id']; ?>" class="btn" onclick="history.back()">Cancel</button>
+                                    <a id="cancel-btn" href="delete.php?f_reservation_id=<?= $reservation['reservation_id']; ?>&f_passenger_id=<?= $reservation['passenger_id'];?>" class="btn" onclick="history.back()">Cancel</a>
 
                                 </form>
 
