@@ -47,10 +47,6 @@ require 'admin/dbcon.php';
         $departure_date = mysqli_real_escape_string($con, $_POST['departure_date']);
         $direction_id = mysqli_real_escape_string($con, $_POST['direction_id']);
         $passenger_id = mysqli_real_escape_string($con, $_POST['passenger_id']);
-        echo $departure_date;
-        echo $direction_id;
-        echo $passenger_id;
-        
 
     }
     ?>

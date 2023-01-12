@@ -10,17 +10,18 @@ require 'admin/dbcon.php';
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous"> -->
-     <link rel="stylesheet" href="css/book1-view.css">
+    <link rel="stylesheet" href="css/book1-view.css">
 
     <title>Passenger Data</title>
 
     <style>
-        body{
+        body {
             min-height: 1200px;
             overflow-x: hidden;
             width: 100%;
         }
-        #cancel-btn{
+
+        #cancel-btn {
             display: none;
         }
     </style>
@@ -64,7 +65,7 @@ require 'admin/dbcon.php';
 
                             if (mysqli_num_rows($query_run) > 0) {
                                 $booked_info = mysqli_fetch_array($query_run);
-                            
+
                             ?>
                             <input type="hidden" name="booked_id" value="<?= $booked_info['booked_id']; ?>">
                                 <div class="mb-3">
@@ -185,218 +186,239 @@ require 'admin/dbcon.php';
 
                             if (mysqli_num_rows($query_run) > 0) {
                                 $booked_info = mysqli_fetch_array($query_run);
-                            
+
                             ?>
-                                    <input type="hidden" name="booked_id" value="<?= $booked_info['booked_id']; ?>">
+                                <input type="hidden" name="booked_id" value="<?= $booked_info['booked_id']; ?>">
 
-                                    <!-- main card -->
-                                    <div id="main-card">
+                                <!-- main card -->
+                                <div id="main-card">
 
-                                        <!-- entry container -->
-                                        <div id="entry-container">
+                                    <!-- entry container -->
+                                    <div id="entry-container">
 
-                                            <!-- indv entries -->
+                                        <!-- indv entries -->
 
-                                            <!-- First Name -->
-                                            <div class="indv-container">
+                                        <!-- First Name -->
+                                        <div class="indv-container">
 
-                                                <!-- label -->
-                                                <h2 class="label">First Name:</h2>
+                                            <!-- label -->
+                                            <h2 class="label">First Name:</h2>
 
-                                                <!-- entry -->
-                                                <h4 class="entry"><?= $booked_info['first_name']; ?></h4>
-
-                                            </div>
-
-                                            <!-- Last Name -->
-                                            <div class="indv-container">
-
-                                                <!-- label -->
-                                                <h2 class="label">Last Name:</h2>
-
-                                                <!-- entry -->
-                                                <h4 class="entry"><?= $booked_info['last_name']; ?></h4>
-
-                                            </div>
-
-                                            <!-- Date of Birth -->
-                                            <div class="indv-container">
-
-                                                <!-- label -->
-                                                <h2 class="label">Date of Birth:</h2>
-
-                                                <!-- entry -->
-                                                <h4 class="entry"><?= $booked_info['date_of_birth']; ?></h4>
-
-                                            </div>
-
-                                            <!-- Citizenship -->
-                                            <div class="indv-container">
-
-                                                <!-- label -->
-                                                <h2 class="label">Citizenship:</h2>
-
-                                                <!-- entry -->
-                                                <h4 class="entry"><?= $booked_info['citizenship']; ?></h4>
-
-                                            </div>
-                                            
-                                            <!-- Phone Number -->
-                                            <div class="indv-container">
-
-                                                <!-- label -->
-                                                <h2 class="label">Phone Number:</h2>
-
-                                                <!-- entry -->
-                                                <h4 class="entry"><?= $booked_info['p_number']; ?></h4>
-
-                                            </div>
-                                            
-                                            <!-- Email -->
-                                            <div class="indv-container">
-
-                                                <!-- label -->
-                                                <h2 class="label">Email:</h2>
-
-                                                <!-- entry -->
-                                                <h4 class="entry"><?= $booked_info['email']; ?></h4>
-
-                                            </div>
-                                            
-                                            <!-- Location -->
-                                            <div class="indv-container">
-
-                                                <!-- label -->
-                                                <h2 class="label">Location:</h2>
-
-                                                <!-- entry -->
-                                                <h4 class="entry"><?= $booked_info['location']; ?></h4>
-
-                                            </div>
-
-                                            <!-- Departure Date -->
-                                            <div class="indv-container">
-
-                                                <!-- label -->
-                                                <h2 class="label">Departure Date:</h2>
-
-                                                <!-- entry -->
-                                                <h4 class="entry"><?= $booked_info['departure_date']; ?></h4>
-
-                                            </div>
-
-                                            <!-- Departure Time -->
-                                            <div class="indv-container">
-
-                                                <!-- label -->
-                                                <h2 class="label">Departure Time:</h2>
-
-                                                <!-- entry -->
-                                                <h4 class="entry"><?= $booked_info['departure_time']; ?></h4>
-
-                                            </div>
-
-                                            <!-- Arrival Date -->
-                                            <div class="indv-container">
-
-                                                <!-- label -->
-                                                <h2 class="label">Arrival Date:</h2>
-
-                                                <!-- entry -->
-                                                <h4 class="entry"><?= $booked_info['arrival_date']; ?></h4>
-
-                                            </div>
-
-                                            <!-- Arrival Time -->
-                                            <div class="indv-container">
-
-                                                <!-- label -->
-                                                <h2 class="label">Arrival Time:</h2>
-
-                                                <!-- entry -->
-                                                <h4 class="entry"><?= $booked_info['arrival_time']; ?></h4>
-
-                                            </div>
-
-                                            <!-- Airline -->
-                                            <div class="indv-container">
-
-                                                <!-- label -->
-                                                <h2 class="label">Airline:</h2>
-
-                                                <!-- entry -->
-                                                <h4 class="entry"><?= $booked_info['airline_name']; ?></h4>
-
-                                            </div>
-
-                                            <!-- Price -->
-                                            <div class="indv-container">
-
-                                                <!-- label -->
-                                                <h2 class="label">Price:</h2>
-
-                                                <!-- entry -->
-                                                <h4 class="entry"><?= $booked_info['price']; ?></h4>
-
-                                            </div>
-
-                                            <!-- Payment Method -->
-                                            <div class="indv-container">
-
-                                                <!-- label -->
-                                                <h2 class="label">Payment Method:</h2>
-
-                                                <!-- entry -->
-                                                <h4 class="entry"><?= $booked_info['payment_method']; ?></h4>
-
-                                            </div>
-
-                                            <!-- Payment Amount -->
-                                            <div class="indv-container">
-
-                                                <!-- label -->
-                                                <h2 class="label">Payment Amount:</h2>
-
-                                                <!-- entry -->
-                                                <h4 class="entry"><?= $booked_info['payment_amount']; ?></h4>
-
-                                            </div>
-
-                                            <!-- CVC -->
-                                            <div class="indv-container">
-
-                                                <!-- label -->
-                                                <h2 class="label">CVC:</h2>
-
-                                                <!-- entry -->
-                                                <h4 class="entry"><?= $booked_info['cvc']; ?></h4>
-
-                                            </div>
-
-                                            <!-- Expiration Date -->
-                                            <div class="indv-container">
-
-                                                <!-- label -->
-                                                <h2 class="label">Expiration Date:</h2>
-
-                                                <!-- entry -->
-                                                <h4 class="entry"><?= $booked_info['expiry_date']; ?></h4>
-
-                                            </div>
+                                            <!-- entry -->
+                                            <h4 class="entry"><?= $booked_info['first_name']; ?></h4>
 
                                         </div>
 
-                                        <div id="act-container">
+                                        <!-- Last Name -->
+                                        <div class="indv-container">
 
-                                            <!-- confirm -->
-                                            <button id="confirm-btn" type="submit" name="finish_booking" value="<?= $booked_info['booked_id']; ?>" class="btn btn-info btn-sm">Finish</button>
-    
-                                            <!-- Cancel -->
-                                            <a id="cancel-btn" href="delete.php?p_payment_id=<?= $payment['payment_id']; ?>&p_reservation_id=<?= $payment['reservation_id']; ?>" class="btn" onclick="history.back()">Cancel</a>
+                                            <!-- label -->
+                                            <h2 class="label">Last Name:</h2>
+
+                                            <!-- entry -->
+                                            <h4 class="entry"><?= $booked_info['last_name']; ?></h4>
+
+                                        </div>
+
+                                        <!-- Date of Birth -->
+                                        <div class="indv-container">
+
+                                            <!-- label -->
+                                            <h2 class="label">Date of Birth:</h2>
+
+                                            <!-- entry -->
+                                            <h4 class="entry"><?= $booked_info['date_of_birth']; ?></h4>
+
+                                        </div>
+
+                                        <!-- Citizenship -->
+                                        <div class="indv-container">
+
+                                            <!-- label -->
+                                            <h2 class="label">Citizenship:</h2>
+
+                                            <!-- entry -->
+                                            <h4 class="entry"><?= $booked_info['citizenship']; ?></h4>
+
+                                        </div>
+
+                                        <!-- Phone Number -->
+                                        <div class="indv-container">
+
+                                            <!-- label -->
+                                            <h2 class="label">Phone Number:</h2>
+
+                                            <!-- entry -->
+                                            <h4 class="entry"><?= $booked_info['p_number']; ?></h4>
+
+                                        </div>
+
+                                        <!-- Email -->
+                                        <div class="indv-container">
+
+                                            <!-- label -->
+                                            <h2 class="label">Email:</h2>
+
+                                            <!-- entry -->
+                                            <h4 class="entry"><?= $booked_info['email']; ?></h4>
+
+                                        </div>
+
+                                        <!-- Location -->
+                                        <div class="indv-container">
+
+                                            <!-- label -->
+                                            <h2 class="label">Location:</h2>
+
+                                            <!-- entry -->
+                                            <h4 class="entry"><?= $booked_info['location']; ?></h4>
+
+                                        </div>
+
+                                        <div class="indv-container">
+
+                                            <!-- label -->
+                                            <h2 class="label">Origin Airport:</h2>
+
+                                            <!-- entry -->
+                                            <h4 class="entry"><?php echo $airport_name1; ?></h4>
+
+                                        </div>
+
+                                        <!-- Destination Airport -->
+                                        <div class="indv-container">
+
+                                            <!-- label -->
+                                            <h2 class="label">Destination Airport:</h2>
+
+                                            <!-- entry -->
+                                            <h4 class="entry"><?php echo $airport_name2; ?></h4>
+
+                                        </div>
+
+                                        <!-- Departure Date -->
+                                        <div class="indv-container">
+
+                                            <!-- label -->
+                                            <h2 class="label">Departure Date:</h2>
+
+                                            <!-- entry -->
+                                            <h4 class="entry"><?= $booked_info['departure_date']; ?></h4>
+
+                                        </div>
+
+                                        <!-- Departure Time -->
+                                        <div class="indv-container">
+
+                                            <!-- label -->
+                                            <h2 class="label">Departure Time:</h2>
+
+                                            <!-- entry -->
+                                            <h4 class="entry"><?= $booked_info['departure_time']; ?></h4>
+
+                                        </div>
+
+                                        <!-- Arrival Date -->
+                                        <div class="indv-container">
+
+                                            <!-- label -->
+                                            <h2 class="label">Arrival Date:</h2>
+
+                                            <!-- entry -->
+                                            <h4 class="entry"><?= $booked_info['arrival_date']; ?></h4>
+
+                                        </div>
+
+                                        <!-- Arrival Time -->
+                                        <div class="indv-container">
+
+                                            <!-- label -->
+                                            <h2 class="label">Arrival Time:</h2>
+
+                                            <!-- entry -->
+                                            <h4 class="entry"><?= $booked_info['arrival_time']; ?></h4>
+
+                                        </div>
+
+                                        <!-- Airline -->
+                                        <div class="indv-container">
+
+                                            <!-- label -->
+                                            <h2 class="label">Airline:</h2>
+
+                                            <!-- entry -->
+                                            <h4 class="entry"><?= $booked_info['airline_name']; ?></h4>
+
+                                        </div>
+
+                                        <!-- Price -->
+                                        <div class="indv-container">
+
+                                            <!-- label -->
+                                            <h2 class="label">Price:</h2>
+
+                                            <!-- entry -->
+                                            <h4 class="entry"><?= $booked_info['price']; ?></h4>
+
+                                        </div>
+
+                                        <!-- Payment Method -->
+                                        <div class="indv-container">
+
+                                            <!-- label -->
+                                            <h2 class="label">Payment Method:</h2>
+
+                                            <!-- entry -->
+                                            <h4 class="entry"><?= $booked_info['payment_method']; ?></h4>
+
+                                        </div>
+
+                                        <!-- Payment Amount -->
+                                        <div class="indv-container">
+
+                                            <!-- label -->
+                                            <h2 class="label">Payment Amount:</h2>
+
+                                            <!-- entry -->
+                                            <h4 class="entry"><?= $booked_info['payment_amount']; ?></h4>
+
+                                        </div>
+
+                                        <!-- CVC -->
+                                        <div class="indv-container">
+
+                                            <!-- label -->
+                                            <h2 class="label">CVC:</h2>
+
+                                            <!-- entry -->
+                                            <h4 class="entry"><?= $booked_info['cvc']; ?></h4>
+
+                                        </div>
+
+                                        <!-- Expiration Date -->
+                                        <div class="indv-container">
+
+                                            <!-- label -->
+                                            <h2 class="label">Expiration Date:</h2>
+
+                                            <!-- entry -->
+                                            <h4 class="entry"><?= $booked_info['expiry_date']; ?></h4>
 
                                         </div>
 
                                     </div>
+
+                                    <div id="act-container">
+
+                                        <!-- confirm -->
+                                        <button id="confirm-btn" type="submit" name="finish_booking" value="<?= $booked_info['booked_id']; ?>" class="btn btn-info btn-sm">Finish</button>
+
+                                        <!-- Cancel -->
+                                        <a id="cancel-btn" href="delete.php?p_payment_id=<?= $payment['payment_id']; ?>&p_reservation_id=<?= $payment['reservation_id']; ?>" class="btn" onclick="history.back()">Cancel</a>
+
+                                    </div>
+
+                                </div>
                             <?php
                             } else {
                                 echo '<h5>No Record Found </h5>';

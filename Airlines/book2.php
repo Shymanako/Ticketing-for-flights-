@@ -78,8 +78,6 @@ require 'admin/dbcon.php';
                     }
                 }
 
-                echo $passenger_id;
-
                 ?>
                 <input type="hidden" name="passenger_id" value="<?php echo $passenger_id; ?>">
             </div>
