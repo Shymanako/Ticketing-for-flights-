@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 10, 2023 at 02:43 PM
--- Server version: 10.4.27-MariaDB
--- PHP Version: 8.2.0
+-- Generation Time: Jan 14, 2023 at 02:16 PM
+-- Server version: 10.4.25-MariaDB
+-- PHP Version: 8.1.10
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -30,7 +30,7 @@ SET time_zone = "+00:00";
 CREATE TABLE `airline` (
   `airline_id` char(3) NOT NULL,
   `airline_name` varchar(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `airline`
@@ -49,7 +49,7 @@ INSERT INTO `airline` (`airline_id`, `airline_name`) VALUES
 CREATE TABLE `airport` (
   `airport_code` char(3) NOT NULL,
   `airport_name` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `airport`
@@ -73,16 +73,7 @@ CREATE TABLE `booked_information` (
   `passenger_id` int(10) NOT NULL,
   `flight_id` int(10) NOT NULL,
   `payment_id` int(10) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `booked_information`
---
-
-INSERT INTO `booked_information` (`booked_id`, `reservation_id`, `passenger_id`, `flight_id`, `payment_id`) VALUES
-(1, 10, 10, 1, 1),
-(2, 11, 11, 1, 2),
-(3, 45, 17, 2, 3);
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -95,7 +86,7 @@ CREATE TABLE `direction` (
   `origin_airport_code` char(3) NOT NULL,
   `destination_airport_code` char(3) NOT NULL,
   `location` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `direction`
@@ -117,16 +108,17 @@ CREATE TABLE `flight` (
   `schedule_id` int(10) NOT NULL,
   `image` varchar(255) NOT NULL,
   `description` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `flight`
 --
 
 INSERT INTO `flight` (`flight_id`, `schedule_id`, `image`, `description`) VALUES
-(1, 1, 'Flight_Image_571.jpg', 'Helo'),
-(2, 2, 'Flight_Image_530.jpg', 'Hi'),
-(3, 3, 'Flight_Image_417.jpg', 'yummy');
+(4, 4, 'Flight_Image_917.jpg', 'Singapore The home of lions'),
+(5, 7, 'Flight_Image_0.jpg', 'asd'),
+(6, 8, 'Flight_Image_657.png', 'asd'),
+(7, 9, 'Flight_Image_707.jpg', 'awq');
 
 -- --------------------------------------------------------
 
@@ -142,35 +134,7 @@ CREATE TABLE `passenger` (
   `citizenship` varchar(20) NOT NULL,
   `p_number` varchar(20) NOT NULL,
   `email` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `passenger`
---
-
-INSERT INTO `passenger` (`passenger_id`, `first_name`, `last_name`, `date_of_birth`, `citizenship`, `p_number`, `email`) VALUES
-(1, 'noel', 'salazar', '1221-12-12', 'f', '123123123', '122@gmail.com'),
-(2, 'asdasd', 'asd', '1212-12-12', 'sad', '123123123', '123@gmail.com'),
-(3, 'asd', 'asd', '1212-12-12', 'asdasd', '1231231', 'qweq@gmail.com'),
-(4, 'asda', 'dasda', '1232-12-31', 'qweqw', '12312321312', 'asd12@gmail.com'),
-(5, 'asd', 'asd', '1124-04-23', 'sdada', '123', 'qwe2@yahoo.com'),
-(6, 'asd', 'asd', '1231-12-12', 'asdadas', '1231232131', 'dasda@yahoo.com'),
-(10, 'qwe', 'qwe', '1212-12-12', 'qweq', '123123123', 'qwe@gmail.com'),
-(11, 'Noel', 'asd', '2012-12-25', 'fwqf', '123213213', 'f@gmail.com'),
-(12, 'sad', 'asd', '1212-12-12', 'ad', '213', 'sd@gmail.com'),
-(13, 'asd', 'asd', '1212-12-12', 'sd', '211312', 'ww@yahoo.com'),
-(14, 'asd', 'asd', '1212-12-12', 'qweqw', '123213', '12@yahoo.com'),
-(15, 'wqe', 'qwe', '1212-12-12', 'qwe', '123', 'we2@yahoo.com'),
-(16, 'asdasd', 'asd', '1212-12-12', 'we', '213', 'asd@yahoo.com'),
-(17, 'qwe', 'qwe', '1212-12-12', 'qweqwe', '12323', 'we@yahoo.com'),
-(20, '234', '234', '1212-12-12', 'qweqwe', '123123', '12@gmail.com'),
-(21, 'wqe', 'qwe', '1212-12-12', 'wqe', '131231', '2we@yahoo.com'),
-(22, 'asd', 'asd', '1212-12-12', '1', '1231', 'eweq@gmail.com'),
-(23, 'eqwe', 'qwe', '1212-12-12', 'weq', '312313', '3@gmail.com'),
-(24, 'qwe', 'qwe', '1212-12-12', 'qwe', '1233', '2@yahoo.com'),
-(25, 'wqe', 'qwe', '1212-12-12', 'wqeq', '123123', 'w@yahoo.com'),
-(27, 'das', 'da', '1212-12-12', 'adada', '2131', '31231@yahoo.com'),
-(28, 'qwe', 'weq', '1212-12-12', 'weqwe', '1231342', 'qwe@yahoo.com');
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -185,16 +149,7 @@ CREATE TABLE `payment` (
   `payment_amount` int(11) NOT NULL,
   `cvc` int(3) NOT NULL,
   `expiry_date` date NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `payment`
---
-
-INSERT INTO `payment` (`payment_id`, `reservation_id`, `payment_method`, `payment_amount`, `cvc`, `expiry_date`) VALUES
-(1, 10, 'Visa', 125, 123, '2023-01-26'),
-(2, 11, 'Mastercard', 125, 123, '2023-01-24'),
-(3, 45, 'Visa', 69, 123, '2023-01-18');
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -206,18 +161,7 @@ CREATE TABLE `reservation` (
   `reservation_id` int(10) NOT NULL,
   `passenger_id` int(10) NOT NULL,
   `flight_id` int(10) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `reservation`
---
-
-INSERT INTO `reservation` (`reservation_id`, `passenger_id`, `flight_id`) VALUES
-(3, 20, 1),
-(4, 21, 1),
-(5, 22, 1),
-(11, 24, 1),
-(12, 25, 1);
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -230,32 +174,23 @@ CREATE TABLE `schedule` (
   `direction_id` int(7) NOT NULL,
   `departure_date` date NOT NULL,
   `departure_time` time NOT NULL,
-  `arrval_date` date NOT NULL,
+  `arrival_date` date NOT NULL,
   `arrival_time` time NOT NULL,
   `airline_id` char(3) NOT NULL,
   `price` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Stand-in structure for view `ticket`
--- (See below for the actual view)
+-- Dumping data for table `schedule`
 --
-CREATE TABLE `ticket` (
-`flight_id` int(10)
-,`direction_id` int(7)
-,`schedule_id` int(10)
-);
 
--- --------------------------------------------------------
-
---
--- Structure for view `ticket`
---
-DROP TABLE IF EXISTS `ticket`;
-
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `ticket`  AS SELECT `f`.`flight_id` AS `flight_id`, `s`.`direction_id` AS `direction_id`, `s`.`schedule_id` AS `schedule_id` FROM (`flight` `f` left join `schedule` `s` on(`f`.`schedule_id` = `s`.`schedule_id`)) ORDER BY `f`.`flight_id` ASC  ;
+INSERT INTO `schedule` (`schedule_id`, `direction_id`, `departure_date`, `departure_time`, `arrival_date`, `arrival_time`, `airline_id`, `price`) VALUES
+(4, 1, '2023-01-20', '20:37:00', '2023-01-14', '20:37:00', 'GNA', 123),
+(5, 2, '2023-01-14', '13:46:00', '2023-01-15', '01:46:00', 'GNA', 123),
+(6, 1, '2023-01-15', '13:47:00', '2023-01-16', '13:47:00', 'GNA', 52),
+(7, 1, '2023-01-20', '13:48:00', '2023-01-19', '13:48:00', 'GNA', 4521),
+(8, 1, '2023-01-18', '14:15:00', '2023-01-20', '14:15:00', 'GNA', 234),
+(9, 1, '2023-01-18', '14:16:00', '2023-01-20', '14:16:00', 'GNA', 43);
 
 --
 -- Indexes for dumped tables
@@ -323,7 +258,7 @@ ALTER TABLE `schedule`
 -- AUTO_INCREMENT for table `booked_information`
 --
 ALTER TABLE `booked_information`
-  MODIFY `booked_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `booked_id` int(10) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `direction`
@@ -335,31 +270,31 @@ ALTER TABLE `direction`
 -- AUTO_INCREMENT for table `flight`
 --
 ALTER TABLE `flight`
-  MODIFY `flight_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `flight_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `passenger`
 --
 ALTER TABLE `passenger`
-  MODIFY `passenger_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `passenger_id` int(10) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `payment`
 --
 ALTER TABLE `payment`
-  MODIFY `payment_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `payment_id` int(10) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `reservation`
 --
 ALTER TABLE `reservation`
-  MODIFY `reservation_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `reservation_id` int(10) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `schedule`
 --
 ALTER TABLE `schedule`
-  MODIFY `schedule_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `schedule_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
