@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Bitter&family=Cutive+Mono&family=Righteous&display=swap');
+
 *{
     margin: 0;
     padding: 0;
@@ -5,11 +7,17 @@
 }
 
 body{
-    /* height:1000px; */
+    /* height:100vh; */
+    padding-top: 100px;
     display: flex;
         justify-content: center;
         align-items: center;
         flex-flow: column nowrap;
+    font-family: 'Bitter', serif;
+}
+a{
+    text-decoration: none;
+    color: #000;
 }
 
 /* main card */
@@ -18,12 +26,13 @@ body{
 }
 
 
+
 /* buttons */
 #btn-container{
     width: 800px;
     padding: 5px 10px;
     display: flex;
-        justify-content: space-between
+        justify-content: space-between;
 }
     #btn-container button{
         padding: 3px 8px;
@@ -31,8 +40,17 @@ body{
 
 /* card container */
 #card-container{
-    border: 1px #000 solid;
+    /* border: 1px #000 solid; */
+    margin-top: 20px;
     width: 800px;
+}
+
+/* logo */
+#logo{
+    font-family: 'Righteous', cursive;
+    background: #ffc1c1;
+    padding: 10px;
+    color: #000;
 }
 
 /* entries */
@@ -42,8 +60,20 @@ body{
 }
     .entry-container{
         width: 50%;
-        border: 1px red solid;
+        /* border: 1px red solid; */
     }
     .name-container{
         width: 100%;
     }
+
+        .label{
+            font-size: 20px;
+            font-weight: 400;
+        }
+        .entry{
+            margin: 3px;
+            padding: 3px;
+            background: #dfdfdf;
+            font-size: 25px;
+            font-family: 'Cutive Mono', monospace;
+        }
