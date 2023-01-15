@@ -19,7 +19,6 @@ if (isset($_GET['delete_flight_id']) and isset($_GET['delete_image'])) {
             //failed to remove remove image
             $_SESSION['message'] = "Image not Available";
             header("Location: flight.php");
-            die();
         } else {
         }
     } else {

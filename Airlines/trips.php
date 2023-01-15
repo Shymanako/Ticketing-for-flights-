@@ -77,7 +77,7 @@ require 'admin/dbcon.php';
                             } else {
                                 //Image Available
                             ?>
-                                <img src="<?php echo 'http://localhost/Ticketing-for-flights-/Airlines/'; ?>img/flight/<?php echo $image; ?>" width="320px">
+                                <img src="<?php echo 'http://localhost/Ticketing-for-flights-/Airlines/'; ?>img/flight/<?php echo $image; ?>" width="320px" height="205px">
                             <?php
                             }
 
