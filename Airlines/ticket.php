@@ -135,44 +135,76 @@ require 'admin/dbcon.php';
         <h1>Airline Ticket</h1>
 
         <!-- passenger info -->
-        
+
         <!-- entry -->
         <div class="entries">
 
             <!-- name -->
             <div class="entry-container name-container">
                 <h2 class="label">Name:</h2>
-                <h3 class="entry">John Doe</h3>
+                <h3 class="entry"><?= $booked_info['first_name']; ?> <?= $booked_info['last_name']; ?></h3>
             </div>
 
             <!-- from -->
             <div class="entry-container">
                 <h2 class="label">From:</h2>
-                <h3 class="entry">Tanghal</h3>
+                <h3 class="entry">
+
+                    <?php
+                    $query2 = "select direction.origin_airport_code, airport.airport_name from booked_information left join flight on booked_information.flight_id = flight.flight_id left join schedule on flight.schedule_id = schedule.schedule_id left join direction on schedule.direction_id = direction.direction_id left join airport on direction.origin_airport_code = airport.airport_code where booked_id='$booked_id'";
+                    $query_run2 = mysqli_query($con, $query2);
+                    if (mysqli_num_rows($query_run2) > 0) {
+                        while ($row2 = mysqli_fetch_assoc($query_run2)) {
+                            $origin_airport_code = $row2['origin_airport_code'];
+                            $airport_name = $row2['airport_name'];
+                    ?>
+                            <?php echo $airport_name; ?>
+                    <?php
+                        }
+                    }
+                    ?>
+
+                </h3>
             </div>
 
             <!-- to -->
             <div class="entry-container">
                 <h2 class="label">To:</h2>
-                <h3 class="entry">H</h3>
+                <h3 class="entry">
+
+                    <?php
+                    $query2 = "select direction.origin_airport_code, airport.airport_name from booked_information left join flight on booked_information.flight_id = flight.flight_id left join schedule on flight.schedule_id = schedule.schedule_id left join direction on schedule.direction_id = direction.direction_id left join airport on direction.destination_airport_code = airport.airport_code where booked_id='$booked_id'";
+                    $query_run2 = mysqli_query($con, $query2);
+                    if (mysqli_num_rows($query_run2) > 0) {
+                        while ($row2 = mysqli_fetch_assoc($query_run2)) {
+                            $origin_airport_code = $row2['origin_airport_code'];
+                            $airport_name = $row2['airport_name'];
+                    ?>
+                            <?php echo $airport_name; ?>
+                    <?php
+                        }
+                    }
+                    ?>
+
+                </h3>
             </div>
 
             <!-- flight id -->
             <div class="entry-container">
                 <h2 class="label">Flight ID:</h2>
-                <h3 class="entry">1234567890</h3>
+                <h3 class="entry"><?= $booked_info['flight_id']; ?></h3>
             </div>
 
             <!--date -->
             <div class="entry-container">
                 <h2 class="label">Date (yyyy-mm-dd):</h2>
-                <h3 class="entry">karon</h3>
+                <h3 class="entry"><?= $booked_info['departure_date']; ?></h3>
             </div>
 
             <!-- time -->
             <div class="entry-container">
                 <h2 class="label">Time:</h2>
-                <h3 class="entry">taud-taud</h3>
+                <h3 class="entry"><?= $booked_info['departure_time']; ?></h3>
             </div>
 
         </div>
