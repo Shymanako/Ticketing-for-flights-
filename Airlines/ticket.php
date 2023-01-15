@@ -11,6 +11,9 @@ require 'admin/dbcon.php';
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
     <link rel="stylesheet" href="css/ticket.css">
+    <script src=
+"https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.2/jspdf.min.js">
+        </script>
 
     <title>Passenger Data</title>
 
@@ -18,7 +21,7 @@ require 'admin/dbcon.php';
 
 <body>
 
-    <div class="container mt-5">
+    <!-- <div class="container mt-5">
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
@@ -120,26 +123,102 @@ require 'admin/dbcon.php';
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
 
     <!-- button container -->
     <div id="btn-container">
-        <button>Download Ticket</button>
-        <button type="submit">Finish</button>
+        <button id="downl-btn">Download</button>
+        <button><a href="home.php">Finish</a></button>
     </div>
 
     <!--card container-->
     <div id="card-container">
 
         <!-- logo -->
-        <h1>Airline Ticket</h1>
+        <h1 id="logo">Airline Ticket</h1>
 
-        
+        <!-- passenger info -->
+
+        <!-- entry -->
+        <div class="entries">
+
+            <!-- name -->
+            <div class="entry-container name-container">
+                <h2 class="label">Name:</h2>
+                <h3 class="entry"><?= $booked_info['first_name']; ?> <?= $booked_info['last_name']; ?></h3>
+            </div>
+
+            <!-- from -->
+            <div class="entry-container">
+                <h2 class="label">From:</h2>
+                <h3 class="entry">
+
+                    <?php
+                    $query2 = "select direction.origin_airport_code, airport.airport_name from booked_information left join flight on booked_information.flight_id = flight.flight_id left join schedule on flight.schedule_id = schedule.schedule_id left join direction on schedule.direction_id = direction.direction_id left join airport on direction.origin_airport_code = airport.airport_code where booked_id='$booked_id'";
+                    $query_run2 = mysqli_query($con, $query2);
+                    if (mysqli_num_rows($query_run2) > 0) {
+                        while ($row2 = mysqli_fetch_assoc($query_run2)) {
+                            $origin_airport_code = $row2['origin_airport_code'];
+                            $airport_name = $row2['airport_name'];
+                    ?>
+                            <?php echo $airport_name; ?>
+                    <?php
+                        }
+                    }
+                    ?>
+
+                </h3>
+            </div>
+
+            <!-- to -->
+            <div class="entry-container">
+                <h2 class="label">To:</h2>
+                <h3 class="entry">
+
+                    <?php
+                    $query2 = "select direction.origin_airport_code, airport.airport_name from booked_information left join flight on booked_information.flight_id = flight.flight_id left join schedule on flight.schedule_id = schedule.schedule_id left join direction on schedule.direction_id = direction.direction_id left join airport on direction.destination_airport_code = airport.airport_code where booked_id='$booked_id'";
+                    $query_run2 = mysqli_query($con, $query2);
+                    if (mysqli_num_rows($query_run2) > 0) {
+                        while ($row2 = mysqli_fetch_assoc($query_run2)) {
+                            $origin_airport_code = $row2['origin_airport_code'];
+                            $airport_name = $row2['airport_name'];
+                    ?>
+                            <?php echo $airport_name; ?>
+                    <?php
+                        }
+                    }
+                    ?>
+
+                </h3>
+            </div>
+
+            <!-- flight id -->
+            <div class="entry-container">
+                <h2 class="label">Flight ID:</h2>
+                <h3 class="entry"><?= $booked_info['flight_id']; ?></h3>
+            </div>
+
+            <!--date -->
+            <div class="entry-container">
+                <h2 class="label">Date (yyyy-mm-dd):</h2>
+                <h3 class="entry"><?= $booked_info['departure_date']; ?></h3>
+            </div>
+
+            <!-- time -->
+            <div class="entry-container">
+                <h2 class="label">Time:</h2>
+                <h3 class="entry"><?= $booked_info['departure_time']; ?></h3>
+            </div>
+
+        </div>
 
     </div>
 
 
+    <script src="js/ticket.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+    
 
 
 </body>
