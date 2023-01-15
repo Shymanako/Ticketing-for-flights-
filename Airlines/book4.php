@@ -77,7 +77,6 @@ require 'admin/dbcon.php';
                 } else {
                     if (isset($_SESSION['reservation'])) {
                         $reservation_id = $_SESSION['reservation'];
-                        echo $reservation_id;
                     }
                 }
 

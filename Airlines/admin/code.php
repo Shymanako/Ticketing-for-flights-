@@ -77,7 +77,6 @@ if (isset($_POST['update_flight'])) {
     $flight_id = mysqli_real_escape_string($con, $_POST['flight_id']);
     $schedule_id = mysqli_real_escape_string($con, $_POST['schedule_id']);
     $current_image = mysqli_real_escape_string($con, $_POST['current_image']);
-    $description = mysqli_real_escape_string($con, $_POST['description']);
 
     // update new image if selected
     // check whether the image is selected or not
@@ -139,7 +138,7 @@ if (isset($_POST['update_flight'])) {
     }
 
     // update the database
-    $query = "update flight set schedule_id = '$schedule_id', image = '$image', description = '$description' where flight_id = $flight_id";
+    $query = "update flight set schedule_id = '$schedule_id', image = '$image' where flight_id = $flight_id";
     // excecute query
     $query_run = mysqli_query($con, $query);
 
@@ -160,7 +159,6 @@ if (isset($_POST['update_flight'])) {
 
 if (isset($_POST['save_flight'])) {
     $schedule_id = mysqli_real_escape_string($con, $_POST['schedule_id']);
-    $description = mysqli_real_escape_string($con, $_POST['description']);
 
     // check whether the image is selected or not and set the value for image name
     if (isset($_FILES['image']['name'])) {
@@ -196,7 +194,7 @@ if (isset($_POST['save_flight'])) {
         $image = "";
     }
 
-    $query = "INSERT INTO flight (schedule_id, image, description) VALUES ('$schedule_id', '$image', '$description')";
+    $query = "INSERT INTO flight (schedule_id, image) VALUES ('$schedule_id', '$image')";
 
     $query_run = mysqli_query($con, $query);
     if ($query_run) {

@@ -56,7 +56,7 @@ require 'admin/dbcon.php';
         <div class="box-container">
 
             <?php
-            $query = "SELECT flight.flight_id, flight.image, flight.description, direction.location from flight left join schedule on flight.schedule_id = schedule.schedule_id left join direction on schedule.direction_id = direction.direction_id";
+            $query = "SELECT flight.flight_id, flight.image, direction.location from flight left join schedule on flight.schedule_id = schedule.schedule_id left join direction on schedule.direction_id = direction.direction_id group by direction.location order by direction.location";
             $query_run = mysqli_query($con, $query);
             $count = mysqli_num_rows($query_run);
 
@@ -65,7 +65,6 @@ require 'admin/dbcon.php';
                     $flight_id = $row['flight_id'];
                     $location = $row['location'];
                     $image = $row['image'];
-                    $description = $row['description'];
 
             ?>
 
@@ -87,10 +86,27 @@ require 'admin/dbcon.php';
                         </div>
 
                         <div class="flight-home-desc">
-                            <td><?php echo $location; ?></td>
-                            <br>
-                            <td><?php echo $description; ?></td>
-                            <br>
+                            <td>
+
+                                <?php
+
+                                $query2 = "select DISTINCT direction.location from flight left join schedule on flight.schedule_id = schedule.schedule_id left join direction on schedule.direction_id = direction.direction_id where flight_id='$flight_id'";
+                                $query_run2 = mysqli_query($con, $query2);
+                                $count2 = mysqli_num_rows($query_run2);
+
+                                if ($count2 > 0) {
+                                    while ($row2 = mysqli_fetch_assoc($query_run2)) {
+                                        $location = $row2['location'];
+                                        echo $location;
+                                    
+                                    }
+                                }
+
+
+                                ?>
+
+                            </td>
+
                         </div>
 
 

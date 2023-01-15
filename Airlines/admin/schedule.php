@@ -53,7 +53,8 @@
               <table class="table table-bordered table-striped">
                   <thead>
                       <tr>
-                        <th>Direction ID</th>
+                        <th>Schedule ID</th>
+                        <th>Direction</th>
                         <th>Departure Date</th>
                         <th>Departure Time</th>
                         <th>Arrival Date</th>
@@ -65,7 +66,7 @@
                   </thead>
                   <tbody>
                     <?php 
-                      $query = "SELECT * FROM schedule";
+                      $query = "SELECT schedule.schedule_id, schedule.departure_date, schedule.departure_time, schedule.arrival_date, schedule.arrival_time, schedule.airline_id, schedule.price, direction.origin_airport_code, direction.destination_airport_code from schedule left join direction on schedule.direction_id = direction.direction_id";
                       $query_run = mysqli_query($con, $query);
 
                       if(mysqli_num_rows($query_run) > 0){
@@ -74,7 +75,8 @@
                           // echo
                           ?>
                           <tr>
-                            <td><?= $schedule['direction_id']; ?></td>
+                            <td><?= $schedule['schedule_id']; ?></td>
+                            <td><?= $schedule['origin_airport_code']; ?> to <?= $schedule['destination_airport_code']; ?></td>
                             <td><?= $schedule['departure_date']; ?></td>
                             <td><?= $schedule['departure_time']; ?></td>
                             <td><?= $schedule['arrival_date']; ?></td>
