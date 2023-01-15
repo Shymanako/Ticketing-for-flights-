@@ -14,5 +14,36 @@ body{
 
 /* main card */
 #main-card{
-    border: 1px red solid;
+    border: 1px red solid;;
 }
+
+
+/* buttons */
+#btn-container{
+    width: 800px;
+    padding: 5px 10px;
+    display: flex;
+        justify-content: space-between
+}
+    #btn-container button{
+        padding: 3px 8px;
+    }
+
+/* card container */
+#card-container{
+    border: 1px #000 solid;
+    width: 800px;
+}
+
+/* entries */
+.entries{
+    display: flex;
+        flex-flow: row wrap;
+}
+    .entry-container{
+        width: 50%;
+        border: 1px red solid;
+    }
+    .name-container{
+        width: 100%;
+    }

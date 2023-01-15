@@ -134,7 +134,48 @@ require 'admin/dbcon.php';
         <!-- logo -->
         <h1>Airline Ticket</h1>
 
+        <!-- passenger info -->
         
+        <!-- entry -->
+        <div class="entries">
+
+            <!-- name -->
+            <div class="entry-container name-container">
+                <h2 class="label">Name:</h2>
+                <h3 class="entry">John Doe</h3>
+            </div>
+
+            <!-- from -->
+            <div class="entry-container">
+                <h2 class="label">From:</h2>
+                <h3 class="entry">Tanghal</h3>
+            </div>
+
+            <!-- to -->
+            <div class="entry-container">
+                <h2 class="label">To:</h2>
+                <h3 class="entry">H</h3>
+            </div>
+
+            <!-- flight id -->
+            <div class="entry-container">
+                <h2 class="label">Flight ID:</h2>
+                <h3 class="entry">1234567890</h3>
+            </div>
+
+            <!--date -->
+            <div class="entry-container">
+                <h2 class="label">Date (yyyy-mm-dd):</h2>
+                <h3 class="entry">karon</h3>
+            </div>
+
+            <!-- time -->
+            <div class="entry-container">
+                <h2 class="label">Time:</h2>
+                <h3 class="entry">taud-taud</h3>
+            </div>
+
+        </div>
 
     </div>
 
