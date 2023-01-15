@@ -262,6 +262,8 @@ section{
 
 .home-trips .image-menu{
     padding: 0;
+    width: 320px;
+    height: 205px;
 }
 
 .home-trips .flight-home-desc{
