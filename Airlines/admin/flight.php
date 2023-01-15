@@ -58,7 +58,6 @@ require 'dbcon.php';
                   <th>Flight ID</th>
                   <th>Schedule ID</th>
                   <th>Image</th>
-                  <th>Description</th>
                   <th>Action</th>
                 </tr>
               </thead>
@@ -73,8 +72,6 @@ require 'dbcon.php';
                     $flight_id = $row['flight_id'];
                     $schedule_id = $row['schedule_id'];
                     $image = $row['image'];
-                    $description = $row['description'];
-
                 ?>
                     <tr>
                       <td><?php echo $flight_id; ?></td>
@@ -93,7 +90,6 @@ require 'dbcon.php';
                         }
                         ?>
                       </td>
-                      <td><?php echo $description; ?></td>
                       <td>
                         <a href="flight-view.php?flight_id=<?php echo $flight_id; ?>" class="btn btn-info btn-sm">View</a>
                         <a href="flight-update.php?flight_id=<?php echo $flight_id; ?>" class="btn btn-success btn-sm">Update</a>

@@ -43,8 +43,6 @@ require 'dbcon.php';
 
                             $current_schedule_id = $row['schedule_id'];
                             $current_image = $row['image'];
-                            $description = $row['description'];
-
 
                             if (mysqli_num_rows($query_run) > 0) {
                                 $flight = mysqli_fetch_array($query_run);
@@ -112,11 +110,6 @@ require 'dbcon.php';
                                         <td>
                                             <input type="file" name="image">
                                         </td>
-                                    </div>
-
-                                    <div class="mb-3">
-                                        <label> Description </label>
-                                        <input type="text" name="description" value="<?php echo $description; ?>">
                                     </div>
 
                                     <div class="mb-3">

@@ -45,8 +45,6 @@ require 'dbcon.php';
                                     $flight_id = $row['flight_id'];
                                     $schedule_id = $row['schedule_id'];
                                     $image = $row['image'];
-                                    $description = $row['description'];
-
                                 ?>
 
                                     <div class="mb-3">
@@ -73,10 +71,6 @@ require 'dbcon.php';
                                             }
                                             ?>
                                         </p>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label> Description </label>
-                                        <p class="form-control"><?php echo $description; ?></p>
                                     </div>
 
                                 <?php

@@ -87,11 +87,6 @@ require 'dbcon.php';
                             </div>
 
                             <div class="mb-3">
-                                <label> Description </label>
-                                <input type="text" name="description" class="form-control">
-                            </div>
-
-                            <div class="mb-3">
                                 <button type="submit" name="save_flight" class="btn btn-primary">Save Flight</button>
                             </div>
 
