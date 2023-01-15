@@ -124,8 +124,8 @@ require 'admin/dbcon.php';
 
     <!-- button container -->
     <div id="btn-container">
-        <button>Download Ticket</button>
-        <button type="submit">Finish</button>
+        <button>Download</button>
+        <button>Finish</button>
     </div>
 
     <!--card container-->
