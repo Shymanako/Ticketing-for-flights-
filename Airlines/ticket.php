@@ -10,6 +10,7 @@ require 'admin/dbcon.php';
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/ticket.css">
 
     <title>Passenger Data</title>
 
@@ -18,14 +19,11 @@ require 'admin/dbcon.php';
 <body>
 
     <div class="container mt-5">
-
-
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
-                        <h4>BOARDING PASS
-                        </h4>
+                        <h4>Airline Ticket</h4>
                     </div>
 
                     <form id="act-container" action="about.php" method='POST' class="d-inline">
@@ -119,12 +117,25 @@ require 'admin/dbcon.php';
                             ?>
                         </div>
                     </form>
-
-
                 </div>
             </div>
         </div>
     </div>
+
+    <!-- button container -->
+    <div id="btn-container">
+        <button>Download Ticket</button>
+        <button type="submit">Finish</button>
+    </div>
+
+    <!--card container-->
+    <div id="card-container">
+
+        <!-- logo -->
+        <h1>Airline Ticket</h1>
+
+        
+
     </div>
 
 
