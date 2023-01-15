@@ -443,6 +443,8 @@ section{
 
 .trips .image-menu{
     padding: 0;
+    width: 320px;
+    height: 205px;
 }
 
 .trips .center{

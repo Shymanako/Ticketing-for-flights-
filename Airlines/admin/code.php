@@ -127,7 +127,6 @@ if (isset($_POST['update_flight'])) {
                     //Failed to remove image
                     $_SESSION['message'] = "Failed to remove current Image.";
                     header('location: flight.php');
-                    die(); //Stop the Process
                 }
             }
         } else {
@@ -148,7 +147,6 @@ if (isset($_POST['update_flight'])) {
         $_SESSION['message'] = "Flight Updated Successfully";
         header("Location: flight.php");
         exit(0);
-
     } else {
 
         $_SESSION['message'] = "Flight Failed to Update";
@@ -167,7 +165,6 @@ if (isset($_POST['save_flight'])) {
 
         // upload the image only if selected
         if ($image != "") {
-
             // auto rename image
             // get the extension of ourt image (jpg, png, gif, etc.) e.g. "food.jpg"
             $ext = end(explode('.', $image));
@@ -181,6 +178,24 @@ if (isset($_POST['save_flight'])) {
 
             // upload the image
             $upload = move_uploaded_file($source_path, $destination_path);
+
+            if ($upload == "../img/flight/" . $image) {
+                while ($upload == "../img/flight/" . $image) {
+                    // auto rename image
+                    // get the extension of ourt image (jpg, png, gif, etc.) e.g. "food.jpg"
+                    $ext = end(explode('.', $image));
+
+                    // rename the image
+                    $image = "Flight_Image_" . rand(000, 999) . '.' . $ext; // e.g. flight_name_69.jpg
+
+                    $source_path = $_FILES['image']['tmp_name'];
+
+                    $destination_path = "../img/flight/" . $image;
+
+                    // upload the image
+                    $upload = move_uploaded_file($source_path, $destination_path);
+                }
+            }
 
             //check whether the image is uploaded or not
             if ($upload == false) {
