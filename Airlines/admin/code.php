@@ -172,30 +172,38 @@ if (isset($_POST['save_flight'])) {
             // rename the image
             $image = "Flight_Image_" . rand(000, 999) . '.' . $ext; // e.g. flight_name_69.jpg
 
-            $source_path = $_FILES['image']['tmp_name'];
+            if ($image == "select image from flight where image = '$image'") {
+                // rename the image
+                $image = "Flight_Image_" . rand(000, 999) . '.' . $ext; // e.g. flight_name_69.jpg
+                $source_path = $_FILES['image']['tmp_name'];
 
-            $destination_path = "../img/flight/" . $image;
+                $destination_path = "../img/flight/" . $image;
 
-            // upload the image
-            $upload = move_uploaded_file($source_path, $destination_path);
+                // upload the image
+                $upload = move_uploaded_file($source_path, $destination_path);
 
-            if ($upload == "../img/flight/" . $image) {
-                while ($upload == "../img/flight/" . $image) {
-                    // auto rename image
-                    // get the extension of ourt image (jpg, png, gif, etc.) e.g. "food.jpg"
-                    $ext = end(explode('.', $image));
+                $query = "select image from flight where image not in ";
 
-                    // rename the image
-                    $image = "Flight_Image_" . rand(000, 999) . '.' . $ext; // e.g. flight_name_69.jpg
+                if ($upload == "Select image from flight where image ") {
+                    while ($upload == "../img/flight/" . $image) {
+                        // auto rename image
+                        // get the extension of ourt image (jpg, png, gif, etc.) e.g. "food.jpg"
+                        $ext = end(explode('.', $image));
 
-                    $source_path = $_FILES['image']['tmp_name'];
+                        // rename the image
+                        $image = "Flight_Image_" . rand(000, 999) . '.' . $ext; // e.g. flight_name_69.jpg
 
-                    $destination_path = "../img/flight/" . $image;
+                        $source_path = $_FILES['image']['tmp_name'];
 
-                    // upload the image
-                    $upload = move_uploaded_file($source_path, $destination_path);
+                        $destination_path = "../img/flight/" . $image;
+
+                        // upload the image
+                        $upload = move_uploaded_file($source_path, $destination_path);
+                    }
                 }
             }
+
+
 
             //check whether the image is uploaded or not
             if ($upload == false) {

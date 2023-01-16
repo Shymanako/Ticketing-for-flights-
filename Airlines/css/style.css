@@ -445,6 +445,8 @@ section{
 
 .trips .image-menu{
     padding: 0;
+    /* width: 320px;
+    height: 205px; */
     width: 320px;
     height: 205px;
 }
@@ -693,6 +695,10 @@ section{
 }
 
 /* popular places */
-.flight-card{
-    border: 5px red solid;
-}
+/* #test{
+    /* border: 5px red solid; */
+    display: flex;
+        justify-content: center;
+        flex-flow: column nowrap;
+
+} */

@@ -68,7 +68,7 @@ require 'admin/dbcon.php';
 
             ?>
 
-                    <div class="box flight-card">
+                    <div id="test" class="box flight-card">
                         <div class="image-menu">
                             <?php
                             if ($image == "") {
@@ -77,7 +77,7 @@ require 'admin/dbcon.php';
                             } else {
                                 //Image Available
                             ?>
-                                <img src="<?php echo 'http://localhost/Ticketing-for-flights-/Airlines/'; ?>img/flight/<?php echo $image; ?>" width="320px" height="205px">
+                                <img src="<?php echo 'http://localhost/Ticketing-for-flights-/Airlines/'; ?>img/flight/<?php echo $image; ?>" width="100%   " height="205px">
                             <?php
                             }
 
