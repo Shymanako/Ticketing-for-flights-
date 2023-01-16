@@ -96,13 +96,30 @@ if (isset($_POST['update_flight'])) {
             //Rename the Image
             $image = "flight_image_" . rand(000, 999) . '.' . $ext; // e.g. Flight_image_834.jpg
 
+            $query = "select image from flight where image ='$image'";
 
-            $source_path = $_FILES['image']['tmp_name'];
+            $query_run = mysqli_query($con, $query);
 
-            $destination_path = "../img/flight/" . $image;
+            $count = mysqli_num_rows($query_run);
 
-            //Finally Upload the Image
-            $upload = move_uploaded_file($source_path, $destination_path);
+            if ($count > 0) {
+                while ($image == $query_run) {
+                    // auto rename image
+                    // get the extension of ourt image (jpg, png, gif, etc.) e.g. "food.jpg"
+                    $ext = end(explode('.', $image));
+
+                    // rename the image
+                    $image = "Flight_Image_" . rand(000, 999) . '.' . $ext; // e.g. flight_name_69.jpg
+
+                }
+            } else {
+                $source_path = $_FILES['image']['tmp_name'];
+
+                $destination_path = "../img/flight/" . $image;
+
+                // upload the image
+                $upload = move_uploaded_file($source_path, $destination_path);
+            }
 
             //Check whether the image is uploaded or not
             //And if the image is not uploaded then we will stop the process and redirect with error message
@@ -165,13 +182,22 @@ if (isset($_POST['save_flight'])) {
 
         // upload the image only if selected
         if ($image != "") {
-            // auto rename image
-            // get the extension of ourt image (jpg, png, gif, etc.) e.g. "food.jpg"
-            $ext = end(explode('.', $image));
+            while (true) {
+                // auto rename image
+                // get the extension of ourt image (jpg, png, gif, etc.) e.g. "food.jpg"
+                $ext = end(explode('.', $image));
 
-            // rename the image
-            $image = "Flight_Image_" . rand(000, 999) . '.' . $ext; // e.g. flight_name_69.jpg
+                // rename the image
+                $image = "Flight_Image_" . rand(000, 999) . '.' . $ext; // e.g. flight_name_69.jpg
 
+                $query = "SELECT image FROM flight WHERE image ='$image'";
+                $query_run = mysqli_query($con, $query);
+                $count = mysqli_num_rows($query_run);
+
+                if ($count == 0) {
+                    break;
+                }
+            }
             $source_path = $_FILES['image']['tmp_name'];
 
             $destination_path = "../img/flight/" . $image;
@@ -179,23 +205,6 @@ if (isset($_POST['save_flight'])) {
             // upload the image
             $upload = move_uploaded_file($source_path, $destination_path);
 
-            if ($upload == "../img/flight/" . $image) {
-                while ($upload == "../img/flight/" . $image) {
-                    // auto rename image
-                    // get the extension of ourt image (jpg, png, gif, etc.) e.g. "food.jpg"
-                    $ext = end(explode('.', $image));
-
-                    // rename the image
-                    $image = "Flight_Image_" . rand(000, 999) . '.' . $ext; // e.g. flight_name_69.jpg
-
-                    $source_path = $_FILES['image']['tmp_name'];
-
-                    $destination_path = "../img/flight/" . $image;
-
-                    // upload the image
-                    $upload = move_uploaded_file($source_path, $destination_path);
-                }
-            }
 
             //check whether the image is uploaded or not
             if ($upload == false) {
@@ -208,6 +217,7 @@ if (isset($_POST['save_flight'])) {
         //dont upload image and set the image value as blank
         $image = "";
     }
+
 
     $query = "INSERT INTO flight (schedule_id, image) VALUES ('$schedule_id', '$image')";
 
