@@ -66,7 +66,11 @@ require 'admin/dbcon.php';
         <form action="bookform2.php" name="Form" onsubmit="return validateForm()" autocomplete="off" method="post" class="bookform" required>
             <div class="flex">
                 <?php
-                $query = "select flight.flight_id, direction.location, schedule.departure_date, schedule.departure_time, schedule.arrival_date, schedule.arrival_time, schedule.price from flight left join schedule on flight.schedule_id = schedule.schedule_id left join direction on schedule.direction_id = direction.direction_id where departure_date like '%$departure_date%' and direction.direction_id like '%$direction_id%'";
+                $query = "select flight.flight_id, direction.location, schedule.departure_date, schedule.departure_time, schedule.arrival_date, schedule.arrival_time, schedule.price from flight 
+                left join schedule on flight.schedule_id = schedule.schedule_id 
+                left join direction on schedule.direction_id = direction.direction_id 
+                where departure_date = '$departure_date' and direction.direction_id = '$direction_id'
+                ";
                 $query_run = mysqli_query($con, $query);
                 if (mysqli_num_rows($query_run) > 0) {
                     // Foof Available
