@@ -35,7 +35,6 @@ require 'admin/dbcon.php';
             <a href="about.php">about</a>
             <a href="trips.php">trips</a>
             <a href="book.php">book a flight</a>
-            <a href="login.php">Login</a>
         </nav>
 
         <div id="menu-btn" class="fas fa-bars"></div>

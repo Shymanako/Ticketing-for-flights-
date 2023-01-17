@@ -118,8 +118,10 @@ require 'admin/dbcon.php';
 
                 <div class="inputBox">
                     <span>Expiry Date : <span style="color:red;">*</span> </span>
-                    <input type="date" value="<?= date('F-Y') ?>" name="expiry_date">
+                    <input type="hidden" name="expiry_date" value="<?php echo date('Y-m-d', strtotime("+7 days")); ?>">
+                    <input type="text" value="<?php echo date('Y-m-d', strtotime("+7 days")); ?>" name="expiry_date" disabled>
                 </div>
+
 
             </div>
 
