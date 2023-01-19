@@ -20,6 +20,7 @@ require 'admin/dbcon.php';
 
     <!-- custom css file link -->
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/trips.css">
 
 </head>
 
@@ -143,7 +144,8 @@ require 'admin/dbcon.php';
 
         <h1 class="heading-title"> Available Flights </h1>
 
-        <div class="box-container">
+        <!-- main container -->
+        <div id="main-container" class="box-container">
 
             <?php
             $query = "SELECT flight.flight_id, flight.image, direction.location from flight left join schedule on flight.schedule_id = schedule.schedule_id left join direction on schedule.direction_id = direction.direction_id group by direction.location order by direction.location limit 3";
@@ -158,8 +160,11 @@ require 'admin/dbcon.php';
 
             ?>
 
-                    <div class="box flight-card">
 
+                    <!-- card -->
+                    <div id="card-test" >
+
+                        <!-- image -->
                         <div class="image-menu">
                             <?php
                             if ($image == "") {
@@ -176,13 +181,14 @@ require 'admin/dbcon.php';
 
                         </div>
 
-                        <div class="flight-home-desc">
+                        <!-- discription -->
+                        <div id="discription">
                             <td><?php echo $location; ?></td>
                         </div>
 
-
-                        <td>
-                            <a href="book.php" class="btn center">book here!</a>
+                        <!-- book here btn -->
+                        <td  id="book-btn">
+                            <a href="book.php" class="btn">book here!</a>
                         </td>
 
                     </div>
