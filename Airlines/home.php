@@ -123,7 +123,7 @@ require 'admin/dbcon.php';
     <section class="home-about">
 
         <div class="image">
-            <img src="img/aboutus.jpg" alt="">
+            <img src="img/GensantoDavao.jpg" alt="">
         </div>
 
         <div class="content">
