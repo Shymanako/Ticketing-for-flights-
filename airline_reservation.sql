@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 15, 2023 at 11:16 PM
+-- Generation Time: Jan 19, 2023 at 04:30 PM
 -- Server version: 10.4.25-MariaDB
 -- PHP Version: 8.1.10
 
@@ -20,6 +20,18 @@ SET time_zone = "+00:00";
 --
 -- Database: `airline_reservation`
 --
+
+DELIMITER $$
+--
+-- Functions
+--
+CREATE DEFINER=`root`@`localhost` FUNCTION `calculateAge` (`date_of_birth` DATE) RETURNS INT(11)  BEGIN
+    DECLARE age INT;
+    SET age = TIMESTAMPDIFF(YEAR, date_of_birth, NOW());
+    RETURN age;
+END$$
+
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -82,7 +94,22 @@ CREATE TABLE `booked_information` (
 --
 
 INSERT INTO `booked_information` (`booked_id`, `reservation_id`, `passenger_id`, `flight_id`, `payment_id`) VALUES
-(1, 1, 1, 1, 1);
+(1, 1, 1, 1, 1),
+(2, 2, 3, 1, 2),
+(3, 3, 4, 1, 3);
+
+-- --------------------------------------------------------
+
+--
+-- Stand-in structure for view `booked_passenger`
+-- (See below for the actual view)
+--
+CREATE TABLE `booked_passenger` (
+`passenger_id` int(10)
+,`first_name` varchar(50)
+,`last_name` varchar(50)
+,`reservation_id` int(10)
+);
 
 -- --------------------------------------------------------
 
@@ -263,7 +290,22 @@ CREATE TABLE `passenger` (
 
 INSERT INTO `passenger` (`passenger_id`, `first_name`, `last_name`, `date_of_birth`, `citizenship`, `p_number`, `email`) VALUES
 (1, 'weqwe', 'qwe', '1212-12-12', 'qweqw', '123213', '23@y.com'),
-(2, 'qwe', 'qwe', '1212-12-12', 'qweqwe', '32131', 'ewe@y.com');
+(2, 'qwe', 'qwe', '1212-12-12', 'qweqwe', '32131', 'ewe@y.com'),
+(3, 'qwe', 'qwe', '1212-12-12', 'qwe', '123213', 'eqwe@ya.com'),
+(4, 'qwe', 'qwe', '0000-00-00', 'qweqwe', '123213', 'qweq@yahoo.com'),
+(6, 'QWE', 'QWE', '2020-02-19', 'QWEQWE', '123123213', 'qwe2@yaho.com');
+
+--
+-- Triggers `passenger`
+--
+DELIMITER $$
+CREATE TRIGGER `upper_case_trigger` BEFORE INSERT ON `passenger` FOR EACH ROW BEGIN
+    SET NEW.first_name = UPPER(NEW.first_name);
+    SET NEW.last_name = UPPER(NEW.last_name);
+    SET NEW.citizenship = UPPER(NEW.citizenship);
+END
+$$
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -285,7 +327,9 @@ CREATE TABLE `payment` (
 --
 
 INSERT INTO `payment` (`payment_id`, `reservation_id`, `payment_method`, `payment_amount`, `cvc`, `expiry_date`) VALUES
-(1, 1, 'Visa', 1200, 123, '2023-01-19');
+(1, 1, 'Visa', 1200, 123, '2023-01-19'),
+(2, 2, 'Visa', 1200, 123, '2023-01-20'),
+(3, 3, 'Visa', 1200, 123, '2023-01-26');
 
 -- --------------------------------------------------------
 
@@ -304,7 +348,9 @@ CREATE TABLE `reservation` (
 --
 
 INSERT INTO `reservation` (`reservation_id`, `passenger_id`, `flight_id`) VALUES
-(1, 1, 1);
+(1, 1, 1),
+(2, 3, 1),
+(3, 4, 1);
 
 -- --------------------------------------------------------
 
@@ -437,6 +483,15 @@ INSERT INTO `schedule` (`schedule_id`, `direction_id`, `departure_date`, `depart
 (107, 12, '2023-01-18', '14:25:00', '2023-01-18', '19:40:00', 'MNA', 1586),
 (108, 12, '2023-01-18', '21:15:00', '2023-01-19', '14:30:00', 'MNA', 1635);
 
+-- --------------------------------------------------------
+
+--
+-- Structure for view `booked_passenger`
+--
+DROP TABLE IF EXISTS `booked_passenger`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `booked_passenger`  AS SELECT `passenger`.`passenger_id` AS `passenger_id`, `passenger`.`first_name` AS `first_name`, `passenger`.`last_name` AS `last_name`, `reservation`.`reservation_id` AS `reservation_id` FROM (`passenger` left join `reservation` on(`passenger`.`passenger_id` = `reservation`.`passenger_id`)) WHERE `reservation`.`reservation_id` is not null GROUP BY `passenger`.`passenger_id` ORDER BY `passenger`.`passenger_id` ASC  ;
+
 --
 -- Indexes for dumped tables
 --
@@ -503,7 +558,7 @@ ALTER TABLE `schedule`
 -- AUTO_INCREMENT for table `booked_information`
 --
 ALTER TABLE `booked_information`
-  MODIFY `booked_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `booked_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `direction`
@@ -521,19 +576,19 @@ ALTER TABLE `flight`
 -- AUTO_INCREMENT for table `passenger`
 --
 ALTER TABLE `passenger`
-  MODIFY `passenger_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `passenger_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `payment`
 --
 ALTER TABLE `payment`
-  MODIFY `payment_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `payment_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `reservation`
 --
 ALTER TABLE `reservation`
-  MODIFY `reservation_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `reservation_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `schedule`
