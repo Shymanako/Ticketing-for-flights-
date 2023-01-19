@@ -39,6 +39,8 @@ require 'admin/dbcon.php';
                         if (mysqli_num_rows($query_run) > 0) {
                             foreach ($query_run as $passenger) {
 
+                                $current_passenger_id = $passenger['passenger_id'];
+
                                 // echo
                         ?>
 
@@ -50,76 +52,90 @@ require 'admin/dbcon.php';
 
                                         <!-- indv entries -->
 
-                                            <!-- fname -->
-                                            <div class="indv-container">
+                                        <!-- fname -->
+                                        <div class="indv-container">
 
-                                                <!-- label -->
-                                                <h2 class="label">First Name:</h2>
+                                            <!-- label -->
+                                            <h2 class="label">First Name:</h2>
 
-                                                <!-- entry -->
-                                                <h4 class="entry"><?= $passenger['first_name']; ?></h4>
+                                            <!-- entry -->
+                                            <h4 class="entry"><?= $passenger['first_name']; ?></h4>
 
-                                            </div>
+                                        </div>
 
-                                            <!-- lname -->
-                                            <div class="indv-container">
+                                        <!-- lname -->
+                                        <div class="indv-container">
 
-                                                <!-- label -->
-                                                <h2 class="label">Last Name:</h2>
+                                            <!-- label -->
+                                            <h2 class="label">Last Name:</h2>
 
-                                                <!-- entry -->
-                                                <h4 class="entry"><?= $passenger['last_name']; ?></h4>
+                                            <!-- entry -->
+                                            <h4 class="entry"><?= $passenger['last_name']; ?></h4>
 
-                                            </div>
-                                            
-                                            <!-- date of birth -->
-                                            <div class="indv-container">
+                                        </div>
 
-                                                <!-- label -->
-                                                <h2 class="label">Date of Birth (yyyy-mm-dd):</h2>
+                                        <!-- date of birth -->
+                                        <div class="indv-container">
 
-                                                <!-- entry -->
-                                                <h4 class="entry"><?= $passenger['date_of_birth']; ?></h4>
+                                            <!-- label -->
+                                            <h2 class="label">Age:</h2>
 
-                                            </div>
-                                            
-                                            <!-- citizenship -->
-                                            <div class="indv-container">
+                                            <!-- entry -->
+                                            <h4 class="entry">
+                                                <?php
 
-                                                <!-- label -->
-                                                <h2 class="label">Citizenship:</h2>
+                                                $query = "SELECT calculateAge(date_of_birth) AS Age FROM passenger WHERE passenger_id ='$current_passenger_id' ";
+                                                $query_run = mysqli_query($con, $query);
 
-                                                <!-- entry -->
-                                                <h4 class="entry"><?= $passenger['citizenship']; ?></h4>
+                                                if (mysqli_num_rows($query_run) > 0) {
+                                                    while ($row = mysqli_fetch_assoc($query_run)) {
+                                                        $calculateAge = $row['Age'];
+                                                        echo $calculateAge;
+                                                    }
+                                                }
+                                                ?>
 
-                                            </div>
-                                            
-                                            <!-- phone -->
-                                            <div class="indv-container">
+                                            </h4>
 
-                                                <!-- label -->
-                                                <h2 class="label">Phone Number:</h2>
+                                        </div>
 
-                                                <!-- entry -->
-                                                <h4 class="entry"><?= $passenger['p_number']; ?></h4>
+                                        <!-- citizenship -->
+                                        <div class="indv-container">
 
-                                            </div>
-                                            
-                                            <!-- email -->
-                                            <div class="indv-container">
+                                            <!-- label -->
+                                            <h2 class="label">Citizenship:</h2>
 
-                                                <!-- label -->
-                                                <h2 class="label">Email:</h2>
+                                            <!-- entry -->
+                                            <h4 class="entry"><?= $passenger['citizenship']; ?></h4>
 
-                                                <!-- entry -->
-                                                <h4 class="entry"><?= $passenger['email']; ?></h4>
+                                        </div>
 
-                                            </div>
+                                        <!-- phone -->
+                                        <div class="indv-container">
+
+                                            <!-- label -->
+                                            <h2 class="label">Phone Number:</h2>
+
+                                            <!-- entry -->
+                                            <h4 class="entry"><?= $passenger['p_number']; ?></h4>
+
+                                        </div>
+
+                                        <!-- email -->
+                                        <div class="indv-container">
+
+                                            <!-- label -->
+                                            <h2 class="label">Email:</h2>
+
+                                            <!-- entry -->
+                                            <h4 class="entry"><?= $passenger['email']; ?></h4>
+
+                                        </div>
 
                                     </div>
 
                                     <!-- actions form -->
-                                    <form id="act-container"  action="delete.php" method='POST' class="d-inline">
+                                    <form id="act-container" action="delete.php" method='POST' class="d-inline">
 
                                         <!-- confirm -->
                                         <a id="confirm-btn" href="book2.php?passenger_id=<?= $passenger['passenger_id']; ?>">Confirm</a>

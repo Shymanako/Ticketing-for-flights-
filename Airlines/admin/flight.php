@@ -33,8 +33,8 @@ require 'dbcon.php';
       <li><a href="payment.php">Payment</a></li>
       <li><a href="reservation.php">Reservation</a></li>
       <li><a href="schedule.php">Schedule</a></li>
+      <li><a href="booked-passenger.php">Booked Passenger</a></li>
       <li><a href="../home.php"> Back to Website</a></li>
-      <li><a href="logout-admin.php"> Logout</a></li>
     </div>
   </div>
 

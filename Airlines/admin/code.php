@@ -32,7 +32,7 @@ if (isset($_POST['update_passenger'])) {
 
     $query = "UPDATE passenger SET first_name='$first_name', last_name='$last_name',
     date_of_birth='$date_of_birth', citizenship='$citizenship', p_number='$p_number', 
-    email='$email', password='$password' WHERE passenger_id='$passenger_id'";
+    email='$email' WHERE passenger_id='$passenger_id'";
     $query_run = mysqli_query($con, $query);
 
     if ($query_run) {
@@ -56,9 +56,8 @@ if (isset($_POST['save_passenger'])) {
     $citizenship = mysqli_real_escape_string($con, $_POST['citizenship']);
     $p_number = mysqli_real_escape_string($con, $_POST['p_number']);
     $email = mysqli_real_escape_string($con, $_POST['email']);
-    $password = mysqli_real_escape_string($con, $_POST['password']);
 
-    $query = "INSERT INTO passenger (first_name, last_name, date_of_birth, citizenship, p_number, email, password) VALUES ('$first_name', '$last_name', '$date_of_birth', '$citizenship', '$p_number', '$email', '$password')";
+    $query = "INSERT INTO passenger (first_name, last_name, date_of_birth, citizenship, p_number, email) VALUES ('$first_name', '$last_name', '$date_of_birth', '$citizenship', '$p_number', '$email')";
 
     $query_run = mysqli_query($con, $query);
     if ($query_run) {

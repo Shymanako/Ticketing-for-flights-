@@ -42,7 +42,7 @@ require 'admin/dbcon.php';
                             reservation.reservation_id, reservation.passenger_id, reservation.flight_id, passenger.passenger_id, 
                             passenger.first_name, passenger.last_name, passenger.date_of_birth, passenger.citizenship, passenger.p_number, 
                             passenger.email, flight.flight_id, flight.schedule_id, schedule.schedule_id, schedule.direction_id, schedule.departure_time, 
-                            schedule.arrival_time, schedule.airline_id, schedule.price, direction.direction_id, direction.origin_airport_code, 
+                            schedule.arrival_time, schedule.arrival_date, schedule.airline_id, schedule.price, direction.direction_id, direction.origin_airport_code, 
                             direction.destination_airport_code, airline.airline_id, airline.airline_name, payment.payment_id, payment.payment_method, 
                             payment.payment_amount, payment.cvc, payment.expiry_date, schedule.departure_date FROM booked_information left join reservation on 
                             booked_information.reservation_id = reservation.reservation_id left join passenger on booked_information.passenger_id = 
@@ -200,14 +200,25 @@ require 'admin/dbcon.php';
 
             <!--date -->
             <div class="entry-container">
-                <h2 class="label">Date (yyyy-mm-dd):</h2>
+                <h2 class="label">Departure Date:</h2>
                 <h3 class="entry"><?= $booked_info['departure_date']; ?></h3>
             </div>
 
             <!-- time -->
             <div class="entry-container">
-                <h2 class="label">Time:</h2>
+                <h2 class="label">Departure Time:</h2>
                 <h3 class="entry"><?= $booked_info['departure_time']; ?></h3>
+            </div>
+
+            <div class="entry-container">
+                <h2 class="label">Arrival Date:</h2>
+                <h3 class="entry"><?= $booked_info['arrival_date']; ?></h3>
+            </div>
+
+            <!-- time -->
+            <div class="entry-container">
+                <h2 class="label">Arrival Time:</h2>
+                <h3 class="entry"><?= $booked_info['arrival_time']; ?></h3>
             </div>
 
         </div>
