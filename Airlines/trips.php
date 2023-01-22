@@ -132,8 +132,6 @@ require 'admin/dbcon.php';
 
         </div>
 
-        <div class="load-more"><span class="btn">load more</span></div>
-
     </section>
 
     <!-- trips section end -->
