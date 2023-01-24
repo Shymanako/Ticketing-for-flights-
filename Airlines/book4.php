@@ -103,12 +103,16 @@ require 'admin/dbcon.php';
                     <datalist id="payment_method">
                         <option value="Visa">
                         <option value="Mastercard">
+                        <option value="Gcash">
+                        <option value="Metrobank">
+                        <option value="Chinabank">
+                        <option value="Paymaya">
                     </datalist>
                 </div>
 
                 <div class="inputBox">
                     <span>Payment Amount : <span style="color:red;">*</span> </span>
-                    <input type="text" value="<?= $reservation['price']; ?>" name="payment_amount">
+                    <input type="text" value="<?= $reservation['price']; ?>" name="payment_amount" disabled>
                 </div>
 
                 <div class="inputBox">
@@ -135,17 +139,6 @@ require 'admin/dbcon.php';
     </section>
 
     <!-- book a flight section end -->
-
-
-
-
-
-
-
-
-
-
-
 
 
     <!-- footer section start -->
@@ -192,11 +185,6 @@ require 'admin/dbcon.php';
     </section>
 
     <!-- footer section end -->
-
-
-
-
-
 
     <!-- swiper js link -->
     <script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script>

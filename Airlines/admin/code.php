@@ -236,7 +236,7 @@ if (isset($_POST['save_flight'])) {
 if (isset($_POST['delete_payment'])) {
     $payment_id = mysqli_real_escape_string($con, $_POST['delete_payment']);
 
-    $query = "DELETE FROM payment WHERE pid='$payment_id' ";
+    $query = "DELETE FROM payment WHERE payment_id='$payment_id' ";
     $query_run = mysqli_query($con, $query);
 
     if ($query_run) {

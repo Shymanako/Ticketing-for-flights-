@@ -112,13 +112,6 @@ require 'admin/dbcon.php';
     <!-- book a flight section end -->
 
 
-
-
-
-
-
-
-
     <!-- footer section start -->
 
     <section class="footer">
@@ -163,10 +156,6 @@ require 'admin/dbcon.php';
     </section>
 
     <!-- footer section end -->
-
-
-
-
 
 
     <!-- swiper js link -->
