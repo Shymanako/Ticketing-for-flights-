@@ -112,6 +112,7 @@ require 'admin/dbcon.php';
 
                 <div class="inputBox">
                     <span>Payment Amount : <span style="color:red;">*</span> </span>
+                    <input type="hidden" name="payment_amount" value="<?= $reservation['price']; ?>" >
                     <input type="text" value="<?= $reservation['price']; ?>" name="payment_amount" disabled>
                 </div>
 
